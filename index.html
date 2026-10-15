@@ -111,15 +111,15 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
 </head>
 <body>
 <div id="crawl"><canvas id="cr-stars"></canvas>
-<div id="cr-pre">In the far north-east of Vellorum&hellip;</div>
+<div id="cr-pre">In the southern sea of Vellorum&hellip;</div>
 <div id="cr-logo">HEIRS OF THE<br>FRACTURE</div>
 <div id="cr-persp"><div id="cr-field"><div id="cr-text">
-<h2>EPISODE I</h2><h3>THE ENDLESS STAIR</h3>
-<p>Above the ash peaks of Kalandris, the Endless Staircase climbs through the clouds. No pilgrim has ever reached the top. &ldquo;Every step is a prayer,&rdquo; the monks say. &ldquo;Every prayer is a step.&rdquo;</p>
-<p>Now the bells of Hollowbell ring every night, and they only ring when something comes down the stair. Far from Kalandris, pale steps have begun to rise out of the ground in every land of Vellorum.</p>
-<p>Each new flight has a keeper: Carla Tootheater in Ravenfall, the Rock-Chief in Dhargul, Lord Ravenna in C'Tharvatul. And at the very top, in Oneiros, the Dream Tyrant feeds on the sleep of a whole world.</p>
-<p>In Firststep, the town of monasteries and pilgrim inns at the foot of the stair, a forgotten family of adventurers sets out to climb. Every heir will fall, and every fall makes the next heir stronger&hellip;</p>
-<p>The bloodline will climb until the stair is broken.</p>
+<h2>EPISODE I</h2><h3>THE LORD OF TIME</h3>
+<p>There was an island called Temporalis, with a great city called the Deep and an order of mages who studied the hours. Then, one morning, a ring of green light stood on the water where the island had been. Sailors call it the Reverse.</p>
+<p>Those who die near the ring hear a voice at the very end, offering them a choice: <i>join, or perish.</i> The voice belongs to CLOCKWORK, the Lord of Time: faceless, armoured in blue, a clock set over his heart.</p>
+<p>Now the Reverse is spreading. A pale stair has broken through the ash peaks of Kalandris and runs on through every land, and the lords of each country have taken his bargain: a little more time.</p>
+<p>In Firststep, at the foot of the stair, a forgotten family of adventurers sets out to follow it to its heart. Every heir will fall, and every fall makes the next heir stronger&hellip;</p>
+<p>The bloodline will climb until his clock stops.</p>
 </div></div></div>
 <div id="cr-hint">PRESS ANY BUTTON FOR SOUND</div></div>
 <div id="stage"><div id="wrap">
@@ -252,9 +252,9 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
 </div></div>
 
 <div class="ov" id="s-ending" hidden><div class="box" style="max-width:560px;text-align:center">
-  <h2>THE FRACTURE MENDS</h2>
+  <h2 id="end-h">THE CLOCK STOPS</h2>
   <div class="note" id="end-b" style="margin:0 auto"></div>
-  <div class="foot" style="justify-content:center"><button class="b pri" id="end-ok" type="button">Begin New Game+</button></div>
+  <div class="foot" style="justify-content:center"><button class="b" id="end-smash" type="button">Smash the machine</button><button class="b pri" id="end-let" type="button">Let her go</button><button class="b pri" id="end-ok" type="button">Begin New Game+</button></div>
 </div></div>
 </div></div>
 <script>
@@ -352,7 +352,7 @@ function music(key){if(key===musKey)return;musKey=key;musStep=0;if(!AC)return;mu
 const MUS={camp:{sc:'camp',root:45,bpm:76,bass:[0,0,3,2],arp:.35,drum:0},
   vale:{sc:'maj',root:50,bpm:112,bass:[0,3,4,4],arp:.7,drum:1},jungle:{sc:'dor',root:45,bpm:124,bass:[0,0,3,6],arp:.6,drum:3},metal:{sc:'phr',root:40,bpm:168,bass:[0,0,1,5],arp:.9,drum:2},
   vamp:{sc:'vamp',root:45,bpm:118,bass:[0,5,3,4],arp:.8,drum:1},grave:{sc:'min',root:43,bpm:92,bass:[0,5,2,4],arp:.5,drum:1},frost:{sc:'holy',root:52,bpm:98,bass:[0,4,2,5],arp:.75,drum:1},
-  empire:{sc:'hell',root:41,bpm:120,bass:[0,0,4,3],arp:.55,drum:3},dream:{sc:'whole',root:48,bpm:100,bass:[0,2,4,1],arp:.85,drum:1},
+  empire:{sc:'hell',root:41,bpm:120,bass:[0,0,4,3],arp:.55,drum:3},dream:{sc:'whole',root:48,bpm:100,bass:[0,2,4,1],arp:.85,drum:1},time:{sc:'whole',root:45,bpm:88,bass:[0,5,3,1],arp:.9,drum:1},
   holy:{sc:'holy',root:50,bpm:104,bass:[0,3,4,2],arp:.7,drum:1},chaos:{sc:'chaos',root:47,bpm:132,bass:[0,2,5,1],arp:.9,drum:1},hell:{sc:'hell',root:40,bpm:126,bass:[0,1,5,4],arp:.8,drum:1},boss:{sc:'vamp',root:43,bpm:150,bass:[0,1,0,6],arp:1,drum:2},crawl:{sc:'maj',root:43,bpm:92,bass:[0,3,4,0],arp:.9,drum:3}};
 function musTick(){if(!AC||!musKey||!MUS[musKey])return;const M=MUS[musKey],sc=SCALES[M.sc],st=60/M.bpm/4;
   while(musNext<AC.currentTime+.25){const s=musStep,bar=Math.floor(s/16)%4,deg=M.bass[bar],nt=d=>M.root+sc[((d%sc.length)+sc.length)%sc.length]+12*Math.floor(d/sc.length),hz=m=>440*Math.pow(2,(m-69)/12),dl=musNext-AC.currentTime;
@@ -421,9 +421,9 @@ const ZONES=[
   {id:'vor',n:'The Vorzakh Empire',sub:'WE WILL BRING BACK ORDER, TOGETHER!',mus:'empire',bg:'empire',wx:'none',boss:'uooros',bossN:'UOOROS',bossS:'THE MIND BEHIND THE THRONE',
    en:[['legion',5],['musketeer',3],['teether',3],['possessed',2],['mindmage',2],['gungie',3],['engine',1]],
    pal:{wall:'#4a4a52',mort:'#1e1e24',hi:'#6a6a74',acc:'#a040e0',back:'#141418',back2:'#1a1a20',plat:'#6a6a72',plat2:'#3a3a42',sky:['#06040a','#1a1028','#3a2050'],moon:'#c080ff',light:'#d0a0ff',grass:'#3a3a40'}},
-  {id:'one',n:'Oneiros',sub:'SLEEP. HE IS LISTENING.',mus:'dream',bg:'dream',wx:'star',boss:'tyrant',bossN:'THE DREAM TYRANT',bossS:"A SHARD OF POL'DENDROL, GONE WRONG",
-   en:[['lostsoul',4],['dreamfey',3],['sheep',3],['nighthound',2],['eye',2],['nightmare',1]],
-   pal:{wall:'#4a3a6a',mort:'#20183a',hi:'#7a6aa0',acc:'#ff80e0',back:'#140f26',back2:'#1c1632',plat:'#a080d0',plat2:'#5a3a8a',sky:['#0a0620','#3a2060','#e080c0'],moon:'#ffe0ff',light:'#ffb0f0',grass:'#80e0c0'}}];
+  {id:'rev',n:'The Reverse',sub:'JOIN, OR PERISH',mus:'time',bg:'reverse',wx:'time',boss:'clockwork',bossN:'CLOCKWORK',bossS:'THE LORD OF TIME',
+   en:[['drained',5],['tlarcher',3],['second',3],['tlblade',2],['hourthief',2],['overwound',2],['sentinel',1]],
+   pal:{wall:'#2e3a3c',mort:'#121a1c',hi:'#4e6a66',acc:'#40ffa0',back:'#0c1416',back2:'#121c1e',plat:'#6a5a3a',plat2:'#3a3020',sky:['#040a0c','#0e2a26','#2a6a50'],moon:'#a0ffd0',light:'#80ffc0',grass:'#2a4a40'}}];
 
 const ED={
   // Ravenfall: goblins and trolls from beyond the Iron Wall, and the hag's crows
@@ -477,7 +477,15 @@ const ED={
   mindmage:{n:'Mind-Bound Mage',ai:'caster',hp:50,dmg:14,spd:0,w:12,h:22,g:17,proj:'psy',lk:{k:'hum',skin:'#d8c0d8',cloth:'#4a1a6a',head:'hood',wpn:'orb',orb:'#c060ff',eye:'#d070ff'}},
   gungie:{n:'Gungie',ai:'walker',hp:60,dmg:14,spd:26,w:12,h:20,g:7,lk:{k:'hum',skin:'#6a7a8a',cloth:'#2a2a30',head:'zombie',eye:'#ff8040',hunch:1}},
   engine:{n:'War Engine',ai:'brute',hp:230,dmg:26,spd:34,w:22,h:30,g:36,kbr:.95,lk:{k:'golem',col:'#6a6a72',dk:'#3a3a42',eye:'#ff4040'}},
-  // Oneiros: the Dream Tyrant's fey, his nightmares and the souls lost in the Veil
+  // the Reverse: the drained, Clockwork's Timelords and the machines of Lock Keep
+  drained:{n:'Drained Pilgrim',ai:'walker',hp:58,dmg:15,spd:40,w:12,h:20,g:8,lk:{k:'hum',skin:'#d8d8d0',cloth:'#4a4a48',head:'bald',eye:'#80ffc0',hunch:1}},
+  tlarcher:{n:'Timelord Arbalest',ai:'archer',hp:36,dmg:14,spd:34,w:12,h:21,g:9,proj:'tick',lk:{k:'hum',skin:'#c8c8d8',cloth:'#2a3a6a',head:'faceless',wpn:'bow',eye:'#80ffc0'}},
+  second:{n:'Stray Second',ai:'flyer',hp:28,dmg:13,spd:90,w:12,h:12,g:8,shoots:1,proj:'tick',lk:{k:'wisp',col:'#d0ffe8',wing:'#40ffa0',glow:'90,255,170'}},
+  tlblade:{n:'Timelord Blade',ai:'jumper',hp:62,dmg:17,spd:110,w:12,h:21,g:13,lk:{k:'hum',skin:'#c8c8d8',cloth:'#1e2a5a',head:'faceless',wpn:'sword',eye:'#80ffc0'}},
+  hourthief:{n:'Hour-Thief',ai:'caster',hp:52,dmg:15,spd:0,w:12,h:22,g:17,proj:'tick',summ:'drained',lk:{k:'hum',skin:'#e0e0d8',cloth:'#1a4a4a',head:'hood',wpn:'orb',orb:'#40ffa0',eye:'#80ffc0'}},
+  overwound:{n:'Overwound Clock',ai:'exploder',hp:34,dmg:32,spd:42,w:16,h:16,g:8,lk:{k:'balloon',col:'#b08a3a',clock:1}},
+  sentinel:{n:'Lock Keep Sentinel',ai:'brute',hp:240,dmg:28,spd:34,w:22,h:30,g:40,kbr:.9,lk:{k:'golem',col:'#8a7a4a',dk:'#4a3a20',eye:'#40ffa0'}},
+  // Oneiros (no longer a level): the Dream Tyrant's fey, his nightmares and the souls lost in the Veil
   lostsoul:{n:'Lost Soul',ai:'walker',hp:56,dmg:15,spd:44,w:12,h:18,g:8,lk:{k:'ghost',col:'#c0c0ff',walk:1}},
   dreamfey:{n:'Dream Fey',ai:'flyer',hp:28,dmg:13,spd:86,w:12,h:12,g:8,shoots:1,proj:'star',lk:{k:'wisp',col:'#ffe0f8',wing:'#ff90e0',glow:'255,160,230'}},
   sheep:{n:'Counting Sheep',ai:'exploder',hp:34,dmg:32,spd:40,w:16,h:14,g:8,lk:{k:'sheep'}},
@@ -488,8 +496,8 @@ const ED={
 // spd: projectile speed for archers and turrets
 const PJ={green:{c:'#60ff80',h:'#d8ffe0',r:4},venom:{c:'#b0e030',h:'#f0ffa0',r:4},psy:{c:'#b050ff',h:'#f0d0ff',r:4},star:{c:'#ffa0f0',h:'#ffffff',r:4,star:1},
   note:{c:'#ffd040',h:'#fff8c0',r:4,note:1},bolt:{c:'#90d8ff',h:'#ffffff',r:4,bolt:1},ice:{c:'#90d8ff',h:'#f0fbff',r:3,shard:1,spd:250},
-  javelin:{c:'#8a6a3a',h:'#d0d0d8',r:3,shard:1,grav:110,spd:230},stinger:{c:'#2a2a10',h:'#ffe040',r:2,shard:1},bullet:{c:'#ffe0a0',h:'#ffffff',r:2,shard:1,spd:340},icicle:{}};
-const ORB_K=['bloodorb','light','fire','green','venom','psy','star','note','bolt'];
+  javelin:{c:'#8a6a3a',h:'#d0d0d8',r:3,shard:1,grav:110,spd:230},stinger:{c:'#2a2a10',h:'#ffe040',r:2,shard:1},bullet:{c:'#ffe0a0',h:'#ffffff',r:2,shard:1,spd:340},tick:{c:'#40ffa0',h:'#e0fff0',r:4},icicle:{}};
+const ORB_K=['tick','bloodorb','light','fire','green','venom','psy','star','note','bolt'];
 
 // mv: attack patterns · p2: added when enraged · sum: what it calls in · pk: projectile kinds · lk: how it looks
 const BOSS={
@@ -507,8 +515,8 @@ const BOSS={
     lk:{s:2.2,skin:'#c8e8f8',cloth:'#5a7aa0',head:'icecrown',eye:'#ffffff',wpn:'spear',cape:'#8ab0d0',float:1}},
   uooros:{n:'Uooros',hp:4600,dmg:52,w:24,h:44,g:14000,fly:1,mv:['orbs','ring','summon','dive','lances'],sum:['possessed','teether'],pk:{orb:'psy',ring:'psy',lance:'psy'},col:'#a040e0',pil:'psy',
     lk:{s:2.2,skin:'#8a6aa0',cloth:'#2a1040',head:'flayer',eye:'#ffffff',wpn:'claws',cape:'#1a0a2a',float:1}},
-  tyrant:{n:'The Dream Tyrant',hp:6000,dmg:58,w:26,h:46,g:22000,fly:1,mv:['lances','pillars','ring','meteors','summon','dive'],sum:['sheep','dreamfey'],pk:{lance:'star',ring:'star',meteor:'meteor'},col:'#ff80e0',pil:'dream',
-    lk:{s:2.4,skin:'#f0e0ff',cloth:'#3a1a6a',head:'tyrant',eye:'#ff60e0',wpn:'staff',orb:'#ff80e0',cape:'#5a2a9a',float:1,wings:'#8a60c0'}}};
+  clockwork:{n:'Clockwork, Lord of Time',hp:6000,dmg:58,w:24,h:44,g:22000,fly:1,mv:['lances','ring','pillars','orbs','summon','dive'],sum:['tlblade','second'],pk:{lance:'tick',ring:'tick',orb:'tick'},col:'#40ffa0',pil:'time',
+    lk:{s:2.3,skin:'#c8d0e0',cloth:'#1e3a8a',head:'faceless',eye:'#80ffc0',wpn:'sword',cape:'#0e1a4a',float:1}}};
 
 // ---- the Hidden Dojo (upgrade tree) ----
 const NODES=[
@@ -968,7 +976,7 @@ const BARKS=[
   {alert:['FLESH...','JOIN US','VALTHOR WAKES','NNNRRGH'],idle:['*groan*','mmmrrh','itchy...','*drool*'],hurt:['*squelch*','that was my arm','*rattle*'],hit:['join us...','mmm'],lost:['...?','mrrh?']},
   {alert:['FREEZE!','A WARM ONE!','THE CROWN COMMANDS'],idle:['brrr','*crackle*','so cold. so nice.','*shiver*'],hurt:['CRACK!','I chipped!'],hit:['chill out','stay frozen'],lost:['...snow?','gone cold']},
   {alert:['HALT, CITIZEN!','PAPERS, PLEASE','ORDER!','FOR UOOROS!'],idle:['left, right...','*salutes nothing*','order. together.','*polishes boots*'],hurt:['INSUBORDINATION!','REPORTED!'],hit:['COMPLY!','DISMISSED!'],lost:['as you were','...form 9-B?']},
-  {alert:['WAKE UP...','you are dreaming','sleep forever','baa?'],idle:['zzz','*whisper*','count us...','is this real?'],hurt:['a bad dream!','*shatters*'],hit:['sweet dreams','hush now'],lost:['...was it real?','drifting...']}];
+  {alert:['JOIN, OR PERISH','YOUR TIME IS OWED','FOR THE LORD OF TIME','tick... TOCK!'],idle:['tick... tock...','how old am I?','*winds a key*','is it tomorrow yet?','*counts grey hairs*'],hurt:['not yet!','I lost a year!','*chimes*'],hit:['a little more time','your hours are his'],lost:['...already gone?','was that yesterday?']}];
 const typeHash=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h};
 let barkGT=0;
 function bark(e,kind){if(!e.alive||e.boss||!me||me.room!==e.room)return;const z=BARKS[run?run.zi:0]||BARKS[0],lines=z[kind];if(!lines)return;
@@ -1236,7 +1244,7 @@ function shade(hex,k){const n=parseInt(hex.slice(1),16);let r=n>>16,g=n>>8&255,b
 function buildTiles(pal,zid){
   const c=document.createElement('canvas');c.width=16*16;c.height=16;const g=c.getContext('2d');const R=prng(zid.length*99+7);
   const px=(x,y,col)=>{g.fillStyle=col;g.fillRect(x,y,1,1)};
-  const mossy=['rav','dha','rot','camp'].includes(zid),icy=zid==='fro',dream=zid==='one',hot=zid==='orm';
+  const mossy=['rav','dha','rot','camp'].includes(zid),icy=zid==='fro',dream=zid==='rev',hot=zid==='orm';
   // a bevelled stone: lit from the top left, shaded bottom right, speckled, sometimes chipped or cracked
   const stone=(x0,y0,w,h,base)=>{const col=shade(base,(R()-.5)*.18),hi=shade(col,.22),lo=shade(col,-.32);
     g.fillStyle=col;g.fillRect(x0,y0,w,h);
@@ -1248,7 +1256,7 @@ function buildTiles(pal,zid){
     if(mossy&&R()<.35){g.fillStyle=pal.grass;for(let i=0;i<4;i++)px(x0+1+Math.floor(R()*(w-2)),y0+Math.floor(R()*2),R()<.5?pal.grass:shade(pal.grass,-.3))}
     if(icy&&R()<.4){g.fillStyle='rgba(220,240,255,.35)';g.fillRect(x0+1,y0+1,w-2,1)}
     if(hot&&R()<.2){px(x0+2+Math.floor(R()*(w-4)),y0+h-2,'#ff6a1a')}
-    if(dream&&R()<.2){px(x0+Math.floor(R()*w),y0+Math.floor(R()*h),'#ffb0f0')}};
+    if(dream&&R()<.2){px(x0+Math.floor(R()*w),y0+Math.floor(R()*h),'#60ffb0')}};
   // 0-3 masonry
   for(let v=0;v<4;v++){const ox=v*16;g.fillStyle=pal.mort;g.fillRect(ox,0,16,16);
     if(v===3){stone(ox,0,8,8,pal.wall);stone(ox+8,0,8,8,pal.wall);stone(ox,8,16,8,pal.wall)}
@@ -1324,6 +1332,13 @@ function drawParallax(){const p=world.pal||CAMP_PAL;ctx.drawImage(skyC,0,0);
       const wx=-cam.x*.12;ctx.fillStyle=mid;for(let i=-1;i<6;i++){const x=((wx+i*130)%780+780)%780-130;ctx.fillRect(x,150,130,100);ctx.fillRect(x+10,110,18,140);ctx.fillRect(x+80,96,22,154);ctx.beginPath();ctx.moveTo(x+78,96);ctx.lineTo(x+91,70);ctx.lineTo(x+104,96);ctx.fill();ctx.fillStyle='rgba(200,120,255,.6)';ctx.fillRect(x+90,110,2,3);ctx.fillRect(x+18,124,2,3);ctx.fillStyle=mid}
       const sx=240-cam.x*.2;ctx.fillStyle=shade(p.sky[0],-.4);ctx.fillRect(sx-6,140,12,110);ctx.fillRect(sx-12,154,24,30);ctx.beginPath();ctx.arc(sx,132,10,0,7);ctx.fill();ctx.fillStyle='rgba(200,120,255,'+(.5+Math.sin(gtime*2)*.3)+')';ctx.fillRect(sx-4,130,2,2);ctx.fillRect(sx+2,130,2,2);
       ctx.fillStyle='rgba(0,0,0,.25)';ctx.fillRect(0,0,VW,VH);break}
+    case'reverse':{// fog over black water, the echoes of Temporalis, and the green ring on the sea
+      const rx=VW*.62-cam.x*.03;ctx.strokeStyle='rgba(64,255,160,'+(.35+Math.sin(gtime*1.3)*.12)+')';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(rx,150,120,26,0,0,7);ctx.stroke();ctx.lineWidth=1;ctx.strokeStyle='rgba(180,255,220,.4)';ctx.beginPath();ctx.ellipse(rx,150,120,26,0,0,7);ctx.stroke();
+      ctx.fillStyle='rgba(64,255,160,.07)';ctx.beginPath();ctx.ellipse(rx,150,118,24,0,0,7);ctx.fill();
+      rep(.15,150,(x,id)=>{const h=40+hash(id)*60,w=10+hash(id+1)*10;ctx.fillStyle=shade(p.sky[0],.15);ctx.fillRect(x,176-h,w,h);ctx.fillRect(x-2,176-h,w+4,3);ctx.beginPath();ctx.moveTo(x-2,176-h);ctx.lineTo(x+w/2,160-h);ctx.lineTo(x+w+2,176-h);ctx.fill();
+        if(hash(id+2)>.4){const cx=x+w/2,cy=176-h+10;ctx.fillStyle='rgba(160,255,210,.35)';ctx.beginPath();ctx.arc(cx,cy,4,0,7);ctx.fill();ctx.strokeStyle='rgba(10,30,26,.9)';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(-gtime*(1+hash(id+3)*4))*3,cy+Math.sin(-gtime*(1+hash(id+3)*4))*3);ctx.stroke()}});
+      ctx.fillStyle=shade(p.sky[0],-.3);ctx.fillRect(0,176,VW,VH-176);for(let i=0;i<14;i++){const y=180+i*6,o=(gtime*(6+i)+i*37)%VW;ctx.fillStyle='rgba(64,255,160,'+(.05+.02*(i%3))+')';ctx.fillRect(VW-o,y,30+i*3,1)}
+      rep(.4,90,(x,id)=>{ctx.fillStyle='rgba(180,230,210,.06)';ctx.beginPath();ctx.ellipse(x+40,190+hash(id)*40,60,9,0,0,7);ctx.fill()});break}
     case'dream':{rep(.1,160,(x,id)=>{const y=70+hash(id)*90,w=40+hash(id+1)*40;ctx.fillStyle=shade(p.sky[1],-.25);ctx.beginPath();ctx.ellipse(x+w/2,y,w/2,6,0,0,7);ctx.fill();ctx.beginPath();ctx.moveTo(x+4,y);ctx.lineTo(x+w/2,y+26+hash(id+2)*20);ctx.lineTo(x+w-4,y);ctx.fill();ctx.fillStyle='rgba(255,220,250,.25)';ctx.fillRect(x+w*.7,y+4,2,80)});
       layer(.3,236,30,shade(p.sky[0],-.1),7,26,0);
       rep(.45,60,(x,id)=>{ctx.fillStyle='rgba(255,200,240,.08)';ctx.beginPath();ctx.ellipse(x+30,210+hash(id)*30,40,10,0,0,7);ctx.fill()});break}
@@ -1471,6 +1486,7 @@ function hum(x,y,f,s,o,t,st){
     case'lich':r(hx,hy,6,6,skin);r(hx+3,hy+2,2,2,'#111');r(hx+1,hy+2,1,2,'#111');r(hx+1,hy+5,4,1,'#5a5040');r(hx+4,hy+3,1,1,eye);r(hx-1,hy-2,8,2,'#c8b040');r(hx-1,hy-4,1,2,'#c8b040');r(hx+2,hy-4,1,2,'#c8b040');r(hx+5,hy-4,1,2,'#c8b040');r(hx+2,hy-2,2,1,'#60ff80');break;
     case'icecrown':r(hx,hy,6,6,skin);r(hx+3,hy+2,2,1,eye);r(hx+1,hy+5,5,2,'#e0f8ff');r(hx+2,hy+7,1,2,'#e0f8ff');r(hx+4,hy+7,1,3,'#e0f8ff');r(hx-1,hy-2,8,2,'#a0e0ff');r(hx-1,hy-5,1,3,'#e0f8ff');r(hx+2,hy-6,2,4,'#ffffff');r(hx+5,hy-5,1,3,'#e0f8ff');break;
     case'flayer':r(hx-1,hy-1,7,6,skin);r(hx-1,hy-1,7,1,shade(skin,.2));r(hx+3,hy+1,2,1,eye);r(hx+1,hy+5,1,4+Math.round(Math.sin(t*4)),skin);r(hx+3,hy+5,1,5+Math.round(Math.sin(t*4+1)),skin);r(hx+5,hy+5,1,4+Math.round(Math.sin(t*4+2)),skin);r(hx-2,hy+3,2,5,o.cape||dk);break;
+    case'faceless':r(hx-1,hy-1,8,8,'#2a4aa0');r(hx-1,hy-1,8,1,'#6a8ae0');r(hx+5,hy,2,6,'#1a2a6a');r(hx+1,hy+3,6,1,'#1a2a6a');r(hx+2,hy-2,3,1,'#6a8ae0');break;
     case'tyrant':r(hx,hy,6,6,'#f8f0ff');r(hx+2,hy+2,1,1,eye);r(hx+4,hy+2,1,1,eye);r(hx+1,hy+4,5,1,'#3a1a6a');r(hx-2,hy-3,2,4,'#3a1a6a');r(hx+6,hy-3,2,4,'#3a1a6a');r(hx-3,hy-5,1,2,'#3a1a6a');r(hx+8,hy-5,1,2,'#3a1a6a');r(hx+2,hy-3,2,2,'#ffe0ff');break;
     default:r(hx,hy,6,6,skin);r(hx+3,hy+2,2,1,eye)}
   const ax=1+lean,ay=-13+hunch+fl,ext=st==='strike'||st==='charge';
@@ -1521,7 +1537,7 @@ function drawEnemy(e){
     case'hum':{const sc=Math.max(.8,e.h/20);hum(x,y,f,sc,Object.assign({vx:e.vx},lk),t,e.st);break}
     case'bat':{const wf=Math.sin(t*14)>0?-4:2;const r=(lx,ly,w,h,c)=>R_(x,y-5,f,s,lx,ly,w,h,c);r(-3,-3,6,5,lk.col);r(-8,wf-2,5,3,lk.wing);r(3,wf-2,5,3,lk.wing);r(-10,wf,2,2,lk.wing);r(8,wf,2,2,lk.wing);r(1,-2,1,1,lk.eye);r(-1,-2,1,1,lk.eye);if(lk.beak)r(3,-1,2,1,'#c0a040');if(lk.horns){r(-3,-5,1,2,'#e8d8c0');r(2,-5,1,2,'#e8d8c0')}break}
     case'wisp':{const gc=lk.glow||'255,220,120',g=ctx.createRadialGradient(x,y-6,1,x,y-6,12);g.addColorStop(0,'rgba(255,250,240,.9)');g.addColorStop(1,'rgba('+gc+',0)');if(!FL){ctx.fillStyle=g;ctx.fillRect(x-12,y-18,24,24)}const r=(lx,ly,w,h,c)=>R_(x,y-6,f,1,lx,ly,w,h,c);const wf=Math.sin(t*10)>0?-2:0;r(-3,-3,6,6,lk.col);r(-8,-2+wf,4,2,lk.wing);r(4,-2+wf,4,2,lk.wing);r(-4,-7,8,1,lk.glow?shade(lk.wing,.3):'#ffd040');r(0,-1,2,2,lk.glow?'#ffffff':'#7ff');break}
-    case'balloon':{const inf=e.st==='fuse'?1+Math.sin(gtime*40)*.15+.2:1,rr=8*inf;ctx.fillStyle=FL?'#fff':(e.st==='fuse'&&Math.floor(gtime*14)%2?'#ff4040':lk.col);ctx.beginPath();ctx.arc(x,y-8,rr,0,7);ctx.fill();if(lk.sick&&!FL){ctx.fillStyle='#5a7a30';ctx.fillRect(x-5,y-13,3,3);ctx.fillRect(x+3,y-6,2,2);if(chance(.05))P({k:'blood',x,y:y-2,vx:0,vy:20,l:1,c:'#7a9a30',s:1.5})}ctx.fillStyle='#5a1a2a';ctx.fillRect(x-4,y-11,2,2);ctx.fillRect(x+2,y-11,2,2);ctx.fillRect(x-3,y-6,6,1);ctx.fillStyle='#fff';ctx.fillRect(x-2,y-6,1,2);ctx.fillRect(x+1,y-6,1,2);ctx.strokeStyle='#ddd';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.sin(t*3)*3,y+10);ctx.stroke();break}
+    case'balloon':{const inf=e.st==='fuse'?1+Math.sin(gtime*40)*.15+.2:1,rr=8*inf;ctx.fillStyle=FL?'#fff':(e.st==='fuse'&&Math.floor(gtime*14)%2?'#ff4040':lk.col);ctx.beginPath();ctx.arc(x,y-8,rr,0,7);ctx.fill();if(lk.sick&&!FL){ctx.fillStyle='#5a7a30';ctx.fillRect(x-5,y-13,3,3);ctx.fillRect(x+3,y-6,2,2);if(chance(.05))P({k:'blood',x,y:y-2,vx:0,vy:20,l:1,c:'#7a9a30',s:1.5})}if(lk.clock&&!FL){ctx.fillStyle='#f0ffe8';ctx.beginPath();ctx.arc(x,y-8,rr*.6,0,7);ctx.fill();ctx.strokeStyle='#1a1a10';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y-8);ctx.lineTo(x+Math.cos(gtime*(e.st==='fuse'?30:6))*4,y-8+Math.sin(gtime*(e.st==='fuse'?30:6))*4);ctx.stroke();ctx.fillStyle='#b08a3a';ctx.fillRect(x-1,y-17,2,2)}ctx.fillStyle='#5a1a2a';ctx.fillRect(x-4,y-11,2,2);ctx.fillRect(x+2,y-11,2,2);ctx.fillRect(x-3,y-6,6,1);ctx.fillStyle='#fff';ctx.fillRect(x-2,y-6,1,2);ctx.fillRect(x+1,y-6,1,2);ctx.strokeStyle='#ddd';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.sin(t*3)*3,y+10);ctx.stroke();break}
     case'golem':{const r=(lx,ly,w,h,c)=>R_(x,y,f,e.h/30,lx,ly,w,h,c);const lean=e.st==='charge'?3:0;r(-9,-8,6,8,lk.dk);r(3,-8,6,8,lk.dk);r(-11+lean,-24,22,16,lk.col);r(-11+lean,-24,22,2,shade(lk.col,.3));r(-6+lean,-31,12,8,lk.col);r(1+lean,-28,4,2,lk.eye);r(-14+lean,-22,4,12,lk.dk);r(10+lean,-22,4,12,lk.dk);r(-4+lean,-18,8,1,lk.dk);break}
     case'hound':{const r=(lx,ly,w,h,c)=>R_(x,y,f,1,lx,ly,w,h,c);const ph=Math.floor(t*14)%2;r(-10,-10,18,6,lk.col);r(6,-13,6,6,lk.col);r(11,-11,3,2,lk.col);r(9,-12,1,1,lk.eye||'#ffee00');r(-9+ph,-4,2,4,lk.col);r(-4-ph,-4,2,4,lk.col);r(3+ph,-4,2,4,lk.col);r(6-ph,-4,2,4,lk.col);r(-13,-12,4,2,lk.col);const hf=lk.fire||(!lk.eye&&'#ff6a1a');if(!FL&&hf)for(let i=0;i<3;i++){ctx.fillStyle=pickR([hf,shade(hf,.4),'#ffcc40']);ctx.fillRect(x+(f>0?-8+i*5:8-i*5-2),y-13-Math.random()*4,2,3)}break}
     case'wasp':{const wf=Math.sin(t*30)>0?-1:1;const r=(lx,ly,w,h,c)=>R_(x,y-5,f,1,lx,ly,w,h,c);r(-6,-2,5,4,lk.col);r(-5,-2,1,4,'#1a1a10');r(-3,-2,1,4,'#1a1a10');r(-8,0,2,1,'#1a1a10');r(-1,-3,3,4,'#1a1a10');r(2,-3,3,3,lk.col);r(4,-3,1,1,'#c02020');if(!FL){ctx.globalAlpha=.7}r(-3,wf-5,4,2,lk.wing);r(0,wf-5,3,2,lk.wing);ctx.globalAlpha=e.vis!==undefined&&e.vis<1?e.vis:1;break}
@@ -1544,9 +1560,14 @@ function drawBoss(e){const x=Math.round(e.x),y=Math.round(e.y),f=e.face,t=e.an,B
     case'valthor':if(Math.random()<.3)P({k:'spark',x:x+rnd(-14,14),y:y-rnd(0,40),vx:0,vy:-40,l:.6,c:'#60ff80',s:1.5});break;
     case'iceking':if(Math.random()<.3)P({k:'amb',x:x+rnd(-16,16),y:y-rnd(0,44),vx:rnd(-10,10),vy:20,l:1,l0:1,c:'#e8f8ff',s:1});break;
     case'uooros':{ctx.strokeStyle='rgba(176,80,255,'+(.25+Math.sin(gtime*4)*.15)+')';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(x,y-e.h/2,e.w+6+Math.sin(gtime*3)*3,e.h*.7,0,0,7);ctx.stroke();break}
+    case'clockwork':if(Math.random()<.35)P({k:'spark',x:x+rnd(-16,16),y:y-rnd(0,46),vx:0,vy:30,l:.8,c:'#40ffa0',s:1.5});break;
     case'tyrant':for(let i=0;i<5;i++){const a=gtime*1.5+i*1.256;ctx.fillStyle=i%2?'#ffe0ff':'#ff80e0';ctx.fillRect(Math.round(x+Math.cos(a)*22)-1,Math.round(y-e.h+Math.sin(a)*6)-1,2,2)}break;
     case'lionwhyte':if(chance(.08))sparks(x+rnd(-12,12),y-e.h+rnd(-4,8),2,'#a0e0ff');break}
   hum(x,y,f,L.s,Object.assign({vx:e.vx},L),t,st);
+  if(e.boss==='clockwork'&&!FL){// the clock set over his heart, ticking far too fast
+    const cx=x+f*2,cy=y-e.h*.6,sp=e.phase===2?18:9;ctx.fillStyle='#b08a3a';ctx.beginPath();ctx.arc(cx,cy,6,0,7);ctx.fill();ctx.fillStyle='#e8fff4';ctx.beginPath();ctx.arc(cx,cy,4.5,0,7);ctx.fill();
+    ctx.strokeStyle='#0e1a2a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(gtime*sp)*4,cy+Math.sin(gtime*sp)*4);ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(gtime*sp/12)*2.5,cy+Math.sin(gtime*sp/12)*2.5);ctx.stroke();
+    ctx.fillStyle='rgba(64,255,160,'+(.2+Math.sin(gtime*sp)*.15)+')';ctx.beginPath();ctx.arc(cx,cy,9,0,7);ctx.fill()}
   FL=false;ctx.globalAlpha=1}
 function drawProj(q){const x=Math.round(q.x),y=Math.round(q.y);
   if(q.delay>0){if(q.k==='icicle'){ctx.fillStyle='rgba(200,240,255,.6)';ctx.fillRect(x-3,y,6,2);return}if(q.k==='spear'||q.k==='pillar'){ctx.fillStyle=Math.floor(gtime*12)%2?'rgba(255,40,40,.8)':'rgba(255,120,120,.5)';ctx.fillRect(x-q.w/2,y-2,q.w,2);if(q.k==='pillar'){ctx.fillStyle='rgba(255,240,180,.15)';ctx.fillRect(x-1,y-q.h,2,q.h)}}else if(q.k==='meteor'||q.k==='rock'){ctx.fillStyle='rgba(255,80,40,.5)';ctx.fillRect(x-4,y,8,2)}return}
@@ -1561,7 +1582,7 @@ function drawProj(q){const x=Math.round(q.x),y=Math.round(q.y);
     case'rock':ctx.fillStyle='#5a3a2a';ctx.fillRect(x-3,y-3,6,6);ctx.fillStyle='#7a5a4a';ctx.fillRect(x-3,y-3,6,1);break;
     case'wave':ctx.fillStyle='rgba(255,170,90,.8)';ctx.fillRect(x-6,y-6,12,12);ctx.fillStyle='#fff0c0';ctx.fillRect(x-4,y-9,8,4);break;
     case'spear':{const k=Math.min(1,q.on2||0),h=q.h*k;ctx.fillStyle=q.col||'#e8e0d0';ctx.fillRect(x-3,y-h,6,h);ctx.fillStyle='#ffffff';ctx.beginPath();ctx.moveTo(x-4,y-h);ctx.lineTo(x,y-h-8);ctx.lineTo(x+4,y-h);ctx.fill();ctx.fillStyle='#8a0a18';ctx.fillRect(x-3,y-h,6,2);break}
-    case'pillar':{const a=Math.min(1,q.life*2),C={bolt:['160,220,255','240,250,255'],necro:['80,255,120','210,255,220'],psy:['170,80,255','240,210,255'],dream:['255,130,230','255,235,250']}[q.col]||['255,240,170','255,255,240'];ctx.fillStyle=`rgba(${C[0]},${.45*a})`;ctx.fillRect(x-q.w/2-3,y-q.h,q.w+6,q.h);ctx.fillStyle=`rgba(${C[1]},${.9*a})`;
+    case'pillar':{const a=Math.min(1,q.life*2),C={bolt:['160,220,255','240,250,255'],necro:['80,255,120','210,255,220'],psy:['170,80,255','240,210,255'],dream:['255,130,230','255,235,250'],time:['64,255,160','220,255,240']}[q.col]||['255,240,170','255,255,240'];ctx.fillStyle=`rgba(${C[0]},${.45*a})`;ctx.fillRect(x-q.w/2-3,y-q.h,q.w+6,q.h);ctx.fillStyle=`rgba(${C[1]},${.9*a})`;
       if(q.col==='bolt'){let px=x;for(let yy=y;yy>y-q.h;yy-=8){const nx=x+rnd(-4,4);ctx.fillRect(Math.min(px,nx)-1,yy-8,Math.abs(nx-px)+3,9);px=nx}}else ctx.fillRect(x-q.w/2+3,y-q.h,q.w-6,q.h);break}
     case'icicle':ctx.fillStyle='#c0e8ff';ctx.fillRect(x-2,y-8,4,8);ctx.fillStyle='#ffffff';ctx.fillRect(x-1,y-8,1,6);ctx.fillStyle='#a0d8ff';ctx.fillRect(x-1,y,2,3);break;
     case'shuriken':{ctx.save();ctx.translate(x,y);ctx.rotate(gtime*24);ctx.fillStyle='#d8dce4';ctx.fillRect(-1,-5,2,7);ctx.fillStyle='#ffffff';ctx.fillRect(-1,-5,1,6);ctx.fillStyle='#c0a040';ctx.fillRect(-2,2,4,1);ctx.fillStyle='#5a3a1a';ctx.fillRect(-1,3,2,3);ctx.restore();break}// thrown daggers
@@ -1613,7 +1634,7 @@ function drawUnderhang(x,y,tx,ty,zid,pal){const h=hash2(tx,ty);if(h%3)return;con
   for(let i=0;i<n;i++){const ox=x+2+((h>>>(4+i*3))%12),len=2+((h>>>(9+i*4))%6);
     if(zid==='fro'){ctx.fillStyle='#d8f0ff';ctx.fillRect(ox,y+16,2,Math.max(1,len-2));ctx.fillRect(ox,y+16,1,len);ctx.fillStyle='#ffffff';ctx.fillRect(ox,y+16,1,1)}
     else if(zid==='orm'||zid==='vor'){ctx.fillStyle='#2a2a30';ctx.fillRect(ox,y+16,1,len);if(zid==='orm'&&len>5){ctx.fillStyle='#ff6a1a';ctx.fillRect(ox,y+16+len,1,1)}}
-    else if(zid==='one'){ctx.fillStyle='rgba(255,176,240,.55)';ctx.fillRect(ox,y+16,1,len)}
+    else if(zid==='rev'){ctx.fillStyle='#6a5a3a';ctx.fillRect(ox,y+16,1,len);if(len>4){ctx.fillStyle='#b08a3a';ctx.fillRect(ox-1,y+16+len,3,2);ctx.fillStyle='#40ffa0';ctx.fillRect(ox,y+16+len,1,1)}}
     else{ctx.fillStyle=shade(pal.grass,-.35);ctx.fillRect(ox,y+16,1,len);if(len>4){ctx.fillStyle=pal.grass;ctx.fillRect(ox-1,y+16+len-2,1,1)}}}}
 // ground clutter: bones, skulls, candles, rubble and tufts
 function drawClutter(d,pal){const x=d.x,y=d.y;switch(d.k){
@@ -1775,42 +1796,42 @@ function loadZone(zi,seed){run.zi=zi;run.seed=seed;world=genCastle(seed,zi,{trea
   props=world.props.map(p=>Object.assign({},p));chests=world.chests.map(c=>Object.assign({},c));projs=[];pickups=[];parts=[];decals=[];graves=[];bossUI=null;
   mode='run';waitingParty=false;if(me.dead){me.dead=false;me.hp=Math.round(me.st.maxhp*.5)}placePlayer(me,world.start.x,world.start.y);me.room=0;world.rooms[0].seen=true;cam.room=null;snapCam();hideAll();
   toast(ZONES[zi].n.toUpperCase(),ZONES[zi].sub);music(ZONES[zi].mus);persist()}
-// ================= the story, told on the Endless Staircase between countries =================
+// ================= the story of Clockwork and the Reverse, told on the stair between countries =================
 // STORY[i] is the climb after beating country i, one line per landing
 const STORY=[
- ["Behind Carla's lair the stair begins: pale stone, warm to the touch, climbing straight into the clouds.",
-  "A pilgrim in Kalandrian grey sits on a landing, counting. “Every step is a prayer,” she says. “Every prayer is a step.”",
-  "“Count them and you forget your name.” She has forgotten hers.",
-  "At the top of the flight the clouds part over the red rock of Dhargul."],
- ["Stairwarden lanterns hang along this flight, long burnt out.",
-  "Someone has carved into a step: IT IS NOT GOING UP.",
-  "The Descenders sign their warnings like that. In Kalandris they are heretics. They say the stair must be destroyed, before something climbs down it.",
+ ["Carla Tootheater took his bargain: a little more time. When she fell, a clock in her lair stopped, and the stair went on behind it.",
+  "The steps are pale and cold, and every one of them ticks under your feet.",
+  "An old pilgrim sits on a landing, a little younger every time you look. “I came for my youth,” he says. “It is lovely, for the first few days.”",
+  "At the top of the flight the fog parts over the red rock of Dhargul."],
+ ["A Shifter waits on this landing, one of the few who ever got out of the Reverse. Her hair is white. She is nineteen.",
+  "“The machine takes a day from a sleeper and a season from a labourer,” she says. “It took my whole family between one market and the next.”",
+  "“His Timelords keep order in there. They were people once. They chose to be drained more slowly.”",
   "Behind you, the steps you climbed are gone. Ahead stand the cold walls of Ormagöden."],
- ["A monastery clings to this landing. Its order is silent, and its library holds what the climbers saw above.",
-  "The higher the shelf, the stranger the book.",
-  "The last book is blank, except for one line: the name of your family.",
-  "Through the far door comes the smell of blood and old wine. C'Tharvatul."],
- ["Far below, carried on the wind, the bells of Hollowbell are ringing. They only ring when something comes down the stair.",
-  "Flowers grow along these steps in perfect circles. Nothing here has ever rotted.",
-  "The Kalandrians call it a blessing. The elves of Elyndor call it the Blight.",
+ ["Time runs the wrong way on this flight. Your own footprints are already on the steps above you.",
+  "Through a crack in the air you see a wood at night: a young woman in the leaves, and a faceless man in blue armour opening his arms to her.",
+  "She drives a dagger through the clock in his chest. He falls without understanding why.",
+  "The crack closes. Through the far door comes the smell of blood and old wine. C'Tharvatul."],
+ ["Someone has built a shrine on this landing to the Unborn: things born outside time, said to oppose the machine.",
+  "Others pray to the woman in the coffin. If she ever wakes, they say, everyone will be set free.",
+  "Nobody on the stair knows how old they are any more. Nobody speaks Clockwork's old name.",
   "The stair opens onto the black forests of Rotheim."],
- ["A knight of the Silent Guard bars the landing, sword drawn, eyes closed.",
-  "“We are sworn to stop whatever comes down,” the knight says.",
-  "“You are the first thing in a thousand years that is going up.” The knight steps aside.",
+ ["A Timelord bars the landing, faceless, sword drawn. Its hands are an old man's hands.",
+  "“Join, or perish,” it says, the way you say something you have said ten thousand times.",
+  "It does not fight. It sits down on the step. “Just a little more time,” it says, and goes still.",
   "Snow begins to fall. Frostcrown lies ahead."],
- ["This is the Last Landing, the highest anyone has ever come back from. Past it, the stone is new.",
-  "Not ancient. New. Cut minutes ago. Somewhere above, chisels ring in the dark.",
-  "The stair is not climbing up to heaven. It is being built down into the world, one step at a time.",
+ ["From here you can see it: far to the south, a ring of green light standing on the sea.",
+  "Under the ring, the sailors say, the island of Temporalis still lies, with the Deep and the crown at Tempolis. Cut off from the world, and drained hour by hour.",
+  "This stair is no road to heaven. It is laid over the world, the way the Reverse was laid over Temporalis.",
   "The next door opens on the iron gates of the Vorzakh Empire."],
- ["The builders are close now: pale shapes of light, laying stone after stone.",
-  "Every stone is a dream, taken from a sleeper somewhere in Vellorum.",
-  "The Dream Tyrant feeds on the world's sleep, and with every dream he swallows the stair reaches one step lower.",
-  "The Descenders were right. The stair has to be broken, and it can only be broken at the top: Oneiros."]];
+ ["The last of his lords has fallen. Past this landing, the stair goes down into the green.",
+  "Fog over black water. Clocks that cannot be trusted. The echoes of Port Magnus, Hourtop and the Clocktower.",
+  "At the heart stands Lock Keep, and in it the machine, and halls of glass coffins that go on further than anyone has walked.",
+  "In the last coffin lies a woman. Clockwork talks to her every day. Your bloodline has come to stop his clock."]];
 function loadStair(nz,seed){world=genStair(nz);world.nseed=seed;world.pal=STAIR_PAL;tiles=buildTiles(STAIR_PAL,'stair');skyC=buildSky(STAIR_PAL);
   enemies=[];props=[];chests=[];projs=[];pickups=[];parts=[];decals=[];graves=[];bossUI=null;world.story=STORY[nz-1]||[];world.storyI=-1;world.storyT=0;
   portal={x:world.door.x,y:world.door.y,t:0,stair:true};mode='run';waitingParty=false;if(me.dead){me.dead=false;me.hp=Math.round(me.st.maxhp*.5)}
   placePlayer(me,world.start.x,world.start.y);me.room=0;cam.room=null;snapCam();hideAll();me.arrows=quiverOf(me);
-  toast('THE ENDLESS STAIR','ONWARD TO '+ZONES[nz].n.toUpperCase());music('camp');persist()}
+  toast('THE STAIR','ONWARD TO '+ZONES[nz].n.toUpperCase());music('camp');persist()}
 function finishStair(){if(!world.stair)return;if(net&&!net.isHost){toast('AT THE TOP','WAITING FOR THE HOST');netEv({k:'portal'});return}if(net)netGo({cmd:'zone',zi:world.nz,seed:world.nseed});loadZone(world.nz,world.nseed)}
 // halfway up, the stair starts falling away behind you: run
 function stairChase(dt){const w=world,L=w.landings;if(!w.chase){if(me.x>L[1].x0*T){w.chase={x:Math.max(T*6,me.x-15*T),col:0,pause:0};toast('THE STAIR IS FALLING','RUN');shake(6);sfx('boom')}return}
@@ -1838,7 +1859,13 @@ function showDeath(){const p=me,z=run?run.zi:0;$('d-title').textContent=p.heir.n
   if(net){for(const r of remotes.values())if(r.inRun)rows.push([`${r.nick||'Friend'} (score)`,fmt(r.score||0)])}
   $('d-stats').innerHTML=rows.map(([a,b])=>`<li><span>${esc(a)}</span><b>${esc(b)}</b></li>`).join('');mode='dead';show('death');music(null)}
 $('d-ok').onclick=()=>openHeirs('Your last heir has fallen. Who carries the blade now?');
-function showEnding(){mode='dead';$('end-b').innerHTML=`The Dream Tyrant unravels, and with him the stair. From the top down, step by step, the Endless Staircase falls silent. In Hollowbell the bells stop ringing. ${esc(me.heir.name)} walks down out of the clouds into Kalandris, and the pilgrims at Firststep count every step with them. For once, nobody in Vellorum has a nightmare.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;show('ending');music('camp')}
+// the last choice: smash the machine (and the loop begins again), or let her go
+function showEnding(){mode='dead';$('end-h').textContent='JUST A LITTLE MORE TIME';$('end-b').innerHTML=`Clockwork kneels on the floor of Lock Keep, the clock in his chest ticking far too fast. Behind him, in the machine, the woman in glass is slipping away.<br><br>“Just a little more time,” he says. He sounds tired, never angry.`;
+  $('end-ok').hidden=true;$('end-smash').hidden=false;$('end-let').hidden=false;show('ending');music('dream')}
+function endingChoice(letGo){const n=esc(me.heir.name);$('end-smash').hidden=true;$('end-let').hidden=true;$('end-ok').hidden=false;
+  if(letGo){save.trueEnd=(save.trueEnd||0)+1;$('end-h').textContent='THE CLOCK STOPS';$('end-b').innerHTML=`${n} stands between him and the machine, and lets her sleep. The machine runs down. The clock in his chest stops, and Clockwork, Lord of Time, crumbles to dust beside her.<br><br>In the halls of glass, every coffin turns to dust at once. Far to the south the green ring unravels, and after years of being lost, Temporalis returns to the sea. ${n} walks back down to Firststep, and the stair falls silent behind them.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('camp')}
+  else{$('end-h').textContent='IT BEGINS AGAIN';$('end-b').innerHTML=`${n} smashes the machine and pulls her free. Clockwork staggers back, punches a hole through time and walks away down the Reverse, into the past.<br><br>Somewhere, in a wood at night, a young woman looks up at a faceless man in blue armour. The green ring still stands on the sea.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more. Perhaps next time, someone will let her go.`;music('dream')}persist(true)}
+$('end-smash').onclick=()=>endingChoice(false);$('end-let').onclick=()=>endingChoice(true);
 $('end-ok').onclick=()=>{save.ng++;save.bosses=0;persist(true);toCamp()};
 
 // ================= interaction =================
@@ -1853,7 +1880,7 @@ function doInteract(){const it=interactTarget;if(!it)return;
 
 // ================= the toll =================
 function openToll(){if(waitingParty)return;$('cf-yes').disabled=false;const opened=Math.min(ZONES.length-1,save.bosses);$('cf-t').textContent='OLD MURK, THE TOLL-WRAITH';
-  $('cf-b').innerHTML=`"The stair takes the living. I take their coin."<br><br>Entering costs <b class="gold-t">all ${fmt(save.gold)} gold</b> you carry. Spend it first.`+(net&&!net.isHost?'<br><br>Your party leader chooses the country.':'');
+  $('cf-b').innerHTML=`"The stair takes your years. I take your coin."<br><br>Entering costs <b class="gold-t">all ${fmt(save.gold)} gold</b> you carry. Spend it first.`+(net&&!net.isHost?'<br><br>Your party leader chooses the country.':'');
   const ex=$('cf-extra');ex.innerHTML='';let pickZ=0;
   if(opened>0&&(!net||net.isHost)){const seg=document.createElement('div');seg.className='seg';seg.style.cssText='justify-content:center;margin-top:12px;flex-wrap:wrap';for(let z=0;z<=opened;z++){const b=document.createElement('button');b.type='button';b.textContent=ZONES[z].n;b.className=z===0?'on':'';b.onclick=()=>{pickZ=z;[...seg.children].forEach((c,i)=>c.className=i===z?'on':'')};seg.append(b)}ex.append(seg)}
   $('cf-yes').textContent='Pay and enter';$('cf-yes').onclick=()=>{save.gold=0;persist(true);sfx('door');hideAll();
@@ -2062,6 +2089,7 @@ function ambient(dt){const wx=(ZONES[run.zi]||{}).wx;if(!wx||wx==='none'||!chanc
     case'ash':P({k:'amb',x,y:cam.y-4,vx:rnd(-10,10),vy:rnd(16,30),l:7,l0:7,c:pickR(['#5a5050','#ff8a3a','#3a3434']),s:1});break;
     case'mist':P({k:'smoke',x,y:cam.y+VH*rnd(.5,1),vx:rnd(-10,10),vy:rnd(-4,0),l:2.4,l0:2.4,c:shade(world.pal.back2,.25),s:rnd(8,14),mist:1});break;
     case'snow':P({k:'amb',x,y:cam.y-4,vx:rnd(-16,4),vy:rnd(18,34),l:8,l0:8,c:'#f4faff',s:chance(.3)?2:1});break;
+    case'time':P({k:'amb',x,y:cam.y+VH+4,vx:rnd(-4,4),vy:rnd(-22,-10),l:6,l0:6,c:pickR(['#40ffa0','#a0ffd0','#b08a3a']),s:1,tw:1});break;
     case'star':P({k:'amb',x,y,vx:rnd(-4,4),vy:rnd(-10,-2),l:3,l0:3,c:pickR(['#ffe0ff','#ff90e0','#a0e0ff']),s:1,tw:1});break}}
 // ================= co-op over rooms =================
 let room=null,net=null,lobbyUnsub=null,netPj=[];
