@@ -111,15 +111,15 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
 </head>
 <body>
 <div id="crawl"><canvas id="cr-stars"></canvas>
-<div id="cr-pre">In the southern sea of Vellorum&hellip;</div>
+<div id="cr-pre">In the north-east of Vellorum, at the foot of the Endless Stair&hellip;</div>
 <div id="cr-logo">HEIRS OF THE<br>FRACTURE</div>
 <div id="cr-persp"><div id="cr-field"><div id="cr-text">
-<h2>EPISODE I</h2><h3>THE LORD OF TIME</h3>
-<p>There was an island called Temporalis, with a great city called the Deep and an order of mages who studied the hours. Then, one morning, a ring of green light stood on the water where the island had been. Sailors call it the Reverse.</p>
-<p>Those who die near the ring hear a voice at the very end, offering them a choice: <i>join, or perish.</i> The voice belongs to CLOCKWORK, the Lord of Time: faceless, armoured in blue, a clock set over his heart.</p>
-<p>Now the Reverse is spreading. A pale stair has broken through the ash peaks of Kalandris and runs on through every land, and the lords of each country have taken his bargain: a little more time.</p>
-<p>In Firststep, at the foot of the stair, a forgotten family of adventurers sets out to follow it to its heart. Every heir will fall, and every fall makes the next heir stronger&hellip;</p>
-<p>The bloodline will climb until his clock stops.</p>
+<h2>EPISODE I</h2><h3>JUST A LITTLE MORE TIME</h3>
+<p>One grey morning a young man walks into Firststep with ink on his fingers and a broken clock on a chain at his throat. His name is OTHAR HILDERIC, an apprentice of the Order of the Sapphire, from the Deep on the island of Temporalis.</p>
+<p>With him comes his wife, LIILIA. She is twenty and looks forty. She ages faster every week, and no healer on Temporalis can help her.</p>
+<p>&ldquo;I don't need a hero,&rdquo; Othar says. &ldquo;I need someone who won't stop looking.&rdquo; Somewhere in Vellorum, he believes, the lords who have lived too long hold the cure.</p>
+<p>A forgotten family of adventurers takes his coin. Every heir will fall, and every fall makes the next heir stronger&hellip;</p>
+<p>No one in the family asks what the cure will cost.</p>
 </div></div></div>
 <div id="cr-hint">PRESS ANY BUTTON FOR SOUND</div></div>
 <div id="stage"><div id="wrap">
@@ -421,7 +421,7 @@ const ZONES=[
   {id:'vor',n:'The Vorzakh Empire',sub:'WE WILL BRING BACK ORDER, TOGETHER!',mus:'empire',bg:'empire',wx:'none',boss:'uooros',bossN:'UOOROS',bossS:'THE MIND BEHIND THE THRONE',
    en:[['legion',5],['musketeer',3],['teether',3],['possessed',2],['mindmage',2],['gungie',3],['engine',1]],
    pal:{wall:'#4a4a52',mort:'#1e1e24',hi:'#6a6a74',acc:'#a040e0',back:'#141418',back2:'#1a1a20',plat:'#6a6a72',plat2:'#3a3a42',sky:['#06040a','#1a1028','#3a2050'],moon:'#c080ff',light:'#d0a0ff',grass:'#3a3a40'}},
-  {id:'rev',n:'The Reverse',sub:'JOIN, OR PERISH',mus:'time',bg:'reverse',wx:'time',boss:'clockwork',bossN:'CLOCKWORK',bossS:'THE LORD OF TIME',
+  {id:'rev',n:'The Reverse',sub:'JOIN, OR PERISH',mus:'time',bg:'reverse',wx:'time',boss:'clockwork',bossN:'CLOCKWORK',bossS:'ONCE OTHAR HILDERIC',
    en:[['drained',5],['tlarcher',3],['second',3],['tlblade',2],['hourthief',2],['overwound',2],['sentinel',1]],
    pal:{wall:'#2e3a3c',mort:'#121a1c',hi:'#4e6a66',acc:'#40ffa0',back:'#0c1416',back2:'#121c1e',plat:'#6a5a3a',plat2:'#3a3020',sky:['#040a0c','#0e2a26','#2a6a50'],moon:'#a0ffd0',light:'#80ffc0',grass:'#2a4a40'}}];
 
@@ -725,7 +725,7 @@ function genCamp(){
   for(let x=44;x<=48;x++)map[10*mw+x]=2;
   const rooms=[{id:0,cx:0,cy:0,cw:2,ch:1,x:0,y:0,w:mw,h:mh,type:'camp',doors:[],seen:true}];
   return{seed:0,zi:0,mw,mh,map,rooms,doors:[],cellRoom:new Int16Array(GW*GH).fill(-1),spawns:[],props:[],decor:[],chests:[],gates:[],start:{x:3*T,y:15*T},boss:-1,camp:true,
-    npcs:[{k:'sensei',x:10*T,n:'Sensei Hiroe',a:'Hidden Dojo'},{k:'smith',x:20*T,n:'Brakka the Smith',a:'Forge',need:'smith'},{k:'ench',x:29*T,n:'Madame Veyl',a:'Runes',need:'ench'},{k:'arch',x:41*T,n:'Old Compass',a:'Lock the road',need:'arch'},{k:'murk',x:58*T,n:'Old Murk',a:'Enter'}]}}
+    npcs:[{k:'sensei',x:10*T,n:'Sensei Hiroe',a:'Hidden Dojo'},{k:'smith',x:20*T,n:'Brakka the Smith',a:'Forge',need:'smith'},{k:'ench',x:29*T,n:'Madame Veyl',a:'Runes',need:'ench'},{k:'arch',x:41*T,n:'Old Compass',a:'Lock the road',need:'arch'},{k:'othar',x:51*T,n:'Othar and Liilia',a:'Talk'},{k:'murk',x:58*T,n:'Old Murk',a:'Enter'}]}}
 // ================= the Endless Staircase: the climb between two countries =================
 const STAIR_PAL={wall:'#5a5460',mort:'#2e2a34',hi:'#8a8494',acc:'#c84a3a',back:'#1a1822',back2:'#24222c',plat:'#7a6a5a',plat2:'#4a3e34',sky:['#0e1426','#3a4870','#d8a07a'],moon:'#f4ecd8',light:'#ffd8a0',grass:'#6a7a5a'};
 function genStair(zi){// zi: the country this flight of steps leads to
@@ -1608,6 +1608,11 @@ function drawNPC(n){const x=Math.round(n.x),y=15*T;const t=gtime;const f=me?sign
     case'ench':ctx.fillStyle='#3a2440';ctx.fillRect(x-44,y-26,34,20);ctx.fillStyle='#5a3a6a';ctx.beginPath();ctx.ellipse(x-27,y-26,18,10,0,Math.PI,0);ctx.fill();ctx.fillStyle='#2a1a10';ctx.beginPath();ctx.arc(x-38,y-5,5,0,7);ctx.arc(x-16,y-5,5,0,7);ctx.fill();
       hum(x,y,f,1,{skin:'#f0d0c0',cloth:'#4a2a6a',head:'hood',eye:'#c0a0ff',wpn:'orb',orb:'#b080ff'},t,'idle');for(let i=0;i<3;i++){const a=t*2+i*2.1;ctx.fillStyle='#c0a0ff';ctx.fillRect(x+Math.cos(a)*12,y-14+Math.sin(a)*6,2,2)}break;
     case'arch':ctx.fillStyle='#4a3a2a';ctx.fillRect(x+8,y-12,18,2);ctx.fillRect(x+10,y-10,2,10);ctx.fillRect(x+22,y-10,2,10);ctx.fillStyle='#d8d0b0';ctx.fillRect(x+9,y-14,16,2);hum(x,y,f,1,{skin:'#e0c0a0',cloth:'#2a4a5a',head:'',eye:'#111'},t,'idle');ctx.fillStyle='#ddd';ctx.fillRect(x-3,y-22,6,2);break;
+    case'othar':{const b=save.bosses|0;ctx.fillStyle='#4a3424';ctx.fillRect(x-22,y-8,40,3);ctx.fillRect(x-20,y-5,2,5);ctx.fillRect(x+14,y-5,2,5);
+      if(save.trueEnd||b>=7){if(b>=7&&!save.trueEnd&&Math.random()<.04)P({k:'spark',x:x+rnd(-14,14),y:y-rnd(6,20),vx:0,vy:-10,l:1,c:'#40ffa0',s:1});break}
+      if(b<4){const hair=['#5a3420','#7a6a5a','#9a9088','#b8b0a8'][b];hum(x-10,y,1,1,{skin:'#f0d0b8',cloth:'#8a3a4a',head:'hair',hair,eye:'#3a2a2a',wpn:b>=3?'staff':''},t,'idle')}
+      if(b<6){const hair=b<4?'#3a2a1a':b<5?'#8a8a8a':'#d8d8d8';hum(x+8,y,-1,1,{skin:'#e8c8a8',cloth:'#2a3a6a',head:'hair',hair,eye:'#2a2a3a',wpn:''},t,'idle');ctx.fillStyle=b>=4?'#40ffa0':'#c8a040';ctx.fillRect(x+7,y-13,2,2)}
+      else{hum(x+8,y,-1,1.1,{skin:'#c8d0e0',cloth:'#1e3a8a',head:'faceless',eye:'#80ffc0',wpn:''},t,'idle');ctx.fillStyle='#40ffa0';ctx.fillRect(x+7,y-11,3,3)}break}
     case'murk':{const fl=Math.sin(t*2)*2;ctx.fillStyle='#14121a';ctx.beginPath();ctx.moveTo(x-8,y+fl);ctx.lineTo(x-6,y-22+fl);ctx.lineTo(x+6,y-22+fl);ctx.lineTo(x+9,y+fl);ctx.lineTo(x+5,y-3+fl);ctx.lineTo(x,y+fl);ctx.lineTo(x-4,y-3+fl);ctx.fill();ctx.fillStyle='#0a080e';ctx.fillRect(x-4,y-24+fl,8,8);ctx.fillStyle='#7ff0c0';ctx.fillRect(x-2,y-21+fl,1,1);ctx.fillRect(x+1,y-21+fl,1,1);
       ctx.strokeStyle='#5a4a3a';ctx.beginPath();ctx.moveTo(x-10,y-26+fl);ctx.lineTo(x-10,y-2+fl);ctx.stroke();const lg=ctx.createRadialGradient(x-10,y-28+fl,1,x-10,y-28+fl,16);lg.addColorStop(0,'rgba(120,255,200,.7)');lg.addColorStop(1,'rgba(120,255,200,0)');ctx.fillStyle=lg;ctx.fillRect(x-26,y-44+fl,32,32);ctx.fillStyle='#bfffe0';ctx.fillRect(x-12,y-30+fl,4,4);break}}}
 function drawCampScenery(){const gx=60*T;ctx.fillStyle='#2a2028';ctx.fillRect(gx-10,4*T,60,11*T);ctx.fillStyle='#3a3038';ctx.fillRect(gx-14,3*T,68,T);for(let i=0;i<5;i++)ctx.fillRect(gx-14+i*15,2*T,8,T);ctx.fillStyle='#08060a';ctx.beginPath();ctx.moveTo(gx-6,15*T);ctx.lineTo(gx-6,8*T);ctx.quadraticCurveTo(gx+14,4*T,gx+34,8*T);ctx.lineTo(gx+34,15*T);ctx.fill();
@@ -1796,37 +1801,37 @@ function loadZone(zi,seed){run.zi=zi;run.seed=seed;world=genCastle(seed,zi,{trea
   props=world.props.map(p=>Object.assign({},p));chests=world.chests.map(c=>Object.assign({},c));projs=[];pickups=[];parts=[];decals=[];graves=[];bossUI=null;
   mode='run';waitingParty=false;if(me.dead){me.dead=false;me.hp=Math.round(me.st.maxhp*.5)}placePlayer(me,world.start.x,world.start.y);me.room=0;world.rooms[0].seen=true;cam.room=null;snapCam();hideAll();
   toast(ZONES[zi].n.toUpperCase(),ZONES[zi].sub);music(ZONES[zi].mus);persist()}
-// ================= the story of Clockwork and the Reverse, told on the stair between countries =================
-// STORY[i] is the climb after beating country i, one line per landing
+// ================= the story of Othar Hilderic, told on the stair between countries =================
+// STORY[i] is the climb after beating country i: four landings, each a short exchange that plays line by line
 const STORY=[
- ["Carla Tootheater took his bargain: a little more time. When she fell, a clock in her lair stopped, and the stair went on behind it.",
-  "The steps are pale and cold, and every one of them ticks under your feet.",
-  "An old pilgrim sits on a landing, a little younger every time you look. “I came for my youth,” he says. “It is lovely, for the first few days.”",
-  "At the top of the flight the fog parts over the red rock of Dhargul."],
- ["A Shifter waits on this landing, one of the few who ever got out of the Reverse. Her hair is white. She is nineteen.",
-  "“The machine takes a day from a sleeper and a season from a labourer,” she says. “It took my whole family between one market and the next.”",
-  "“His Timelords keep order in there. They were people once. They chose to be drained more slowly.”",
-  "Behind you, the steps you climbed are gone. Ahead stand the cold walls of Ormagöden."],
- ["Time runs the wrong way on this flight. Your own footprints are already on the steps above you.",
-  "Through a crack in the air you see a wood at night: a young woman in the leaves, and a faceless man in blue armour opening his arms to her.",
-  "She drives a dagger through the clock in his chest. He falls without understanding why.",
-  "The crack closes. Through the far door comes the smell of blood and old wine. C'Tharvatul."],
- ["Someone has built a shrine on this landing to the Unborn: things born outside time, said to oppose the machine.",
-  "Others pray to the woman in the coffin. If she ever wakes, they say, everyone will be set free.",
-  "Nobody on the stair knows how old they are any more. Nobody speaks Clockwork's old name.",
-  "The stair opens onto the black forests of Rotheim."],
- ["A Timelord bars the landing, faceless, sword drawn. Its hands are an old man's hands.",
-  "“Join, or perish,” it says, the way you say something you have said ten thousand times.",
-  "It does not fight. It sits down on the step. “Just a little more time,” it says, and goes still.",
-  "Snow begins to fall. Frostcrown lies ahead."],
- ["From here you can see it: far to the south, a ring of green light standing on the sea.",
-  "Under the ring, the sailors say, the island of Temporalis still lies, with the Deep and the crown at Tempolis. Cut off from the world, and drained hour by hour.",
-  "This stair is no road to heaven. It is laid over the world, the way the Reverse was laid over Temporalis.",
-  "The next door opens on the iron gates of the Vorzakh Empire."],
- ["The last of his lords has fallen. Past this landing, the stair goes down into the green.",
-  "Fog over black water. Clocks that cannot be trusted. The echoes of Port Magnus, Hourtop and the Clocktower.",
-  "At the heart stands Lock Keep, and in it the machine, and halls of glass coffins that go on further than anyone has walked.",
-  "In the last coffin lies a woman. Clockwork talks to her every day. Your bloodline has come to stop his clock."]];
+ [["Behind Carla's lair a stair of pale stone opens in the air, where the clock at Othar's throat points.","OTHAR: “It only does that near things that have lived too long. Sorry. I should have said.”"],
+  ["OTHAR: “Carla was three hundred years old. She ate children's teeth, and with them their years.”","LIILIA: “So the cure is eating children. Lovely. I'll pass.”"],
+  ["OTHAR: “No! No. The years can be taken without... I'll find a kinder way.”","He fiddles with the broken clock, trying to make it tick again."],
+  ["LIILIA: “Stop counting my grey hairs, Othar. Count something useful.”","There is a grey streak in her hair that was not there this morning. Ahead lies Dhargul."]],
+ [["The Rock-Chief kept the bones of every challenger. One of them still had a clock tattooed on its neck.","OTHAR: “The Order of the Sapphire marks its mages like that. Whatever he was, he got far.”"],
+  ["One night on the stair, a blue dome of light rises around your camp, and inside it a memory that is not yours:","a wood at night, a young couple in the leaves, and a faceless man in blue armour coming for her."],
+  ["LIILIA: “That's the night we met him. The man with no face. I killed him, you know. He turned to dust.”","OTHAR: “Please don't. Not in front of them.”"],
+  ["OTHAR: “I'm sorry. Thank you for coming this far. I'll pay double.”","LIILIA: “He apologises too much. Pay them triple.” The cold walls of Ormagöden rise ahead."]],
+ [["The clock at Othar's throat is ticking again. He has not slept in two nights.","OTHAR: “Lionwhyte's crown was cut from the same metal. With it I could finally mend the spring.”"],
+  ["OTHAR: “It isn't a clock. It never was. It's a key, and it points south, to the sea.”","LIILIA: “Everything points south when you want it badly enough.”"],
+  ["She walks with a hand on the wall now. Her hair is half grey. She is twenty.","LIILIA: “Don't look at me like that. I'm still faster than you.”"],
+  ["OTHAR: “There is a place called Lock Keep. A pocket beside time. If I can open it, I can hold her.”","Through the far door comes the smell of blood and old wine. C'Tharvatul."]],
+ [["Lord Ravenna lived nine hundred years. As she died, the key at Othar's throat drank something out of the air.","OTHAR: “That's it. That's the last piece. Come with me. Please.”"],
+  ["He turns the key in nothing at all, and a door opens beside time. Lock Keep. In the middle stands the machine.","In the machine lies a woman's body. An old woman. She has Liilia's face."],
+  ["Behind her, in glass, row after row, lie more of her. Some are older. Some are dust.","OTHAR: “Don't. Don't ask me. Help me lift her.” You help him seal the dead woman in glass with the others."],
+  ["He lays his Liilia in the machine. It hums. For the first time in weeks, her hair stops turning grey.","OTHAR: “It can hold her. It only needs time to run on. Taken from the living.” The black forests of Rotheim lie ahead."]],
+ [["OTHAR: “I fed it myself, while you were fighting. A few years. I don't need them.”","His hair is white at the temples. His voice is older than his face."],
+  ["OTHAR: “And Valthor had centuries in him. You saw where they went? Into the key. Into her.”","Every lord you cut down has been feeding the machine. You have been feeding it all along."],
+  ["He opens his shirt. The key is set into his chest now, over his heart, ticking too fast.","LIILIA, through the glass: “Othar. Stop. Let me go.”"],
+  ["OTHAR: “Just a little more time.”","Snow begins to fall. Frostcrown lies ahead."]],
+ [["Othar wears blue armour now. He says it keeps the cold out. He no longer takes off the helm.","OTHAR: “The Ice Entity barely lasted a day in there. The machine is always hungry.”"],
+  ["OTHAR: “Temporalis is full of people. The machine takes a day from a sleeper and a season from a labourer. Nobody would even notice.”","LIILIA: “They would notice, Othar. Their children would notice.”"],
+  ["You find a market on the stair, all old people, white-haired between one stall and the next.","A girl of nineteen with white hair grabs your sleeve. “Who is doing this?” You do not answer."],
+  ["OTHAR: “One more lord. Then she'll have enough, and I can stop. I promise.”","The next door opens on the iron gates of the Vorzakh Empire."]],
+ [["When Uooros falls, the man at the top of the stair is not Othar any more. He is faceless, and the clock in his chest ticks far too fast.","CLOCKWORK: “Thank you, friends. And I'm sorry.”"],
+  ["Far to the south, on the sea, a ring of green light rises. Inside it the island of Temporalis is torn out of time, with every soul in the Deep and Tempolis.","The whole country becomes the Reverse: one great machine for his wife, drained hour by hour."],
+  ["CLOCKWORK: “Those who die near the ring will hear my voice. They can join me, or perish.”","CLOCKWORK: “You helped me build this. You could stay. You'd be the first of my Timelords.”"],
+  ["You turn him down. He sounds tired, never angry. “Then come and stop me.”","The stair goes down into the green, to Lock Keep, to the woman in the machine."]]];
 function loadStair(nz,seed){world=genStair(nz);world.nseed=seed;world.pal=STAIR_PAL;tiles=buildTiles(STAIR_PAL,'stair');skyC=buildSky(STAIR_PAL);
   enemies=[];props=[];chests=[];projs=[];pickups=[];parts=[];decals=[];graves=[];bossUI=null;world.story=STORY[nz-1]||[];world.storyI=-1;world.storyT=0;
   portal={x:world.door.x,y:world.door.y,t:0,stair:true};mode='run';waitingParty=false;if(me.dead){me.dead=false;me.hp=Math.round(me.st.maxhp*.5)}
@@ -1843,11 +1848,24 @@ function stairChase(dt){const w=world,L=w.landings;if(!w.chase){if(me.x>L[1].x0*
   const tx=clamp(Math.floor(me.x/T),0,w.mw-1);if(!me.dead&&me.y>(w.floorAt[tx]+5)*T){// fell: lose a little health, back onto solid steps ahead of the collapse
     let nx=Math.max(Math.floor(c.x/T)+4,6);while(nx<w.mw-2&&(tileAt(nx,w.floorAt[nx])===0||w.gaps.some(g=>nx>=g[0]-1&&nx<=g[1]+1)))nx++;
     placePlayer(me,(nx+.5)*T,w.floorAt[nx]*T-.01);me.hp=Math.max(1,me.hp-Math.round(me.st.maxhp*.1));me.inv=1;c.pause=1;sfx('hurt');shake(5);txt(me.x,me.y-me.h-4,'FELL','#ff8a8a')}}
-function stairStory(dt){const w=world;if(!w.stair||!me)return;stairChase(dt);const L=w.landings;let i=0;for(let k=0;k<L.length-1;k++)if(me.x>L[k].x0*T)i=k+1;if(i>w.storyI){w.storyI=i;w.storyT=0;sfx('swap')}w.storyT+=dt}
-function drawStory(){const w=world;if(!w.stair||w.storyI<0)return;const s=w.story[w.storyI];if(!s)return;const a=Math.min(1,w.storyT/1.2);
+function stairStory(dt){const w=world;if(!w.stair||!me)return;stairChase(dt);const L=w.landings;let i=0;for(let k=0;k<L.length-1;k++)if(me.x>L[k].x0*T)i=k+1;if(i>w.storyI){w.storyI=i;w.storyT=0;w.lineI=0;w.lineT=0;sfx('swap')}w.storyT+=dt;const b=w.story[w.storyI];if(b){w.lineT+=dt;if(w.lineT>4.6&&w.lineI<b.length-1){w.lineI++;w.lineT=0;sfx('tick')}}}
+function drawStory(){const w=world;let s,cnt='';if(w.talk){s=w.talk.lines[w.talk.i];cnt=(w.talk.i+1)+' / '+w.talk.lines.length+'   [E] NEXT'}else{if(!w.stair||w.storyI<0)return;const b=w.story[w.storyI];if(!b)return;s=b[Math.min(w.lineI||0,b.length-1)];cnt=(w.storyI+1)+' / '+w.story.length}
+  if(!s)return;const a=w.talk?1:Math.min(1,(w.lineT||0)/.6);const m=/^([A-Z][A-Z ,]+?)(, through the glass)?: (.*)$/.exec(s);let who='',col='#f4e8c8';if(m){who=m[1]+(m[2]||'');s=m[3];col={OTHAR:'#bfe0ff',LIILIA:'#ffd0c8',CLOCKWORK:'#90ffc8'}[m[1]]||'#f4e8c8'}
   ctx.font='8px Silkscreen, monospace';const words=s.split(' '),lines=[];let cur='';for(const wd of words){const t=cur?cur+' '+wd:wd;if(ctx.measureText(t).width>VW-90){lines.push(cur);cur=wd}else cur=t}if(cur)lines.push(cur);
-  const h=lines.length*11+22,y=62;ctx.globalAlpha=a*.8;ctx.fillStyle='#0a0810';ctx.fillRect(30,y,VW-60,h);ctx.fillStyle='#c8a040';ctx.fillRect(30,y,VW-60,1);ctx.fillRect(30,y+h-1,VW-60,1);ctx.globalAlpha=a;ctx.textAlign='center';ctx.fillStyle='#f4e8c8';lines.forEach((l,k)=>ctx.fillText(l,VW/2,y+15+k*11));
-  ctx.fillStyle='#8a7a5a';ctx.fillText((w.storyI+1)+' / '+w.story.length,VW/2,y+h-5);ctx.textAlign='left';ctx.globalAlpha=1}
+  const top=who?12:0,h=lines.length*11+22+top,y=w.talk?150:62;ctx.globalAlpha=a*.85;ctx.fillStyle='#0a0810';ctx.fillRect(30,y,VW-60,h);ctx.fillStyle='#c8a040';ctx.fillRect(30,y,VW-60,1);ctx.fillRect(30,y+h-1,VW-60,1);ctx.globalAlpha=a;ctx.textAlign='center';
+  if(who){ctx.fillStyle=col;ctx.fillText(who,VW/2,y+13)}ctx.fillStyle=who?col:'#f4e8c8';lines.forEach((l,k)=>ctx.fillText(l,VW/2,y+15+top+k*11));
+  ctx.fillStyle='#8a7a5a';ctx.fillText(cnt,VW/2,y+h-5);ctx.textAlign='left';ctx.globalAlpha=1}
+// ================= Othar and Liilia at camp: what they say depends on how far the bloodline has come =================
+function campTalkLines(){const b=save.bosses|0;if(save.trueEnd)return["Their bench is empty. Someone has scratched a little clock into the wood, and crossed it out.","Far to the south, the sailors say, the island of Temporalis is back on the sea."];
+  return[["OTHAR: “I'm Othar Hilderic, of the Order of the Sapphire. Apprentice. Sorry. I don't need a hero. I need someone who won't stop looking.”","LIILIA: “He means: my wife is cursed, and we can pay.”","OTHAR: “Every lord who has lived too long holds a piece of the cure. Start in Ravenfall.”"],
+   ["LIILIA: “Ravenfall was fun. Do they all have crows?”","OTHAR: “The Rock-Chief in Dhargul next. He keeps the bones of old mages. I need to see them.”"],
+   ["OTHAR: “I dreamed about the man in the woods again.”","LIILIA: “He's dead, Othar. I made sure.”","OTHAR: “I know. That's what frightens me.”"],
+   ["LIILIA: “He hasn't slept. He talks to that clock like it's going to answer.”","OTHAR: “It did answer. It points south. C'Tharvatul next, and then I'll know.”"],
+   ["Liilia is not here. Othar sits alone on the bench, very straight, very tired.","OTHAR: “She's safe in the machine. She's safe. I just need to keep it running.”","OTHAR: “Bring me Valthor. A lich has so much time in him.”"],
+   ["OTHAR: “Don't look at my hair. It's only a few years. I gave them gladly.”","OTHAR: “Frostcrown next. The Ice Entity has kept itself still for an age. All that time, just sitting there.”"],
+   ["A man in blue armour sits on the bench. The helm has no face. He is still polite.","OTHAR: “The Vorzakh Empire. Uooros. After him, I promise, I can stop.”"],
+   ["Their bench is empty. The planks are grey with age, as if a hundred years went by in a night.","Old Murk says a voice spoke to him from the south last night: join, or perish."]][Math.min(b,7)]}
+
 function nextZone(){if(world.stair){finishStair();return}if(run.zi>=ZONES.length-1){showEnding();return}const seed=(Math.random()*2**31)|0;if(net&&net.isHost){netGo({cmd:'stair',zi:run.zi+1,seed})}loadStair(run.zi+1,seed)}
 function onLocalDeath(){if(net&&mode==='run'&&!net.wiped){return}recordDeath();showDeath()}
 function recordFallen(p,kind){const z=run?run.zi:0;save.lineage.unshift({name:p.heir.name,cls:p.heir.cls,traits:p.heir.traits,zone:z,killer:kind==='spike'?'spikes':p.lastBy||'',gold:p.gold,kills:p.kills,score:p.score,t:Date.now()});persist(true)}
@@ -1860,23 +1878,23 @@ function showDeath(){const p=me,z=run?run.zi:0;$('d-title').textContent=p.heir.n
   $('d-stats').innerHTML=rows.map(([a,b])=>`<li><span>${esc(a)}</span><b>${esc(b)}</b></li>`).join('');mode='dead';show('death');music(null)}
 $('d-ok').onclick=()=>openHeirs('Your last heir has fallen. Who carries the blade now?');
 // the last choice: smash the machine (and the loop begins again), or let her go
-function showEnding(){mode='dead';$('end-h').textContent='JUST A LITTLE MORE TIME';$('end-b').innerHTML=`Clockwork kneels on the floor of Lock Keep, the clock in his chest ticking far too fast. Behind him, in the machine, the woman in glass is slipping away.<br><br>“Just a little more time,” he says. He sounds tired, never angry.`;
+function showEnding(){mode='dead';$('end-h').textContent='JUST A LITTLE MORE TIME';$('end-b').innerHTML=`Clockwork kneels on the floor of Lock Keep, the clock in his chest ticking far too fast. Behind him, in the machine, Liilia is slipping away.<br><br>“Just a little more time,” Othar says. He sounds tired, never angry.<br><br>LIILIA, through the glass: “Let me go. Please. Both of you.”`;
   $('end-ok').hidden=true;$('end-smash').hidden=false;$('end-let').hidden=false;show('ending');music('dream')}
 function endingChoice(letGo){const n=esc(me.heir.name);$('end-smash').hidden=true;$('end-let').hidden=true;$('end-ok').hidden=false;
-  if(letGo){save.trueEnd=(save.trueEnd||0)+1;$('end-h').textContent='THE CLOCK STOPS';$('end-b').innerHTML=`${n} stands between him and the machine, and lets her sleep. The machine runs down. The clock in his chest stops, and Clockwork, Lord of Time, crumbles to dust beside her.<br><br>In the halls of glass, every coffin turns to dust at once. Far to the south the green ring unravels, and after years of being lost, Temporalis returns to the sea. ${n} walks back down to Firststep, and the stair falls silent behind them.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('camp')}
-  else{$('end-h').textContent='IT BEGINS AGAIN';$('end-b').innerHTML=`${n} smashes the machine and pulls her free. Clockwork staggers back, punches a hole through time and walks away down the Reverse, into the past.<br><br>Somewhere, in a wood at night, a young woman looks up at a faceless man in blue armour. The green ring still stands on the sea.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more. Perhaps next time, someone will let her go.`;music('dream')}persist(true)}
+  if(letGo){save.trueEnd=(save.trueEnd||0)+1;$('end-h').textContent='THE CLOCK STOPS';$('end-b').innerHTML=`${n} stands between Othar and the machine, and lets Liilia sleep. The machine runs down. The clock in his chest stops, and Clockwork, Lord of Time, crumbles to dust beside her, holding her hand.<br><br>In the halls of glass, every Liilia turns to dust at once. Far to the south the green ring unravels, and after years of being lost, Temporalis returns to the sea. Its people are old, and they will not forget who helped him.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('camp')}
+  else{$('end-h').textContent='IT BEGINS AGAIN';$('end-b').innerHTML=`${n} smashes the machine and pulls Liilia free. Clockwork staggers back, punches a hole through time and walks away down the Reverse, into the past, sure that this time he will save her.<br><br>Somewhere, in a wood at night, a young woman drives a dagger through the clock in a faceless man's chest. A young apprentice picks up the broken clock.<br><br>Some weeks later, he walks into Firststep looking for adventurers.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('dream')}persist(true)}
 $('end-smash').onclick=()=>endingChoice(false);$('end-let').onclick=()=>endingChoice(true);
 $('end-ok').onclick=()=>{save.ng++;save.bosses=0;persist(true);toCamp()};
 
 // ================= interaction =================
 let reviveT=0;
 function findInteract(){interactTarget=null;if(!me||me.dead)return;
-  if(mode==='camp'){for(const n of world.npcs){if(n.need&&!L(n.need))continue;if(Math.abs(me.x-n.x)<22){interactTarget={x:n.x,y:15*T-30,label:n.a,npc:n};return}}}
+  if(mode==='camp'){for(const n of world.npcs){if(n.need&&!L(n.need))continue;if(Math.abs(me.x-n.x)<22){interactTarget={x:n.x,y:15*T-30,label:n.k==='othar'&&world.talk?'Next':n.a,npc:n};return}}}
   if(mode==='run'){for(const c of chests)if(!c.open&&Math.abs(me.x-c.x)<14&&Math.abs(me.y-c.y)<16){interactTarget={x:c.x,y:c.y-12,label:'Open',chest:c};return}
     for(const g of graves)if(!g.mine&&Math.abs(me.x-g.x)<16&&Math.abs(me.y-g.y)<20){interactTarget={x:g.x,y:g.y-14,label:`Hold to raise ${g.n}`,grave:g};return}}}
 function doInteract(){const it=interactTarget;if(!it)return;
   if(it.chest){openChest(it.chest);return}
-  if(it.npc){const k=it.npc.k;if(k==='sensei')openTree();else if(k==='smith')openShop('smith');else if(k==='ench')openShop('ench');else if(k==='arch')openArch();else if(k==='murk')openToll()}}
+  if(it.npc){const k=it.npc.k;if(k==='othar'){if(world.talk){world.talk.i++;sfx('tick');if(world.talk.i>=world.talk.lines.length)world.talk=null}else{world.talk={lines:campTalkLines(),i:0,x:it.npc.x};sfx('swap')}return}if(k==='sensei')openTree();else if(k==='smith')openShop('smith');else if(k==='ench')openShop('ench');else if(k==='arch')openArch();else if(k==='murk')openToll()}}
 
 // ================= the toll =================
 function openToll(){if(waitingParty)return;$('cf-yes').disabled=false;const opened=Math.min(ZONES.length-1,save.bosses);$('cf-t').textContent='OLD MURK, THE TOLL-WRAITH';
@@ -2011,7 +2029,7 @@ function step(dt){gtime+=dt;
     if(net&&net.isHost)checkWipe(dt);
     bossUI=enemies.find(e=>e.boss&&e.alive&&e.st!=='dormant')||null}
   for(const r of remotes.values()){const k=Math.min(1,dt*14);r.x+=(r.tx-r.x)*k;r.y+=(r.ty-r.y)*k;r.at=(r.at||0)+dt;if(r.scarf){let px=r.x-r.face*3,py=r.y-r.h+4;for(const s of r.scarf){s.x+=(px-s.x)*.55;s.y+=(py-s.y)*.55+.6;px=s.x;py=s.y}}}
-  if(mode==='camp'){updateProjs(dt);updatePickups(dt)}
+  if(mode==='camp'){updateProjs(dt);updatePickups(dt);if(world.talk&&me&&Math.abs(me.x-world.talk.x)>40)world.talk=null}
   stepParts(dt);updateCam(dt);
   if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').style.opacity=0}}
 function startBoss(b){if(b.st!=='dormant')return;b.st='intro';b.t=2.4;sealGates();const B=ZONES[run.zi];toast(B.bossN,B.bossS);music('boss');
