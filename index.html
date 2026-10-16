@@ -200,10 +200,10 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
   <h2>HOW TO PLAY</h2>
   <ul class="how">
     <li><b>Move</b> <kbd>A</kbd><kbd>D</kbd> or arrows · <b>Jump</b> <kbd>Space</kbd> or <kbd>K</kbd>, again in the air · <b>Dash</b> <kbd>Shift</kbd> in any direction you hold, also in the air, and you dodge through attacks while dashing</li>
-    <li><b>Light attack</b> <kbd>J</kbd> · <b>Heavy</b> <kbd>I</kbd> · <b>Bow</b> hold <kbd>L</kbd> to aim, release to fire · <b>Block</b> hold <kbd>Q</kbd>, tap it as a hit lands to parry. Hold <kbd>J</kbd> while moving to sprint. Hold <kbd>W</kbd> to attack up, hold <kbd>S</kbd> in the air to attack down or fall faster. See <b>Moves &amp; combos</b> on the title screen.</li>
+    <li><b>Light attack</b> <kbd>J</kbd> · <b>Heavy</b> <kbd>I</kbd> · <b>Grappling hook</b> hold <kbd>L</kbd> to fire it and swing, let go to drop, jump to fling yourself off · <b>Block</b> hold <kbd>Q</kbd>, tap it as a hit lands to parry. Hold <kbd>J</kbd> while moving to sprint. Hold <kbd>W</kbd> to attack up, hold <kbd>S</kbd> in the air to attack down or fall faster. See <b>Moves &amp; combos</b> on the title screen.</li>
     <li><b>Ability</b> <kbd>F</kbd> costs mana. Hits and kills refill mana.</li>
     <li><b>Talk / open / buy</b> <kbd>E</kbd> · <b>Map</b> <kbd>Tab</kbd> or <kbd>M</kbd> · <b>Drop through platforms</b> <kbd>S</kbd> + jump · <b>Pause</b> <kbd>Esc</kbd></li>
-    <li>Slide down walls and jump off them. Controllers work too (PS5 shown): Cross jump, Square light attack (hold while moving to sprint), Triangle heavy, Circle bow (hold to aim in any direction with either stick, release to fire), R2 dash in any direction, R1 ability, L1 block and parry, d-pad up interact and revive, Options pause, Create or touchpad map. In menus: d-pad moves, Cross picks, Circle goes back.</li>
+    <li>Slide down walls and jump off them. Controllers work too (PS5 shown): Cross jump, Square light attack (hold while moving to sprint), Triangle heavy, Circle grappling hook (hold to swing, aim with either stick, jump to fling off), R2 dash in any direction, R1 ability, L1 block and parry, d-pad up interact and revive, Options pause, Create or touchpad map. In menus: d-pad moves, Cross picks, Circle goes back.</li>
     <li>Every heir is different. When yours dies, pick one of their children and spend the family gold in the Hidden Dojo, at the Blacksmith and with the Enchantress.</li>
     <li>Old Murk takes <b>all</b> your remaining gold as the toll to the Waystones. Spend it before you go.</li>
     <li>Each country ends in a boss. Beat it to open the road to the next country. Old Murk will row you to any border you have opened.</li>
@@ -218,7 +218,7 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
     <h3>THE BASICS</h3>
     <span class="k"><kbd>J</kbd> <span class="ps">□</span></span><span><b>Light attack.</b> Press three times for a 3-hit chain; the third hit lunges. Hold it while moving to sprint.</span>
     <span class="k"><kbd>I</kbd> <span class="ps">△</span></span><span><b>Heavy attack.</b> A slow wind-up, then a huge hit that knocks enemies flying.</span>
-    <span class="k"><kbd>L</kbd> <span class="ps">○</span></span><span><b>Bow.</b> Hold to aim (you stand still). On a controller you can aim in any direction with either stick, release to fire. A longer draw shoots harder and pierces. Your quiver is small: arrows stick in walls and enemies, so go and pick them up. One regrows slowly.</span>
+    <span class="k"><kbd>L</kbd> <span class="ps">○</span></span><span><b>Grappling hook.</b> Fires up and forward, or wherever you aim the stick. It catches on walls, ceilings and ledges. Hold to swing and reel in, hold down to let rope out, jump to fling yourself off with a boost. It also yanks small enemies toward you.</span>
     <span class="k"><kbd>Q</kbd> <span class="ps">L1</span></span><span><b>Block and parry.</b> Hold to block hits from the front. Tap it right as a hit lands to parry: no damage, nearby enemies are stunned, shots fly back, and your next hit is a guaranteed crit.</span>
     <span class="k"><kbd>Shift</kbd> <span class="ps">R2</span></span><span><b>Dash.</b> In any of 8 directions, also in the air. You dodge through attacks while dashing.</span>
     <span class="k"><kbd>F</kbd> <span class="ps">R1</span></span><span><b>Class ability.</b> Costs mana. Hits and kills refill it.</span>
@@ -302,7 +302,7 @@ function readPad(){const pads=rawPads().filter(p=>p&&p.connected&&p.buttons&&p.b
   const lx=ax[0]||0,ly=ax[1]||0,sonyRaw=pad.mapping!=='standard'&&/054c|sony|dualsense|dualshock|wireless controller/i.test(pad.id),rx=ax[2]||0,ry=(sonyRaw?ax[5]:ax[3])||0;
   return{a:s[0],b:s[1],x:s[2],y:s[3],l1:s[4],r1:s[5],l2:s[6],r2:s[7],sel:s[8]||s[17],start:s[9],
     up:s[12]||ly<-.5,down:s[13]||ly>.5,left:s[14]||lx<-.45,right:s[15]||lx>.45,lx,ly,rx,ry,id:pad.id}}
-// Cross jump · Square attack · Triangle heavy · Circle bow (hold to aim, release to fire) · R2 dash in any direction · R1 ability · L1 block (tap on impact to parry) · up interact · Options pause · Create / touchpad map
+// Cross jump · Square attack · Triangle heavy · Circle grappling hook · R2 dash in any direction · R1 ability · L1 block (tap on impact to parry) · up interact · Options pause · Create / touchpad map
 function padToGame(q){if(!q)return{};return{l:q.left,r:q.right,u:q.up,d:q.down,jump:q.a,atk:q.x,heavy:q.y,bow:q.b,dash:q.r2,spell:q.r1,parry:q.l1,inter:q.up,pause:q.start,map:q.sel,ax:Math.hypot(q.rx,q.ry)>.35?q.rx:Math.hypot(q.lx,q.ly)>.3?q.lx:0,ay:Math.hypot(q.rx,q.ry)>.35?q.ry:Math.hypot(q.lx,q.ly)>.3?q.ly:0}}
 function pollInput(){
   const pb=padToGame(readPad());
@@ -622,15 +622,15 @@ function tryCastle(seed,zi,opt){
   const addDoor=(a,ax,ay,b,bx,by,boss)=>{const d={a:a.id,b:b.id,ax,ay,bx,by,boss:!!boss};doors.push(d);a.doors.push(d);b.doors.push(d)};
   const hasDoor=(a,b)=>doors.some(d=>(d.a===a&&d.b===b)||(d.a===b&&d.b===a));
   // every country is a climb: start bottom-left, boss near the top-right
-  const start=place(0,GH-1,1,1,'start');const target=17+Math.round(zi*1.2)+ri(R,0,3);
-  const SIZES=[[[1,1],6],[[2,1],4],[[1,2],3],[[2,2],1],[[3,1],1]];
+  const start=place(0,GH-1,1,1,'start');const target=10+Math.round(zi*.7)+ri(R,0,2);
+  const SIZES=[[[1,1],1],[[2,1],3],[[1,2],3],[[2,2],4],[[3,1],1],[[3,2],2],[[2,3],1]];// big rooms, with tall ones to swing through
   for(let tries=0;rooms.length<target&&tries<5000;tries++){
     const a=R()<.55?rooms[rooms.length-1-Math.floor(R()*Math.min(3,rooms.length))]:pk(R,rooms);
     const cand=[];for(let j=0;j<a.ch;j++)for(let i=0;i<a.cw;i++)for(const [dx,dy] of[[1,0],[-1,0],[0,1],[0,-1]]){const nx=a.cx+i+dx,ny=a.cy+j+dy;if(nx<0||ny<0||nx>=GW||ny>=GH)continue;if(occ[ny*GW+nx]>=0)continue;if(a.type==='start'&&dx===-1)continue;cand.push([a.cx+i,a.cy+j,dx,dy])}
     if(!cand.length)continue;const good=cand.filter(c=>c[2]===1||c[3]===-1);const [cx,cy,dx,dy]=good.length&&R()<.75?pk(R,good):pk(R,cand),nx=cx+dx,ny=cy+dy;const [w,h]=wpick(R,SIZES);
     const ox=dx===1?nx:dx===-1?nx-w+1:nx-ri(R,0,w-1),oy=dy===1?ny:dy===-1?ny-h+1:ny-ri(R,0,h-1);
     if(!fits(ox,oy,w,h))continue;const b=place(ox,oy,w,h,'normal');addDoor(a,cx,cy,b,nx,ny)}
-  if(rooms.length<target-3)return null;
+  if(rooms.length<target-2)return null;
   // a few loops
   for(let j=0;j<GH;j++)for(let i=0;i<GW;i++){const a=occ[j*GW+i];if(a<0)continue;for(const [dx,dy] of[[1,0],[0,1]]){const b=occ[(j+dy)*GW+i+dx];if(i+dx>=GW||j+dy>=GH||b<0||b===a)continue;if(hasDoor(a,b))continue;if(R()<.14)addDoor(rooms[a],i,j,rooms[b],i+dx,j+dy)}}
   // boss room at the far end
@@ -720,7 +720,11 @@ function tryCastle(seed,zi,opt){
     for(let y=r.y;y<r.y+r.h-1;y++){if(map[I(r.x,y)]===1&&outside(r.x-1,y))map[I(r.x,y)]=8;const xr=r.x+r.w-1;if(map[I(xr,y)]===1&&outside(xr+1,y))map[I(xr,y)]=8}}
   for(const t of traps)if(t.k==='dart'){const wx=Math.floor((t.x-(t.dir>0?1:-1))/T),wy=Math.floor(t.y/T);for(let yy=wy-2;yy<=wy+2;yy++)if(map[I(wx,yy)]===8)map[I(wx,yy)]=1}// dart traps sit in a stone post
   const sr=rooms[0];
-  return{clutter,seed,zi,mw,mh,map,rooms,doors,cellRoom,spawns,props,decor,chests,gates,traps,start:{x:(sr.x+4)*T,y:(sr.y+16)*T},boss:boss.id,camp:false}}
+  // grapple rings: floating anchors in the open air of every room, so the hook always has something to catch
+  const anchors=[];const clear=(x,y)=>{for(let j=-2;j<=2;j++)for(let i=-2;i<=2;i++)if(map[I(x+i,y+j)]!==0||prot[I(x+i,y+j)])return false;return true};
+  for(const r of rooms){if(r.type==='boss')continue;for(let j=0;j<r.ch;j++)for(let i=0;i<r.cw;i++){const X0=(r.cx+i)*CW,Y0=(r.cy+j)*CH,n=r.cw*r.ch>=2?1+(R()<.5?1:0):1;
+    for(let k=0;k<n;k++)for(let t=0;t<20;t++){const x=X0+5+Math.floor(R()*20),y=Y0+2+Math.floor(R()*6);if(clear(x,y)&&!anchors.some(a=>Math.abs(a.x-(x+.5)*T)<8*T&&Math.abs(a.y-(y+.5)*T)<5*T)){anchors.push({x:(x+.5)*T,y:(y+.5)*T,room:r.id});break}}}}
+  return{clutter,seed,zi,mw,mh,map,rooms,doors,cellRoom,spawns,props,decor,chests,gates,traps,anchors,start:{x:(sr.x+4)*T,y:(sr.y+16)*T},boss:boss.id,camp:false}}
 
 function genCamp(){
   const mw=64,mh=17,map=new Uint8Array(mw*mh);
@@ -748,7 +752,8 @@ function genStair(zi){// zi: the country the far Waystone opens on. Floating isl
   for(let yy=0;yy<mh;yy++){map[I(0,yy)]=map[I(0,yy)]||8;map[I(mw-1,yy)]=map[I(mw-1,yy)]||8}for(let xx=0;xx<mw;xx++)if(!map[I(xx,0)])map[I(xx,0)]=8;
   const rooms=[{id:0,cx:0,cy:0,cw:GW,ch:GH,type:'start',doors:[],x:0,y:0,w:mw,h:mh,seen:true}];
   const clutter=[];for(const l of landings){clutter.push({k:'candles',x:(l.x0+1)*T,y:l.y*T},{k:'candles',x:(l.x1)*T,y:l.y*T})}
-  return{seed:0,zi:-1,stair:true,nz:zi,mw,mh,map,rooms,doors:[],cellRoom:new Int16Array(GW*GH).fill(0),spawns:[],props:[],decor:[],chests:[],gates:[],traps:[],clutter,landings,floorAt,gaps,islands,
+  const anchors=gaps.filter(g=>g[1]-g[0]>=2).map(g=>({x:((g[0]+g[1])/2+.5)*T,y:(floorAt[g[0]]-6)*T,room:0}));
+  return{anchors,seed:0,zi:-1,stair:true,nz:zi,mw,mh,map,rooms,doors:[],cellRoom:new Int16Array(GW*GH).fill(0),spawns:[],props:[],decor:[],chests:[],gates:[],traps:[],clutter,landings,floorAt,gaps,islands,
     start:{x:3*T,y:(mh-30)*T},door:{x:(mw-5)*T,y:lastY*T},boss:-1,camp:false}}
 function roomAtPx(px,py){const w=world;if(w.camp)return w.rooms[0];const cx=Math.floor(px/T/CW),cy=Math.floor(py/T/CH);if(cx<0||cy<0||cx>=GW||cy>=GH)return null;const id=w.cellRoom[cy*GW+cx];return id>=0?w.rooms[id]:null}
 
@@ -820,15 +825,30 @@ function slamLand(p){p.slam=false;p.atkT=0;shake(6);sfx('boom');ring(p.x,p.y-2,4
   for(const e of enemies){if(!e.alive||e.room!==p.room&&!e.boss||e.bossInv)continue;if(Math.abs(e.x-p.x)<48&&Math.abs(e.y-p.y)<28){const r=rollDmg(p,1.6);hitEnemy(e,r.d,r.crit,sign(e.x-p.x)||1,'launch')}}}
 // TowerFall bow: hold to aim (you stand still on the ground), release to fire; a longer draw shoots harder
 function aimDir(p,I,dir){if(Math.hypot(I.ax||0,I.ay||0)>.3){const L=Math.hypot(I.ax,I.ay);return[I.ax/L,I.ay/L]}let ax=dir,ay=(I.d?1:0)-(I.u?1:0);if(!ax&&!ay)ax=p.face;const L=Math.hypot(ax,ay);return[ax/L,ay/L]}
-function bowInput(p,I,dir,dt){
-  if(I.bowP&&!p.aiming&&!(p.bowCd>0)&&p.dashT<=0&&p.hurtT<=0){if((p.arrows|0)<=0){p.bowCd=.3;txt(p.x,p.y-p.h-6,'NO ARROWS','#a8998c');sfx('tick')}else{p.aiming=true;p.aimT=0;sfx('parry0')}}
-  if(!p.aiming)return;p.aimT+=dt;const [ax,ay]=aimDir(p,I,dir);p.aimX=ax;p.aimY=ay;p.bowA=Math.atan2(ay,ax);if(ax)p.face=sign(ax);p.bowT=.2;
-  if(p.hurtT>0||p.dashT>0||p.dead){p.aiming=false;return}
-  if(!I.bow){p.aiming=false;shootBow(p,ax,ay,Math.min(1,p.aimT/.35))}}
-function shootBow(p,ax,ay,pw){if((p.arrows|0)<=0)return;const sp=430+250*pw;
-  p.arrows--;p.bowCd=.18;p.bowT=.2;p.bowA=Math.atan2(ay,ax);
-  projs.push({k:'parrow',own:'p',x:p.x+ax*6,y:p.y-p.h*.6+ay*6,vx:ax*sp,vy:ay*sp-10,r:3,dmg:.6+.4*pw,life:3,grav:330,pierce:pw>=1?1:0,hit:new Set(),room:mode==='run'?p.room:null,stick:1});sfx('bow')}
-function dropArrow(x,y,stuck,a){pickups.push({k:'arrow',x,y,vx:stuck?0:rnd(-30,30),vy:stuck?0:-140,t:0,stuck:!!stuck,a:a||0})}
+// the grappling hook: fire it at any wall, ceiling or ledge, swing on the rope, reel in, jump off with a boost
+const HOOK_SPD=820,HOOK_MAX=360;
+function dropArrow(){}// the bow is gone; nothing drops arrows any more
+function hookAnchorable(x,y){const t=tileAt(Math.floor(x/T),Math.floor(y/T));return solidT(t)&&t!==8||t===2}
+// the ring the hook will fly to: the nearest one ahead and above (or along the stick when aiming)
+function hookTarget(p,ax,ay,strict){const cx=p.x,cy=p.y-p.h*.6;let best=null,bs=1e9;for(const a of world.anchors||[]){const dx=a.x-cx,dy=a.y-cy,d=Math.hypot(dx,dy);if(d>HOOK_MAX-10||d<20)continue;const dot=(dx*ax+dy*ay)/d;if(strict?dot<.9:(dy>-8||dx*p.face<-24))continue;if(!lineClear(cx,cy,a.x,a.y))continue;const sc=d*(strict?1:1.6-dot);if(sc<bs){bs=sc;best=a}}return best}
+function releaseHook(p,boost){const h=p.hook;p.hook=null;if(!h||h.st!=='hold')return;if(boost){p.vy=Math.min(p.vy-120,-JV*.9);p.vx*=1.15;p.aj=p.st.jumps;sfx('djump');ring(p.x,p.y-p.h/2,10,'#ffffff',.25)}}
+function grappleInput(p,I,dir,dt){p.hookCd=(p.hookCd||0)-dt;
+  if(I.bowP&&!p.hook&&p.hurtT<=0&&p.dashT<=0&&p.hookCd<=0){let ax,ay;if(Math.hypot(I.ax||0,I.ay||0)>.3)[ax,ay]=aimDir(p,I,dir);else if(I.d&&!p.onGround){ax=dir*.7;ay=1}else if(I.u&&!dir){ax=0;ay=-1}else{ax=(dir||p.face)*.5;ay=-.87}
+    {const L0=Math.hypot(ax,ay)||1;ax/=L0;ay/=L0;const t=hookTarget(p,ax,ay,Math.hypot(I.ax||0,I.ay||0)>.3||I.u||I.d);if(t){ax=t.x-p.x;ay=t.y-(p.y-p.h*.6)}}
+    const L=Math.hypot(ax,ay)||1;ax/=L;ay/=L;if(ax)p.face=sign(ax);p.hook={x:p.x,y:p.y-p.h*.6,vx:ax*HOOK_SPD,vy:ay*HOOK_SPD,st:'fly',t:0};p.hookCd=.2;sfx('dash')}
+  const h=p.hook;if(!h)return;h.t+=dt;const cx=p.x,cy=p.y-p.h*.6;
+  if(h.st==='fly'){for(let k=0;k<4;k++){h.x+=h.vx*dt/4;h.y+=h.vy*dt/4;
+      {const an=(world.anchors||[]).find(a=>Math.hypot(a.x-h.x,a.y-h.y)<9);if(an){h.x=an.x;h.y=an.y;h.st='hold';h.len=Math.max(18,Math.hypot(h.x-cx,h.y-cy));sfx('parry0');sparks(h.x,h.y,5,'#ffe8b0');if(!I.bow)p.hook=null;return}}
+      if(hookAnchorable(h.x,h.y)){h.x-=h.vx*dt/8;h.y-=h.vy*dt/8;h.st='hold';h.len=Math.max(18,Math.hypot(h.x-cx,h.y-cy));sfx('parry0');sparks(h.x,h.y,4,'#ffe8b0');if(!I.bow){p.hook=null}return}
+      for(const e of enemies){if(!e.alive||e.room!==p.room&&!e.boss)continue;if(Math.abs(e.x-h.x)<e.w/2+3&&h.y>e.y-e.h-3&&h.y<e.y+2){hitEnemy(e,Math.round(p.st.dmg*.4),false,sign(cx-e.x),'hook');if(!e.boss){e.vx=sign(cx-e.x)*300;e.vy=-160;e.stunT=Math.max(e.stunT||0,.6)}h.st='back';return}}}
+    if(Math.hypot(h.x-cx,h.y-cy)>HOOK_MAX||!I.bow&&h.t>.12)h.st='back';return}
+  if(h.st==='back'){const dx=cx-h.x,dy=cy-h.y,d=Math.hypot(dx,dy);if(d<14){p.hook=null;return}h.x+=dx/d*1100*dt;h.y+=dy/d*1100*dt;return}
+  // holding on: the rope pulls you in a circle around the anchor
+  if(!I.bow||p.hurtT>0||p.dead||p.dashT>0){releaseHook(p,false);return}
+  if(I.jumpP){p.jbuf=0;releaseHook(p,true);return}
+  h.len=Math.max(16,h.len-(I.d?-120:I.u?400:230)*dt);// reel in while held; up reels faster, down lets rope out
+  const dx=cx-h.x,dy=cy-h.y,d=Math.hypot(dx,dy)||1;if(d>h.len){const nx=dx/d,ny=dy/d,rv=p.vx*nx+p.vy*ny;if(rv>0){p.vx-=rv*nx;p.vy-=rv*ny}p.vx-=nx*(d-h.len)*12;p.vy-=ny*(d-h.len)*12}
+  if(p.onGround&&h.len<26)releaseHook(p,false)}
 function tryParry(p){if(p.parryCd>0||p.dashT>0||p.hurtT>0)return;p.parryT=.18;p.parryCd=.4;sfx('parry0')}
 function parryOK(p,srcX){p.parryT=0;p.parryCd=0;p.inv=Math.max(p.inv,.35);p.nextCrit=true;p.riposte=1.5;txt(p.x,p.y-p.h-6,'PARRY','#ffd040');sfx('parry');hitstop=Math.max(hitstop,.14);shake(4);
   const fx=p.x+sign(srcX-p.x||p.face)*8;ring(fx,p.y-p.h/2,18,'#ffe080',.3);sparks(fx,p.y-p.h/2,12,'#ffe080');
@@ -844,9 +864,8 @@ function swapHeir(p,forced){const o=partyOther(p);if(!o||p.dead&&!forced)return 
 function buildParty(p){const a=save.cur,b=save.cur2;if(!a||!b){p.party=null;return}p.party=[{heir:a,hp:computeStats(a).maxhp,mp:computeStats(a).maxmp},{heir:b,hp:computeStats(b).maxhp,mp:computeStats(b).maxmp}];p.pi=p.heir===b?1:0}
 function noteHit(){if(!me)return;me.hits=me.hitsT>0?(me.hits|0)+1:1;me.hitsT=2.2;if(me.hits>(me.bestHits|0))me.bestHits=me.hits}
 function updatePlayer(p,dt){
-  p.parryT=(p.parryT||0)-dt;p.parryCd=(p.parryCd||0)-dt;p.chainT=(p.chainT||0)-dt;p.riposte=(p.riposte||0)-dt;p.bowCd=(p.bowCd||0)-dt;p.bowT=(p.bowT||0)-dt;if(p===me&&p.hitsT>0)p.hitsT-=dt;
+  p.parryT=(p.parryT||0)-dt;p.parryCd=(p.parryCd||0)-dt;p.chainT=(p.chainT||0)-dt;p.riposte=(p.riposte||0)-dt;if(p===me&&p.hitsT>0)p.hitsT-=dt;
   {const o=partyOther(p);if(o){o.mhp=o.mhp||computeStats(o.heir).maxhp;o.hp=Math.min(o.mhp,o.hp+o.mhp*.02*dt)}}
-  if(p.arrows===undefined)p.arrows=quiverOf(p);if(p.arrows<quiverOf(p)){p.arrowT=(p.arrowT||0)+dt;if(p.arrowT>9){p.arrowT=0;p.arrows++}}else p.arrowT=0;
   p.inv-=dt;p.dashCd-=dt;if(p.dodgeT>0)p.dodgeT-=dt;p.atkCd-=dt;p.castCd-=dt;p.drop-=dt;p.hurtT-=dt;p.wallLock-=dt;p.invis-=dt;p.rage-=dt;
   if(p.dead){p.deadT+=dt;p.vy+=G*dt;p.vx*=.9;moveBody(p,dt);return}
   const st=p.st,I=inp;
@@ -856,16 +875,16 @@ function updatePlayer(p,dt){
   // wall slide
   p.wall=0;if(!p.onGround&&p.vy>0){if(dir<0&&wallAhead(p,-1))p.wall=-1;else if(dir>0&&wallAhead(p,1))p.wall=1}
   if(p.iaido>0){p.iaido-=dt}
-  else if(I.dashP&&p.dashCd<=0&&p.hurtT<=0&&(p.onGround||p.ad>0)){let dx=dir,dy=(I.d?1:0)-(I.u?1:0);if(p.onGround&&dy>0)dy=0;if(!dx&&!dy)dx=p.face;const L=Math.hypot(dx,dy);p.dvx=dx/L;p.dvy=dy/L;if(dx)p.face=dx;p.dashT=.15;p.dodgeT=.3;p.dodged=0;p.dashCd=st.dashcd;if(!p.onGround)p.ad--;sfx('dash');dust(p.x,p.y,4);p.atkT=0;p.aiming=false;p.slam=false}
+  else if(I.dashP&&p.dashCd<=0&&p.hurtT<=0&&(p.onGround||p.ad>0)){let dx=dir,dy=(I.d?1:0)-(I.u?1:0);if(p.onGround&&dy>0)dy=0;if(!dx&&!dy)dx=p.face;const L=Math.hypot(dx,dy);p.dvx=dx/L;p.dvy=dy/L;if(dx)p.face=dx;p.dashT=.15;p.dodgeT=.3;p.dodged=0;p.dashCd=st.dashcd;if(!p.onGround)p.ad--;sfx('dash');dust(p.x,p.y,4);p.atkT=0;p.aiming=false;p.slam=false;if(p.hook)releaseHook(p,false)}
   if(p.dashT>0){p.dashT-=dt;const S=370*Math.min(1.25,st.spd/118);p.vx=(p.dvx??p.face)*S;p.vy=(p.dvy||0)*S*.85;if(p.dashT<=0){p.vy*=.4;p.vx*=.6}if(Math.random()<.7)P({k:'after',x:p.x,y:p.y,f:p.face,l:.18,l0:.18,s:st.scale,c:CLASSES[p.heir.cls].band})}
   else if(p.hurtT<=0){
     if(dir&&p.wallLock<=0&&!(p.atkT>0&&p.onGround&&p.atkK==='side'))p.face=dir;
     p.blocking=!!I.parry&&p.atkT<=0&&!p.aiming;
     p.atkHold=I.atk?(p.atkHold||0)+dt:0;p.sprint=p.atkHold>.22&&!!dir&&!p.aiming&&!p.blocking;if(p.sprint&&p.atkT>0&&p.atkType==='light'){p.atkT=0;p.anim='run'}if(p.sprint&&p.onGround&&Math.random()<dt*14)P({k:'dust',x:p.x-p.face*4,y:p.y,vx:-p.face*rnd(10,40),vy:rnd(-20,0),l:.4,c:'#a89880',s:2});
     const target=(p.wallLock>0?Math.sign(p.vx):dir)*st.spd*(p.sprint?1.6:1)*(p.rage>0?1.3:1)*(p.atkT>0&&p.onGround?.45:1)*(p.blocking?.25:1)*(p.aiming&&p.onGround?0:p.aiming?.6:1),acc=p.onGround?2600:1900;
-    p.vx+=clamp(target-p.vx,-acc*dt,acc*dt);
+    if(p.hook&&p.hook.st==='hold'&&!p.onGround)p.vx+=dir*560*dt;else p.vx+=clamp(target-p.vx,-acc*dt,acc*dt);
     {const ff=I.d&&!p.onGround&&!p.wall&&p.vy>-40&&!p.aiming,gm=p.jumpHeld&&Math.abs(p.vy)<80?.5:ff?1.4:1;p.vy=Math.min(p.vy+G*gm*dt,p.wall?60:ff?FASTFALL:MAXFALL)}
-    if(p.jbuf>0){
+    if(p.jbuf>0&&!(p.hook&&p.hook.st==='hold')){
       if(I.d&&p.onGround&&onOneWay(p)){p.drop=.25;p.y+=2;p.jbuf=0}
       else if(p.coyote>0){p.vy=-JV;p.coyote=0;p.jbuf=0;sfx('jump');dust(p.x,p.y,5)}
       else if(p.wall||(!p.onGround&&(wallAhead(p,-1)||wallAhead(p,1))&&!p.aj)){const wd=p.wall||(wallAhead(p,-1)?-1:1);p.vy=-JV*.92;p.vx=-wd*210;p.face=-wd;p.wallLock=.15;p.jbuf=0;sfx('jump');dust(p.x+wd*5,p.y-6,4)}
@@ -877,7 +896,7 @@ function updatePlayer(p,dt){
   else if(I.heavyP&&(p.atkCd<=0||p.atkType==='light'&&p.atkT>0&&p.atkT<p.atkDur*.6)&&p.dashT<=0&&p.hurtT<=0){if(p.atkT>0&&p.atkType==='light'&&p.chainN>=1)p.chainT=.1;startAtk(p,'heavy',I)}
   if(p.atkT>0){p.atkT-=dt;if(p.atkType==='heavy'&&p.atkDur-p.atkT<p.atkWind&&Math.random()<.5)P({k:'spark',x:p.x-p.face*4,y:p.y-p.h-6,vx:0,vy:-30,l:.2,c:'#fff',s:1});doSlash(p);if(p.atkT<=0){if(p.atkType==='light')p.chainT=.55;p.slam=false}}
   if(p.slam){p.vy=Math.min(p.vy+1800*dt,640);p.vx*=.85}
-  bowInput(p,I,dir,dt);if(p.dashT>0||p.hurtT>0)p.blocking=false;
+  grappleInput(p,I,dir,dt);if(p.dashT>0||p.hurtT>0)p.blocking=false;
   if(I.parryP)tryParry(p);
   if(I.spellP)castSpell(p);
   // stair steps are one tile high: walk straight up them
@@ -1452,6 +1471,9 @@ function drawNinja(p,o){
   else if(arm==='down'){r(0,-8,2,5,arm1);r(0,-3,2,2,hand);blade(12,'d')}
   ctx.restore();ctx.globalAlpha=1}
 function drawSlashFx(p){
+  if(p.hook){const h=p.hook,hx=p.x+p.face*3,hy=p.y-p.h*.6,taut=h.st==='hold';ctx.strokeStyle=taut?'#d8c8a0':'rgba(216,200,160,.8)';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(hx,hy);
+    if(taut)ctx.lineTo(h.x,h.y);else{const mx=(hx+h.x)/2,my=(hy+h.y)/2+Math.min(14,Math.hypot(h.x-hx,h.y-hy)*.12);ctx.quadraticCurveTo(mx,my,h.x,h.y)}ctx.stroke();
+    const a=Math.atan2(h.y-hy,h.x-hx);ctx.save();ctx.translate(h.x,h.y);ctx.rotate(a);ctx.fillStyle='#b8c0cc';ctx.beginPath();ctx.moveTo(3,0);ctx.lineTo(-2,-1.4);ctx.lineTo(-2,1.4);ctx.fill();ctx.strokeStyle='#e8eef8';ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(1,0);ctx.quadraticCurveTo(-1,-3.4,-3,-2.6);ctx.moveTo(1,0);ctx.quadraticCurveTo(-1,3.4,-3,2.6);ctx.stroke();ctx.restore();ctx.lineWidth=1}
   if(p.aiming){const g=p.aimX||p.face,h=p.aimY||0,sp=430+250*Math.min(1,(p.aimT||0)/.35);let x=p.x+g*6,y=p.y-p.h*.6+h*6,vx=g*sp,vy=h*sp-10;ctx.fillStyle='rgba(255,240,200,.7)';for(let i=0;i<9;i++){for(let k=0;k<3;k++){vy+=330*.012;x+=vx*.012;y+=vy*.012}if(solidAt(x,y))break;ctx.fillRect(Math.round(x),Math.round(y),1,1)}}
   if(p.blocking&&!(p.parryT>0)){ctx.save();ctx.globalAlpha=.5;ctx.strokeStyle='#9adfff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x+p.face*4,p.y-p.h/2,11,p.face>0?-1.1:Math.PI-1.1,p.face>0?1.1:Math.PI+1.1,false);ctx.stroke();ctx.restore()}
   if(p.parryT>0){ctx.save();ctx.globalAlpha=.8;ctx.strokeStyle='#ffe080';ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x+p.face*4,p.y-p.h/2,12,p.face>0?-1.2:Math.PI-1.2,p.face>0?1.2:Math.PI+1.2,false);ctx.stroke();ctx.restore()}
@@ -1719,6 +1741,9 @@ function drawWorld(){
   // back wall
   // decor on walls
   if(!world.camp)for(const d of world.decor){const x=d.x*T,y=d.y*T;if(x<cx-40||x>cx+VW+40||y<cy-40||y>cy+VH+40)continue;drawDecor(d,x,y,pal)}
+  for(const a of world.anchors||[]){if(a.x<cx-20||a.x>cx+VW+20||a.y<cy-20||a.y>cy+VH+20)continue;const tg=me&&!me.hook&&mode==='run'&&hookTarget(me,me.face*.5,-.87,false)===a,bob=Math.sin(gtime*2+a.x)*1.2,y=a.y+bob,pu=.5+.5*Math.sin(gtime*3+a.y);
+    const g=ctx.createRadialGradient(a.x,y,0,a.x,y,tg?14:9);g.addColorStop(0,`rgba(255,226,150,${tg?.55:.25+pu*.1})`);g.addColorStop(1,'rgba(255,226,150,0)');ctx.fillStyle=g;ctx.fillRect(a.x-14,y-14,28,28);
+    ctx.strokeStyle='#5a5048';ctx.lineWidth=2;ctx.beginPath();ctx.arc(a.x,y,4,0,7);ctx.stroke();ctx.strokeStyle=tg?'#fff4d0':'#c8a868';ctx.lineWidth=1;ctx.beginPath();ctx.arc(a.x,y,4,0,7);ctx.stroke();ctx.fillStyle=tg?'#ffffff':'#ffe08a';ctx.fillRect(a.x-.5,y-5.5,1,1.5)}
   if(world.camp)drawCampScenery();else{ctx.globalCompositeOperation='saturation';ctx.globalAlpha=.3;ctx.fillStyle='#808080';ctx.fillRect(cx,cy,VW,VH);ctx.globalCompositeOperation='source-over';
     ctx.globalAlpha=.16;ctx.fillStyle=pal.back||'#0a0610';ctx.fillRect(cx,cy,VW,VH);ctx.globalAlpha=1;if(world.stair)drawStairDressing(cx,cy,pal)}// push the back wall into the haze
   for(let ty=ty0;ty<=ty1;ty++)for(let tx=tx0;tx<=tx1;tx++){const t=tileAt(tx,ty),x=tx*T,y=ty*T;
@@ -2328,7 +2353,7 @@ function drawHUD(){if(!me)return;ctx.font='8px Silkscreen, monospace';ctx.textAl
   bar(10,20,112,4,me.mp,me.st.maxmp,me.mpFlash>0?'#ffffff':'#4da3ff','#0a1a3a');me.mpFlash=(me.mpFlash||0)-1/60;
   const sp=SPELLS[CLASSES[me.heir.cls].spell];ctx.fillStyle='rgba(8,4,8,.7)';ctx.fillRect(4,VH-16,150,12);ctx.fillStyle='#8ac0ff';ctx.fillText(`[F/R1] ${sp.n.toUpperCase()} ${sp.mp?sp.mp+' MP':'12% HP'}`,8,VH-7);
   // quiver and companion
-  ctx.fillStyle='rgba(8,4,8,.7)';ctx.fillRect(4,43,146,13);const qn=quiverOf(me);for(let i=0;i<qn;i++){const on=i<(me.arrows|0),x=9+i*5;ctx.fillStyle=on?'#c8b090':'#3a302a';ctx.fillRect(x,46,1,8);ctx.fillStyle=on?'#e8ecf4':'#3a302a';ctx.fillRect(x-1,45,3,2);ctx.fillStyle=on?'#d04040':'#3a302a';ctx.fillRect(x-1,53,3,1)}
+
   {const o=me.party&&me.party[1-me.pi];if(o){ctx.fillStyle=o.dead?'#6f6259':me.swapCd>0?'#a8998c':'#bfe8ff';ctx.fillText((o.dead?'† ':'⇄ ')+o.heir.name.toUpperCase().slice(0,9),52,53);if(!o.dead){const mh=o.mhp||computeStats(o.heir).maxhp;ctx.fillStyle='#3a0810';ctx.fillRect(118,48,28,4);ctx.fillStyle='#d02030';ctx.fillRect(118,48,28*clamp(o.hp/mh,0,1),4)}}}
   if((me.hits|0)>=3&&me.hitsT>0){ctx.textAlign='right';const k=Math.min(1,me.hitsT/2.2);ctx.globalAlpha=.4+.6*k;ctx.fillStyle=me.hits>=20?'#ff6a3a':me.hits>=10?'#ffb040':'#ffe9a3';ctx.font='16px Silkscreen, monospace';ctx.fillText(me.hits+'',VW-8,VH-24);ctx.font='8px Silkscreen, monospace';ctx.fillText('HIT COMBO'+(me.hits>=10?' · +'+Math.min(me.hits,50)+'% GOLD':''),VW-8,VH-12);ctx.globalAlpha=1;ctx.textAlign='left'}
   ctx.fillStyle='#ffcc4d';ctx.fillRect(10,30,5,5);ctx.fillStyle='#fff3b0';ctx.fillRect(11,31,2,2);ctx.fillStyle='#ffe9a3';ctx.fillText(fmt(save.gold),19,36);
@@ -2361,12 +2386,12 @@ function drawBigMap(){ctx.fillStyle='rgba(6,3,6,.88)';ctx.fillRect(0,0,VW,VH);co
   ctx.fillStyle='#fff';ctx.fillRect(ox+me.x/T/CW*cw-2,oy+me.y/T/CH*ch-4,4,4);for(const r of remotes.values())if(r.inRun&&r.zone===run.zi){ctx.fillStyle='#7ff';ctx.fillRect(ox+r.x/T/CW*cw-2,oy+r.y/T/CH*ch-4,4,4)}ctx.textAlign='left'}
 function drawTitleBg(){if(!skyC){skyC=buildSky(CAMP_PAL,true)}if(!world||mode==='title'){world=world&&world.camp?world:genCamp();world.pal=CAMP_PAL;if(!tiles)tiles=buildTiles(CAMP_PAL,'camp')}cam.x=(Math.sin(gtime*.05)*.5+.5)*(64*T-VW);cam.y=0;drawWorld();drawParade()}
 // the title screen: the whole party marches along the bottom, showing off moves
-const TIPS=['Hold Square while running to sprint.','Aim the bow with the right stick for full 360° shots.','Press Square three times, then Triangle, for a spinning finisher.','Hold L1 to block. Tap it right as a hit lands to parry: enemies are stunned and your next hit crits.','Hold Circle to aim the bow, release to fire. Arrows can be picked back up.','Arrows are scarce. They stick in walls and enemies, so pick them back up.','Up + Triangle launches an enemy. Keep it floating with light hits.','Down + Triangle in the air slams the ground.','Dash through attacks: you can\'t be hit mid-dash.','Ten hits without getting hurt and enemies drop more gold.','Spend your gold before the gate. Old Murk takes the rest.'];
+const TIPS=['Hold Square while running to sprint.','Hold Circle to fire the grappling hook. Swing, then jump to fling yourself off.','Press Square three times, then Triangle, for a spinning finisher.','Hold L1 to block. Tap it right as a hit lands to parry: enemies are stunned and your next hit crits.','Up + Triangle launches an enemy. Keep it floating with light hits.','Down + Triangle in the air slams the ground.','Dash through attacks: you can\'t be hit mid-dash.','Ten hits without getting hurt and enemies drop more gold.','Spend your gold before the gate. Old Murk takes the rest.'];
 let tipI=0,tipT=0;
 function drawParade(){if(!$('s-title')||$('s-title').hidden)return;flushW();const W0=ctx;ctx=M;M.setTransform(RS,0,0,RS,0,0);
   tipT-=1/60;if(tipT<=0){tipT=6;const e=$('t-tip');if(e){e.textContent='Tip: '+TIPS[tipI++%TIPS.length]}}
   const ids=Object.keys(CLASSES),gy=VH-8,sp=34,span=ids.length*sp+VW;ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect(0,gy,VW,8);
-  ids.forEach((id,i)=>{const x=((gtime*28+i*sp)%span)-60,ph=(gtime*.6+i*.37)%3,act=ph<.35;const kind=act?(i%3===0?'atk':i%3===1?'heavy':'bow'):null;
+  ids.forEach((id,i)=>{const x=((gtime*28+i*sp)%span)-60,ph=(gtime*.6+i*.37)%3,act=ph<.35;const kind=act?(i%3===0?'atk':i%3===1?'heavy':'atk'):null;
     const h={cls:id,skin:['#e0b090','#c08860','#8a5a3a','#f0c8a0'][i%4],hair:['#3a2010','#d0a040','#1a1010','#8a3a1a'][i%4],traits:[]};
     const fake={heir:h,cls:id,x,y:gy,face:1,anim:kind==='bow'?'idle':kind?'atk':'run',atkK:kind==='heavy'&&ph<.15?'up':'side',atkType:kind==='heavy'?'heavy':'light',atkT:.2-(ph%.35)*.57,atkDur:.2,at:gtime+i,h:18,scarf:[],st:{scale:1,reach:0},bowT:kind==='bow'?.15:0,bowA:0,combo:1};
     ctx.fillStyle='rgba(0,0,0,.4)';ctx.beginPath();ctx.ellipse(x,gy,6,1.5,0,0,7);ctx.fill();drawNinja(fake,{});if(kind)drawSlashFx(fake);
