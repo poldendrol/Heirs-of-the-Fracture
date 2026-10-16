@@ -2062,7 +2062,7 @@ let toastT=0;function toast(a,b){const e=$('toast');e.innerHTML=esc(a)+(b?'<smal
 
 // ================= flow =================
 let heir=null,waitingParty=false;
-function toCamp(){mode='camp';world=genCamp();world.pal=CAMP_PAL;tiles=buildTiles(CAMP_PAL,'camp');skyC=buildSky(CAMP_PAL,true);enemies=[];projs=[];pickups=[];parts=[];decals=[];props=[];chests=[];graves=[];portal=null;run=null;waitingParty=false;
+function toCamp(){mode='camp';bossUI=null;storyQ=null;slowmo=0;hitstop=0;mapOpen=false;interactTarget=null;waitingParty=false;world=genCamp();world.pal=CAMP_PAL;tiles=buildTiles(CAMP_PAL,'camp');skyC=buildSky(CAMP_PAL,true);enemies=[];projs=[];pickups=[];parts=[];decals=[];props=[];chests=[];graves=[];portal=null;run=null;waitingParty=false;
   if(!me||me.heir!==heir||me.dead)me=makePlayer(heir);else{me.hp=me.st.maxhp}
   me.st=computeStats(heir);me.party=null;save.cur2=null;me.arrows=quiverOf(me);me.hp=Math.min(me.hp,me.st.maxhp);me.mp=me.st.maxmp;placePlayer(me,world.start.x,world.start.y);cam.x=0;cam.y=0;cam.room=null;hideAll();music('camp');audio();acctNote();toast('DRIFTHOLM, NEXUSAR',save.lineage.length<2?'TRAIN WITH THE SENSEI · LISTEN TO THE OLD WAYSTONE':'SPEND YOUR GOLD BEFORE THE GATE')}
 function startGame(){audio();if(!save.heirs||!heir&&!save.cur){openHeirs(save.lineage.length?'Your last heir has fallen. Who carries the blade now?':'The first of the bloodline. Choose who begins it.');return}heir=save.cur;toCamp()}
@@ -2072,7 +2072,7 @@ function openHeirs(note){if(!save.heirs||save.heirs.length<3){save.heirs=[genHei
     const pc=document.createElement('canvas');pc.width=48;pc.height=48;d.append(pc);
     d.insertAdjacentHTML('beforeend',`<div class="nm">${esc(h.name)}</div><div class="cl">${esc(c.n)}</div><div class="tr">${h.traits.length?h.traits.map(t=>`<b>${esc(TR[t].n)}</b>: ${esc(TR[t].d)}`).join('<br>'):'No traits'}</div><div class="sp">${esc(sp.n)}: ${esc(sp.d)}</div><div class="tr">HP ${st.maxhp} · DMG ${Math.round(st.dmg)} · MP ${st.maxmp}</div>`);
     d.onclick=()=>{heir=h;save.cur=h;save.heirs=null;persist(true);sfx('buy');toCamp()};list.append(d);
-    const g=pc.getContext('2d'),old=ctx;ctx=g;g.imageSmoothingEnabled=false;const fake={heir:h,st,x:24,y:42,face:1,anim:'idle',at:0,h:st.scale*18,scarf:[],inv:0};g.save();g.translate(24,42);g.scale(2/Math.max(1,st.scale*1.1),2/Math.max(1,st.scale*1.1));g.translate(-24,-42);drawNinja(fake,{});g.restore();ctx=old});
+    const g=pc.getContext('2d'),old=ctx;ctx=g;g.imageSmoothingEnabled=false;const fake={heir:h,st,x:24,y:42,face:1,anim:'idle',at:0,h:st.scale*18,scarf:[],inv:0};try{g.save();g.translate(24,42);g.scale(2/Math.max(1,st.scale*1.1),2/Math.max(1,st.scale*1.1));g.translate(-24,-42);drawNinja(fake,{});g.restore()}catch(e){console.error(e)}finally{ctx=old}});
   $('h-reroll').hidden=!(save.rerolls>0);$('h-reroll').textContent=`Reroll heirs (${save.rerolls} left)`;show('heirs')}
 $('h-reroll').onclick=()=>{if(save.rerolls>0){save.rerolls--;save.heirs=[genHeir(),genHeir(),genHeir()];persist();openHeirs($('heirnote').textContent)}};
 function beginRun(cfg){run={zi:cfg.zi,ng:cfg.ng,seed:cfg.seed,lock:!!cfg.lock,bossDone:cfg.bossDone|0,treasure:cfg.treasure|0,bossesBeat:0,t0:gtime};if(!cfg.lock)save.lock=cfg.seed;save.stats.runs++;persist();
@@ -2378,6 +2378,7 @@ function layout(){const s=Math.min(innerWidth/VW,innerHeight/VH);const k=s;$('wr
 addEventListener('resize',layout);layout();
 function frame(now){let dt=Math.min(.1,(now-last)/1000);last=now;
   try{
+    if(mode==='dead'&&!anyMenu()){if(heir&&save.cur)toCamp();else openHeirs('Your last heir has fallen. Who carries the blade now?')}// never get stuck dead with no screen up
     const sim=mode!=='title'&&!(anyMenu()&&!net);
     if(sim){acc+=dt*(slowmo>0?.35:1);slowmo-=dt;let n=0;while(acc>=DT&&n<4){acc-=DT;n++;pollInput();if(hitstop>0){hitstop-=DT;gtime+=DT;continue}step(DT)}}else acc=0;
     M.setTransform(RS,0,0,RS,0,0);M.imageSmoothingEnabled=false;ctx=Wx;Wx.setTransform(1,0,0,1,0,0);Wx.clearRect(0,0,VW,VH);
