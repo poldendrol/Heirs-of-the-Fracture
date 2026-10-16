@@ -111,15 +111,16 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
 </head>
 <body>
 <div id="crawl"><canvas id="cr-stars"></canvas>
-<div id="cr-pre">In the north-east of Vellorum, at the foot of the Endless Stair&hellip;</div>
+<div id="cr-pre">Beyond every world, where all roads meet&hellip;</div>
 <div id="cr-logo">HEIRS OF THE<br>FRACTURE</div>
 <div id="cr-persp"><div id="cr-field"><div id="cr-text">
-<h2>EPISODE I</h2><h3>JUST A LITTLE MORE TIME</h3>
-<p>One grey morning a young man walks into Firststep with ink on his fingers and a broken clock on a chain at his throat. His name is OTHAR HILDERIC, an apprentice of the Order of the Sapphire, from the Deep on the island of Temporalis.</p>
-<p>With him comes his wife, LIILIA. She is twenty and looks forty. She ages faster every week, and no healer on Temporalis can help her.</p>
-<p>&ldquo;I don't need a hero,&rdquo; Othar says. &ldquo;I need someone who won't stop looking.&rdquo; Somewhere in Vellorum, he believes, the lords who have lived too long hold the cure.</p>
-<p>A forgotten family of adventurers takes his coin. Every heir will fall, and every fall makes the next heir stronger&hellip;</p>
-<p>No one in the family asks what the cure will cost.</p>
+<h2>EPISODE I</h2><h3>THE KEEPER OF THE HEART</h3>
+<p>Long ago the EMPYREALS ruled the multiverse from NEXUSAR, the Nexus of Realms. They made the races of Vellorum to serve them, and they forged a primordial dragon to enforce their perfect order.</p>
+<p>Then a spark of imagination struck the dragon. It became the LOREWYRM, possibility given form, and the empire of perfect order shattered.</p>
+<p>Ages later, on the floating islands of DRIFTHOLM, a forgotten family of adventurers hears a warm voice from an old Waystone. It calls itself the KEEPER.</p>
+<p>&ldquo;Seven lords of Vellorum carry a flaw,&rdquo; it says. &ldquo;A sickness in the weave of the worlds. Cut it out of them and bring it to me, and everything will heal.&rdquo;</p>
+<p>Every heir will fall, and every fall makes the next heir stronger&hellip;</p>
+<p>No one in the family asks why the Keeper never shows its face.</p>
 </div></div></div>
 <div id="cr-hint">PRESS ANY BUTTON FOR SOUND</div></div>
 <div id="stage"><div id="wrap">
@@ -204,7 +205,7 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
     <li><b>Talk / open / buy</b> <kbd>E</kbd> · <b>Map</b> <kbd>Tab</kbd> or <kbd>M</kbd> · <b>Drop through platforms</b> <kbd>S</kbd> + jump · <b>Pause</b> <kbd>Esc</kbd></li>
     <li>Slide down walls and jump off them. Controllers work too (PS5 shown): Cross jump, Square light attack (hold while moving to sprint), Triangle heavy, Circle bow (hold to aim in any direction with either stick, release to fire), R2 dash in any direction, R1 ability, L1 block and parry, d-pad up interact and revive, Options pause, Create or touchpad map. In menus: d-pad moves, Cross picks, Circle goes back.</li>
     <li>Every heir is different. When yours dies, pick one of their children and spend the family gold in the Hidden Dojo, at the Blacksmith and with the Enchantress.</li>
-    <li>Old Murk takes <b>all</b> your remaining gold as the toll onto the stair. Spend it before you go.</li>
+    <li>Old Murk takes <b>all</b> your remaining gold as the toll to the Waystones. Spend it before you go.</li>
     <li>Each country ends in a boss. Beat it to open the road to the next country. Old Murk will row you to any border you have opened.</li>
     <li>Co-op: up to 4 players. Everyone keeps their own gold on their own account. Stand on a fallen friend's grave and hold <kbd>E</kbd> or up to raise them.</li>
   </ul>
@@ -254,7 +255,7 @@ kbd{font:600 12px var(--px);background:#2a1d26;border:1px solid var(--line2);pad
 <div class="ov" id="s-ending" hidden><div class="box" style="max-width:560px;text-align:center">
   <h2 id="end-h">THE CLOCK STOPS</h2>
   <div class="note" id="end-b" style="margin:0 auto"></div>
-  <div class="foot" style="justify-content:center"><button class="b" id="end-smash" type="button">Smash the machine</button><button class="b pri" id="end-let" type="button">Let her go</button><button class="b pri" id="end-ok" type="button">Begin New Game+</button></div>
+  <div class="foot" style="justify-content:center"><button class="b" id="end-smash" type="button">Restore the order</button><button class="b pri" id="end-let" type="button">Set the spark free</button><button class="b pri" id="end-ok" type="button">Begin New Game+</button></div>
 </div></div>
 </div></div>
 <script>
@@ -402,7 +403,7 @@ const TR=Object.fromEntries(TRAITS.map(t=>[t.id,t]));
 const NAMES=['Kaito','Mira','Sorin','Ilinca','Doru','Anca','Radu','Vesna','Bogdan','Zora','Mihai','Lumi','Tenzo','Akane','Raiko','Yuki','Stoyan','Dacia','Ivo','Nadia','Petra','Toma','Kiri','Hana','Juro','Emeric','Liviu','Oana','Tibor','Senna','Rin','Vali','Ash','Corvin','Ilya','Mako','Nyx','Oren','Sly','Teo'];
 const ROMAN=['','','II','III','IV','V','VI','VII','VIII','IX','X'];
 
-// Velloran: one country per level, in the order the stair reaches them from Firststep
+// Velloran: one country per level, reached through the Waystones of Nexusar; the last level is the Nexus itself
 const ZONES=[
   {id:'rav',n:'Ravenfall',sub:'BEYOND THE IRON WALL',mus:'vale',bg:'vale',wx:'leaf',boss:'carla',bossN:'SCREECHING CARLA TOOTHEATER',bossS:'THE LAST HAG OF RAVENFALL',
    en:[['goblin',5],['gobarcher',3],['crow',3],['worg',2],['hexer',2],['troll',1]],
@@ -425,9 +426,9 @@ const ZONES=[
   {id:'vor',n:'The Vorzakh Empire',sub:'WE WILL BRING BACK ORDER, TOGETHER!',mus:'empire',bg:'empire',wx:'none',boss:'uooros',bossN:'UOOROS',bossS:'THE MIND BEHIND THE THRONE',
    en:[['legion',5],['musketeer',3],['teether',3],['possessed',2],['mindmage',2],['gungie',3],['engine',1]],
    pal:{wall:'#4a4a52',mort:'#1e1e24',hi:'#6a6a74',acc:'#a040e0',back:'#141418',back2:'#1a1a20',plat:'#6a6a72',plat2:'#3a3a42',sky:['#06040a','#1a1028','#3a2050'],moon:'#c080ff',light:'#d0a0ff',grass:'#3a3a40'}},
-  {id:'rev',n:'The Reverse',sub:'JOIN, OR PERISH',mus:'time',bg:'reverse',wx:'time',boss:'clockwork',bossN:'CLOCKWORK',bossS:'ONCE OTHAR HILDERIC',
+  {id:'nex',n:'Nexusar',sub:'ALL ROADS MEET HERE',mus:'time',bg:'nexus',wx:'time',boss:'ordanis',bossN:'ORDANIS',bossS:'THE LAST EMPYREAL',
    en:[['drained',5],['tlarcher',3],['second',3],['tlblade',2],['hourthief',2],['overwound',2],['sentinel',1]],
-   pal:{wall:'#2e3a3c',mort:'#121a1c',hi:'#4e6a66',acc:'#40ffa0',back:'#0c1416',back2:'#121c1e',plat:'#6a5a3a',plat2:'#3a3020',sky:['#040a0c','#0e2a26','#2a6a50'],moon:'#a0ffd0',light:'#80ffc0',grass:'#2a4a40'}}];
+   pal:{wall:'#4a4458',mort:'#1a1624',hi:'#7a7090',acc:'#ffe08a',back:'#0c0a14',back2:'#14101e',plat:'#8a7a5a',plat2:'#4a3e2a',sky:['#030208','#120e24','#3a2a5a'],moon:'#fff4d0',light:'#ffe8b0',grass:'#6a5a8a',void:1}}];
 
 const ED={
   // Ravenfall: goblins and trolls from beyond the Iron Wall, and the hag's crows
@@ -481,14 +482,14 @@ const ED={
   mindmage:{n:'Mind-Bound Mage',ai:'caster',hp:50,dmg:14,spd:0,w:12,h:22,g:17,proj:'psy',lk:{k:'hum',skin:'#d8c0d8',cloth:'#4a1a6a',head:'hood',wpn:'orb',orb:'#c060ff',eye:'#d070ff'}},
   gungie:{n:'Gungie',ai:'walker',hp:60,dmg:14,spd:26,w:12,h:20,g:7,lk:{k:'hum',skin:'#6a7a8a',cloth:'#2a2a30',head:'zombie',eye:'#ff8040',hunch:1}},
   engine:{n:'War Engine',ai:'brute',hp:230,dmg:26,spd:34,w:22,h:30,g:36,kbr:.95,lk:{k:'golem',col:'#6a6a72',dk:'#3a3a42',eye:'#ff4040'}},
-  // the Reverse: the drained, Clockwork's Timelords and the machines of Lock Keep
-  drained:{n:'Drained Pilgrim',ai:'walker',hp:58,dmg:15,spd:40,w:12,h:20,g:8,lk:{k:'hum',skin:'#d8d8d0',cloth:'#4a4a48',head:'bald',eye:'#80ffc0',hunch:1}},
-  tlarcher:{n:'Timelord Arbalest',ai:'archer',hp:36,dmg:14,spd:34,w:12,h:21,g:9,proj:'tick',lk:{k:'hum',skin:'#c8c8d8',cloth:'#2a3a6a',head:'faceless',wpn:'bow',eye:'#80ffc0'}},
-  second:{n:'Stray Second',ai:'flyer',hp:28,dmg:13,spd:90,w:12,h:12,g:8,shoots:1,proj:'tick',lk:{k:'wisp',col:'#d0ffe8',wing:'#40ffa0',glow:'90,255,170'}},
-  tlblade:{n:'Timelord Blade',ai:'jumper',hp:62,dmg:17,spd:110,w:12,h:21,g:13,lk:{k:'hum',skin:'#c8c8d8',cloth:'#1e2a5a',head:'faceless',wpn:'sword',eye:'#80ffc0'}},
-  hourthief:{n:'Hour-Thief',ai:'caster',hp:52,dmg:15,spd:0,w:12,h:22,g:17,proj:'tick',summ:'drained',lk:{k:'hum',skin:'#e0e0d8',cloth:'#1a4a4a',head:'hood',wpn:'orb',orb:'#40ffa0',eye:'#80ffc0'}},
-  overwound:{n:'Overwound Clock',ai:'exploder',hp:34,dmg:32,spd:42,w:16,h:16,g:8,lk:{k:'balloon',col:'#b08a3a',clock:1}},
-  sentinel:{n:'Lock Keep Sentinel',ai:'brute',hp:240,dmg:28,spd:34,w:22,h:30,g:40,kbr:.9,lk:{k:'golem',col:'#8a7a4a',dk:'#4a3a20',eye:'#40ffa0'}},
+  // Nexusar: the Remnants, the Ancients' servants still following orders no one gives any more
+  drained:{n:'Hollow Servant',ai:'walker',hp:58,dmg:15,spd:40,w:12,h:20,g:8,lk:{k:'hum',skin:'#e8e0d0',cloth:'#5a5070',head:'bald',eye:'#ffe8a0',hunch:1}},
+  tlarcher:{n:'Remnant Archer',ai:'archer',hp:36,dmg:14,spd:34,w:12,h:21,g:9,proj:'order',lk:{k:'hum',skin:'#f0e8d8',cloth:'#c8b080',head:'remnant',wpn:'bow',eye:'#ffe8a0'}},
+  second:{n:'Waystone Spark',ai:'flyer',hp:28,dmg:13,spd:90,w:12,h:12,g:8,shoots:1,proj:'order',lk:{k:'wisp',col:'#fff4d8',wing:'#ffd870',glow:'255,220,140'}},
+  tlblade:{n:'Remnant Blade',ai:'jumper',hp:62,dmg:17,spd:110,w:12,h:21,g:13,lk:{k:'hum',skin:'#f0e8d8',cloth:'#a08a50',head:'remnant',wpn:'sword',eye:'#ffe8a0'}},
+  hourthief:{n:'Order Priest',ai:'caster',hp:52,dmg:15,spd:0,w:12,h:22,g:17,proj:'order',summ:'drained',lk:{k:'hum',skin:'#f4ecd8',cloth:'#e8dcc0',head:'hood',wpn:'orb',orb:'#ffe08a',eye:'#ffe8a0'}},
+  overwound:{n:'Unstable Shard',ai:'exploder',hp:34,dmg:32,spd:42,w:16,h:16,g:8,lk:{k:'balloon',col:'#9a80d0'}},
+  sentinel:{n:'Remnant Colossus',ai:'brute',hp:240,dmg:28,spd:34,w:22,h:30,g:40,kbr:.9,lk:{k:'golem',col:'#d8ccb0',dk:'#8a7a5a',eye:'#ffe08a'}},
   // Oneiros (no longer a level): the Dream Tyrant's fey, his nightmares and the souls lost in the Veil
   lostsoul:{n:'Lost Soul',ai:'walker',hp:56,dmg:15,spd:44,w:12,h:18,g:8,lk:{k:'ghost',col:'#c0c0ff',walk:1}},
   dreamfey:{n:'Dream Fey',ai:'flyer',hp:28,dmg:13,spd:86,w:12,h:12,g:8,shoots:1,proj:'star',lk:{k:'wisp',col:'#ffe0f8',wing:'#ff90e0',glow:'255,160,230'}},
@@ -500,8 +501,8 @@ const ED={
 // spd: projectile speed for archers and turrets
 const PJ={green:{c:'#60ff80',h:'#d8ffe0',r:4},venom:{c:'#b0e030',h:'#f0ffa0',r:4},psy:{c:'#b050ff',h:'#f0d0ff',r:4},star:{c:'#ffa0f0',h:'#ffffff',r:4,star:1},
   note:{c:'#ffd040',h:'#fff8c0',r:4,note:1},bolt:{c:'#90d8ff',h:'#ffffff',r:4,bolt:1},ice:{c:'#90d8ff',h:'#f0fbff',r:3,shard:1,spd:250},
-  javelin:{c:'#8a6a3a',h:'#d0d0d8',r:3,shard:1,grav:110,spd:230},stinger:{c:'#2a2a10',h:'#ffe040',r:2,shard:1},bullet:{c:'#ffe0a0',h:'#ffffff',r:2,shard:1,spd:340},tick:{c:'#40ffa0',h:'#e0fff0',r:4},icicle:{}};
-const ORB_K=['tick','bloodorb','light','fire','green','venom','psy','star','note','bolt'];
+  javelin:{c:'#8a6a3a',h:'#d0d0d8',r:3,shard:1,grav:110,spd:230},stinger:{c:'#2a2a10',h:'#ffe040',r:2,shard:1},bullet:{c:'#ffe0a0',h:'#ffffff',r:2,shard:1,spd:340},tick:{c:'#40ffa0',h:'#e0fff0',r:4},order:{c:'#ffd870',h:'#ffffff',r:4},icicle:{}};
+const ORB_K=['tick','order','bloodorb','light','fire','green','venom','psy','star','note','bolt'];
 
 // mv: attack patterns · p2: added when enraged · sum: what it calls in · pk: projectile kinds · lk: how it looks
 const BOSS={
@@ -519,8 +520,8 @@ const BOSS={
     lk:{s:2.2,skin:'#c8e8f8',cloth:'#5a7aa0',head:'icecrown',eye:'#ffffff',wpn:'spear',cape:'#8ab0d0',float:1}},
   uooros:{n:'Uooros',hp:4600,dmg:52,w:24,h:44,g:14000,fly:1,mv:['orbs','ring','summon','dive','lances'],sum:['possessed','teether'],pk:{orb:'psy',ring:'psy',lance:'psy'},col:'#a040e0',pil:'psy',
     lk:{s:2.2,skin:'#8a6aa0',cloth:'#2a1040',head:'flayer',eye:'#ffffff',wpn:'claws',cape:'#1a0a2a',float:1}},
-  clockwork:{n:'Clockwork, Lord of Time',hp:6000,dmg:58,w:24,h:44,g:22000,fly:1,mv:['lances','ring','pillars','orbs','summon','dive'],sum:['tlblade','second'],pk:{lance:'tick',ring:'tick',orb:'tick'},col:'#40ffa0',pil:'time',
-    lk:{s:2.3,skin:'#c8d0e0',cloth:'#1e3a8a',head:'faceless',eye:'#80ffc0',wpn:'sword',cape:'#0e1a4a',float:1}}};
+  ordanis:{n:'Ordanis, the Last Empyreal',hp:6000,dmg:58,w:24,h:44,g:22000,fly:1,mv:['lances','ring','pillars','orbs','summon','dive'],sum:['tlblade','second'],pk:{lance:'order',ring:'order',orb:'order'},col:'#ffe08a',pil:'order',
+    lk:{s:2.4,skin:'#f4e4b8',cloth:'#e8d8b0',head:'empyreal',eye:'#ffffff',wpn:'spear',cape:'#c8a040',float:1}}};
 
 // ---- the Hidden Dojo (upgrade tree) ----
 const NODES=[
@@ -675,7 +676,7 @@ function tryCastle(seed,zi,opt){
         else if(pat==='pillars'){const n=ri(R,2,3);for(let k=0;k<n;k++){const x=X0+5+k*Math.floor(20/n)+ri(R,0,3),h=ri(R,3,6);let ok=true;for(let yy=0;yy<h;yy++)if(prot[I(x,Y0+15-yy)]||prot[I(x+1,Y0+15-yy)])ok=false;if(!ok)continue;for(let yy=0;yy<h;yy++){S(x,Y0+15-yy,1);S(x+1,Y0+15-yy,1)}if(R()<.6)plat(x-3,x+4,Y0+15-h-3)}}
         else if(pat==='pit'){for(let x=X0+8;x<=X0+21;x++)S(x,Y0+15,3);plat(X0+9,X0+12,Y0+12);plat(X0+17,X0+20,Y0+12);if(R()<.5)plat(X0+12,X0+17,Y0+9)}
         else if(pat==='steps'){const c=X0+ri(R,9,20);for(let s=0;s<3;s++)for(let x=c-6+s*2;x<=c+6-s*2;x++)S(x,Y0+15-s,7)}
-        else if(pat==='stair'){// a flight of the Endless Staircase climbing across the room
+        else if(pat==='stair'){// a flight of old stone steps climbing across the room
           const up=R()<.7,n=ri(R,4,6),w=3,x0=X0+ri(R,3,6);for(let s=0;s<n;s++){const xs=up?x0+s*w:x0+(n-1-s)*w;for(let xx=0;xx<w;xx++)for(let yy=0;yy<=s;yy++)S(xs+xx,Y0+15-yy,yy===s?7:1)}
           const topY=Y0+15-n,ex=up?x0+n*w:x0-1;if(R()<.6)plat(up?ex+2:X0+2,up?Math.min(X0+27,ex+7):Math.max(X0+2,ex-6),topY-2)}
         else if(pat==='blocks'){for(let k=ri(R,2,3);k>0;k--){const x=X0+ri(R,3,24),w=ri(R,2,3),h=ri(R,2,3);for(let yy=0;yy<h;yy++)for(let xx=0;xx<w;xx++)S(x+xx,Y0+15-yy,4)}}
@@ -729,23 +730,26 @@ function genCamp(){
   for(let x=44;x<=48;x++)map[10*mw+x]=2;
   const rooms=[{id:0,cx:0,cy:0,cw:2,ch:1,x:0,y:0,w:mw,h:mh,type:'camp',doors:[],seen:true}];
   return{seed:0,zi:0,mw,mh,map,rooms,doors:[],cellRoom:new Int16Array(GW*GH).fill(-1),spawns:[],props:[],decor:[],chests:[],gates:[],start:{x:3*T,y:15*T},boss:-1,camp:true,
-    npcs:[{k:'sensei',x:10*T,n:'Sensei Hiroe',a:'Hidden Dojo'},{k:'smith',x:20*T,n:'Brakka the Smith',a:'Forge',need:'smith'},{k:'ench',x:29*T,n:'Madame Veyl',a:'Runes',need:'ench'},{k:'arch',x:41*T,n:'Old Compass',a:'Lock the road',need:'arch'},{k:'othar',x:51*T,n:'Othar and Liilia',a:'Talk'},{k:'murk',x:58*T,n:'Old Murk',a:'Enter'}]}}
-// ================= the Endless Staircase: the climb between two countries =================
-const STAIR_PAL={wall:'#5a5460',mort:'#2e2a34',hi:'#8a8494',acc:'#c84a3a',back:'#1a1822',back2:'#24222c',plat:'#7a6a5a',plat2:'#4a3e34',sky:['#0e1426','#3a4870','#d8a07a'],moon:'#f4ecd8',light:'#ffd8a0',grass:'#6a7a5a'};
-function genStair(zi){// zi: the country this flight of steps leads to
-  const mw=GW*CW,mh=GH*CH,map=new Uint8Array(mw*mh),I=(x,y)=>y*mw+x;
-  const SEG=4,STEPS=15,W=3,LAND=10;let x=0,y=mh-6;const floorAt=new Int16Array(mw).fill(mh-6),landings=[];
-  for(;x<6;x++)floorAt[x]=y;
-  const gaps=[];for(let s=0;s<SEG;s++){for(let k=0;k<STEPS;k++){y--;if(s>=2&&k%5===3)gaps.push([x,x+W-1]);for(let i=0;i<W;i++)floorAt[x++]=y}landings.push({x0:x,x1:x+LAND-1,y});for(let i=0;i<LAND;i++)floorAt[x++]=y}
-  for(;x<mw;x++)floorAt[x]=y;
-  for(let xx=0;xx<mw;xx++){const f=floorAt[xx];for(let yy=f;yy<mh;yy++)map[I(xx,yy)]=yy===f&&xx>=6&&xx<mw-8&&!landings.some(l=>xx>=l.x0&&xx<=l.x1)?7:1}
-  for(const [a,b] of gaps)for(let xx=a;xx<=b;xx++)for(let yy=0;yy<mh;yy++)map[I(xx,yy)]=0;// broken steps to jump over
+    npcs:[{k:'sensei',x:10*T,n:'Sensei Hiroe',a:'Hidden Dojo'},{k:'smith',x:20*T,n:'Brakka the Smith',a:'Forge',need:'smith'},{k:'ench',x:29*T,n:'Madame Veyl',a:'Runes',need:'ench'},{k:'arch',x:41*T,n:'Old Compass',a:'Lock the road',need:'arch'},{k:'keeper',x:51*T,n:'The Old Waystone',a:'Listen'},{k:'murk',x:58*T,n:'Old Murk',a:'Enter'}]}}
+// ================= a crossing through Nexusar: from one Waystone to the next =================
+const STAIR_PAL={wall:'#4e4860',mort:'#1c1828',hi:'#857c9c',acc:'#ffe08a',back:'#0c0a16',back2:'#16121e',plat:'#8a7a5a',plat2:'#4a3e2a',sky:['#030208','#140f28','#40306a'],moon:'#fff4d0',light:'#ffe0a0',grass:'#7a6aa8',void:1};
+function genStair(zi){// zi: the country the far Waystone opens on. Floating islands and broken bridges, drifting slowly upward
+  const mw=GW*CW,mh=GH*CH,map=new Uint8Array(mw*mh),I=(x,y)=>y*mw+x,R=prng(zi*7919+13);
+  const SEG=4,LAND=10;let x=0,y=mh-30;const floorAt=new Int16Array(mw).fill(y),landings=[],gaps=[],islands=[];
+  const isle=(w)=>{islands.push({x0:x,x1:x+w-1,y});for(let i=0;i<w;i++)floorAt[x++]=y};
+  isle(8);
+  for(let s=0;s<SEG;s++){const n=4+Math.floor(R()*2);
+    for(let k=0;k<n;k++){const gw=s===0&&k<2?2:2+Math.floor(R()*2);gaps.push([x,x+gw-1]);for(let i=0;i<gw;i++)floorAt[x++]=y;// open void between islands
+      y+=-Math.floor(R()*4)+1;y=clamp(y,8,mh-12);isle(3+Math.floor(R()*4))}
+    landings.push({x0:x,x1:x+LAND-1,y});islands.push({x0:x,x1:x+LAND-1,y});for(let i=0;i<LAND;i++)floorAt[x++]=y}
+  const lastY=y,xs=x;while(x<mw)floorAt[x++]=lastY;islands.push({x0:xs,x1:mw-1,y:lastY});
+  for(const is of islands){const w=is.x1-is.x0+1;for(let xx=is.x0;xx<=is.x1&&xx<mw;xx++){const e=Math.min(xx-is.x0,is.x1-xx),depth=2+Math.min(e,4)+((xx*7)%3===0?1:0);for(let yy=is.y;yy<Math.min(mh,is.y+depth);yy++)map[I(xx,yy)]=1}}
+  for(let xx=0;xx<mw;xx++){if(gaps.some(g=>xx>=g[0]&&xx<=g[1]))continue;const f=floorAt[xx];if(!map[I(xx,f)])for(let yy=f;yy<f+3;yy++)map[I(xx,yy)]=1}
   for(let yy=0;yy<mh;yy++){map[I(0,yy)]=map[I(0,yy)]||8;map[I(mw-1,yy)]=map[I(mw-1,yy)]||8}for(let xx=0;xx<mw;xx++)if(!map[I(xx,0)])map[I(xx,0)]=8;
   const rooms=[{id:0,cx:0,cy:0,cw:GW,ch:GH,type:'start',doors:[],x:0,y:0,w:mw,h:mh,seen:true}];
   const clutter=[];for(const l of landings){clutter.push({k:'candles',x:(l.x0+1)*T,y:l.y*T},{k:'candles',x:(l.x1)*T,y:l.y*T})}
-  const top=floorAt[mw-4];
-  return{seed:0,zi:-1,stair:true,nz:zi,mw,mh,map,rooms,doors:[],cellRoom:new Int16Array(GW*GH).fill(0),spawns:[],props:[],decor:[],chests:[],gates:[],traps:[],clutter,landings,floorAt,gaps,
-    start:{x:3*T,y:(mh-6)*T},door:{x:(mw-5)*T,y:top*T},boss:-1,camp:false}}
+  return{seed:0,zi:-1,stair:true,nz:zi,mw,mh,map,rooms,doors:[],cellRoom:new Int16Array(GW*GH).fill(0),spawns:[],props:[],decor:[],chests:[],gates:[],traps:[],clutter,landings,floorAt,gaps,islands,
+    start:{x:3*T,y:(mh-30)*T},door:{x:(mw-5)*T,y:lastY*T},boss:-1,camp:false}}
 function roomAtPx(px,py){const w=world;if(w.camp)return w.rooms[0];const cx=Math.floor(px/T/CW),cy=Math.floor(py/T/CH);if(cx<0||cy<0||cx>=GW||cy>=GH)return null;const id=w.cellRoom[cy*GW+cx];return id>=0?w.rooms[id]:null}
 
 // ================= physics =================
@@ -1243,13 +1247,13 @@ function updatePickups(dt){if(!me)return;for(const c of pickups){c.t+=dt;const d
   const had=pickups.length;pickups=pickups.filter(c=>!c.got);if(pickups.length!==had)persist()}
 // ================= tiles =================
 let tiles=null,lightC=null,lightX=null;
-// Firststep, Kalandris: the town at the foot of the Endless Staircase
-const CAMP_PAL={wall:'#4e4a52',mort:'#221e26',hi:'#74707c',acc:'#c84a3a',back:'#16141a',back2:'#1e1a22',plat:'#6a4a2a',plat2:'#3a2814',sky:['#0c1026','#3a4870','#d8a07a'],moon:'#f4ecd8',light:'#ffc070',grass:'#5a6a4a'};
+// Driftholm: floating islands in Nexusar where stranded travellers from a dozen worlds have made a home
+const CAMP_PAL={wall:'#4e4a5a',mort:'#201c2a',hi:'#78708a',acc:'#c84a3a',back:'#14121c',back2:'#1c1824',plat:'#6a4a2a',plat2:'#3a2814',sky:['#04030c','#1a1434','#4a3a78'],moon:'#f4ecd8',light:'#ffc070',grass:'#6a7a5a',void:1};
 function shade(hex,k){const n=parseInt(hex.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;if(k<0){r*=1+k;g*=1+k;b*=1+k}else{r+=(255-r)*k;g+=(255-g)*k;b+=(255-b)*k}return'#'+((1<<24)|(r<<16)|(g<<8)|b|0).toString(16).slice(1)}
 function buildTiles(pal,zid){
   const c=document.createElement('canvas');c.width=16*16;c.height=16;const g=c.getContext('2d');const R=prng(zid.length*99+7);
   const px=(x,y,col)=>{g.fillStyle=col;g.fillRect(x,y,1,1)};
-  const mossy=['rav','dha','rot','camp'].includes(zid),icy=zid==='fro',dream=zid==='rev',hot=zid==='orm';
+  const mossy=['rav','dha','rot','camp'].includes(zid),icy=zid==='fro',dream=zid==='nex',hot=zid==='orm';
   // a bevelled stone: lit from the top left, shaded bottom right, speckled, sometimes chipped or cracked
   const stone=(x0,y0,w,h,base)=>{const col=shade(base,(R()-.5)*.18),hi=shade(col,.22),lo=shade(col,-.32);
     g.fillStyle=col;g.fillRect(x0,y0,w,h);
@@ -1261,7 +1265,7 @@ function buildTiles(pal,zid){
     if(mossy&&R()<.35){g.fillStyle=pal.grass;for(let i=0;i<4;i++)px(x0+1+Math.floor(R()*(w-2)),y0+Math.floor(R()*2),R()<.5?pal.grass:shade(pal.grass,-.3))}
     if(icy&&R()<.4){g.fillStyle='rgba(220,240,255,.35)';g.fillRect(x0+1,y0+1,w-2,1)}
     if(hot&&R()<.2){px(x0+2+Math.floor(R()*(w-4)),y0+h-2,'#ff6a1a')}
-    if(dream&&R()<.2){px(x0+Math.floor(R()*w),y0+Math.floor(R()*h),'#60ffb0')}};
+    if(dream&&R()<.2){px(x0+Math.floor(R()*w),y0+Math.floor(R()*h),R()<.5?'#ffe08a':'#b090ff')}};
   // 0-3 masonry
   for(let v=0;v<4;v++){const ox=v*16;g.fillStyle=pal.mort;g.fillRect(ox,0,16,16);
     if(v===3){stone(ox,0,8,8,pal.wall);stone(ox+8,0,8,8,pal.wall);stone(ox,8,16,8,pal.wall)}
@@ -1297,11 +1301,11 @@ const TW=(i,dx,dy)=>ctx.drawImage(tiles,i*16,0,16,16,dx,dy,16,16);
 // ================= backgrounds =================
 let skyC=null;
 function buildSky(pal,camp){const c=document.createElement('canvas');c.width=VW;c.height=VH;const g=c.getContext('2d');const gr=g.createLinearGradient(0,0,0,VH);gr.addColorStop(0,pal.sky[0]);gr.addColorStop(.6,pal.sky[1]);gr.addColorStop(1,pal.sky[2]);g.fillStyle=gr;g.fillRect(0,0,VW,VH);
-  const R=prng(42);for(let i=0;i<70;i++){g.fillStyle=`rgba(255,240,230,${R()*.6})`;g.fillRect(Math.floor(R()*VW),Math.floor(R()*VH*.6),1,1)}
+  if(pal.void)return c;const R=prng(42);for(let i=0;i<70;i++){g.fillStyle=`rgba(255,240,230,${R()*.6})`;g.fillRect(Math.floor(R()*VW),Math.floor(R()*VH*.6),1,1)}
   const mg=g.createRadialGradient(340,70,8,340,70,90);mg.addColorStop(0,pal.moon+'aa');mg.addColorStop(1,pal.moon+'00');g.fillStyle=mg;g.fillRect(0,0,VW,VH);g.fillStyle=pal.moon;g.beginPath();g.arc(340,70,26,0,7);g.fill();g.fillStyle='rgba(0,0,0,.18)';g.beginPath();g.arc(333,64,6,0,7);g.arc(350,80,4,0,7);g.arc(346,60,3,0,7);g.fill();
   return c}
 function drawParallax(){const p=world.pal||CAMP_PAL;ctx.drawImage(skyC,0,0);
-  const bg=world.camp||world.stair?'stair':(ZONES[world.zi]||ZONES[0]).bg,far=shade(p.sky[1],-.45),mid=shade(p.sky[1],-.6),near=shade(p.sky[0],-.3);
+  const bg=world.camp||world.stair?'nexus':(ZONES[world.zi]||ZONES[0]).bg,far=shade(p.sky[1],-.45),mid=shade(p.sky[1],-.6),near=shade(p.sky[0],-.3);
   const layer=(f,base,amp,col,seed,step,jag)=>{ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,VH);const off=(cam.x*f)%step;for(let i=-1;i<VW/step+3;i++){const x=i*step-off;const k=Math.floor((cam.x*f)/step)+i;let h=base-(Math.sin(k*1.7+seed)*.5+.5)*amp-(Math.sin(k*.37)*.5+.5)*amp*.6;if(jag&&k%2)h-=jag;ctx.lineTo(x,h)}ctx.lineTo(VW,VH);ctx.fill()};
   const rep=(f,span,fn)=>{const o=((cam.x*f)%span+span)%span;for(let k=-1;k<VW/span+2;k++){const id=Math.floor((cam.x*f)/span)+k;fn(k*span-o,id)}};
   const hash=n=>{const s=Math.sin(n*127.1)*43758.5;return s-Math.floor(s)};
@@ -1337,6 +1341,21 @@ function drawParallax(){const p=world.pal||CAMP_PAL;ctx.drawImage(skyC,0,0);
       const wx=-cam.x*.12;ctx.fillStyle=mid;for(let i=-1;i<6;i++){const x=((wx+i*130)%780+780)%780-130;ctx.fillRect(x,150,130,100);ctx.fillRect(x+10,110,18,140);ctx.fillRect(x+80,96,22,154);ctx.beginPath();ctx.moveTo(x+78,96);ctx.lineTo(x+91,70);ctx.lineTo(x+104,96);ctx.fill();ctx.fillStyle='rgba(200,120,255,.6)';ctx.fillRect(x+90,110,2,3);ctx.fillRect(x+18,124,2,3);ctx.fillStyle=mid}
       const sx=240-cam.x*.2;ctx.fillStyle=shade(p.sky[0],-.4);ctx.fillRect(sx-6,140,12,110);ctx.fillRect(sx-12,154,24,30);ctx.beginPath();ctx.arc(sx,132,10,0,7);ctx.fill();ctx.fillStyle='rgba(200,120,255,'+(.5+Math.sin(gtime*2)*.3)+')';ctx.fillRect(sx-4,130,2,2);ctx.fillRect(sx+2,130,2,2);
       ctx.fillStyle='rgba(0,0,0,.25)';ctx.fillRect(0,0,VW,VH);break}
+    case'nexus':{// Nexusar: a starless void, the Heart of Reality, and drifting islands of ruins from forgotten worlds
+      const fin=world.zi===7&&!world.camp&&!world.stair,hx=VW*.7-cam.x*.015,hy=fin?110:92,hr=fin?52:30,hue=(gtime*40)%360;
+      for(let i=0;i<4;i++){const y=40+i*50+Math.sin(gtime*.2+i)*6;ctx.fillStyle=`hsla(${(hue+i*80)%360},70%,60%,.035)`;ctx.beginPath();ctx.ellipse(VW/2-cam.x*.01*(i+1)%VW,y,VW*.7,14+i*4,Math.sin(i)*.15,0,7);ctx.fill()}
+      const hg=ctx.createRadialGradient(hx,hy,0,hx,hy,hr*3);hg.addColorStop(0,fin?'rgba(255,255,250,.5)':`hsla(${hue},90%,80%,.35)`);hg.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=hg;ctx.fillRect(hx-hr*3,hy-hr*3,hr*6,hr*6);
+      const cg=ctx.createRadialGradient(hx-hr*.3,hy-hr*.3,2,hx,hy,hr);cg.addColorStop(0,'#ffffff');cg.addColorStop(.45,fin?'#fff8e0':`hsl(${(hue+40)%360},90%,82%)`);cg.addColorStop(1,fin?'#e8d8a0':`hsl(${(hue+160)%360},70%,55%)`);ctx.fillStyle=cg;ctx.beginPath();ctx.arc(hx,hy,hr*(1+Math.sin(gtime*2.2)*.03),0,7);ctx.fill();
+      ctx.lineWidth=1;for(let i=0;i<3;i++){ctx.strokeStyle=fin?'rgba(255,240,200,.45)':`hsla(${(hue+i*120)%360},90%,75%,.45)`;ctx.beginPath();ctx.ellipse(hx,hy,hr*(1.35+i*.25),hr*(.25+i*.06),gtime*(.2+i*.1)+i,0,7);ctx.stroke()}
+      const isle=(x,y,w,col,lit,id,big)=>{ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w*.78,y+w*.22);ctx.lineTo(x+w*.55,y+w*.5);ctx.lineTo(x+w*.4,y+w*.3);ctx.lineTo(x+w*.2,y+w*.25);ctx.closePath();ctx.fill();ctx.fillStyle=lit;ctx.fillRect(x,y,w,1);
+        const kind=hash(id+9);if(kind<.4){for(let j=0;j<3;j++){const h=w*(.3+hash(id+j)*.5),px=x+w*(.2+j*.25);ctx.fillStyle=col;ctx.fillRect(px,y-h,w*.08+1,h);if(hash(id+j+4)<.5)ctx.fillRect(px-1,y-h,w*.08+3,2)}}// crumbling pillars of a forgotten world
+        else if(kind<.7){const h=w*.9,px=x+w*.45;ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(px-w*.08,y);ctx.lineTo(px,y-h);ctx.lineTo(px+w*.08,y);ctx.fill();ctx.fillStyle=`hsla(${(hue+id*50)%360},90%,75%,${.5+Math.sin(gtime*2+id)*.3})`;ctx.fillRect(px-.5,y-h*.7,1,h*.5)}// a crystal tower that pulses
+        else{ctx.fillStyle=col;ctx.fillRect(x+w*.3,y-w*.25,w*.4,w*.25);ctx.beginPath();ctx.arc(x+w*.5,y-w*.25,w*.2,Math.PI,0);ctx.fill();if(big){ctx.fillStyle='rgba(255,220,150,.6)';ctx.fillRect(x+w*.42,y-w*.15,2,2);ctx.fillRect(x+w*.55,y-w*.12,2,2)}}};// a dome someone lives in
+      rep(.05,150,(x,id)=>{const y=60+hash(id)*120+Math.sin(gtime*.4+id)*3,w=26+hash(id+1)*30;isle(x,y,w,shade(p.sky[1],.05),shade(p.sky[2],.1),id,0)});
+      rep(.12,230,(x,id)=>{if(hash(id+20)<.5)return;const y=120+hash(id+3)*70+Math.sin(gtime*.5+id)*4,y2=130+hash(id+4)*60;ctx.strokeStyle=shade(p.sky[1],-.15);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);ctx.bezierCurveTo(x+60,y-40,x+120,y2+40,x+200,y2);ctx.stroke();ctx.lineWidth=1});// bridges that twist into nowhere
+      rep(.2,200,(x,id)=>{const y=140+hash(id+5)*80+Math.sin(gtime*.6+id)*5,w=50+hash(id+6)*40;isle(x,y,w,shade(p.sky[0],.12),shade(p.sky[2],-.1),id+40,1)});
+      rep(.45,60,(x,id)=>{if(hash(id)<.6)return;const y=hash(id+1)*VH,s=2+hash(id+2)*4;ctx.fillStyle=shade(p.sky[0],.05);ctx.save();ctx.translate(x,y+Math.sin(gtime+id)*6);ctx.rotate(gtime*.3+id);ctx.fillRect(-s/2,-s/2,s,s);ctx.restore()});
+      break}
     case'reverse':{// fog over black water, the echoes of Temporalis, and the green ring on the sea
       const rx=VW*.62-cam.x*.03;ctx.strokeStyle='rgba(64,255,160,'+(.35+Math.sin(gtime*1.3)*.12)+')';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(rx,150,120,26,0,0,7);ctx.stroke();ctx.lineWidth=1;ctx.strokeStyle='rgba(180,255,220,.4)';ctx.beginPath();ctx.ellipse(rx,150,120,26,0,0,7);ctx.stroke();
       ctx.fillStyle='rgba(64,255,160,.07)';ctx.beginPath();ctx.ellipse(rx,150,118,24,0,0,7);ctx.fill();
@@ -1565,14 +1584,14 @@ function drawBoss(e){const x=e.x,y=e.y,f=e.face,t=e.an,BD=BOSS[e.boss];FL=e.flas
     case'valthor':if(Math.random()<.3)P({k:'spark',x:x+rnd(-14,14),y:y-rnd(0,40),vx:0,vy:-40,l:.6,c:'#60ff80',s:1.5});break;
     case'iceking':if(Math.random()<.3)P({k:'amb',x:x+rnd(-16,16),y:y-rnd(0,44),vx:rnd(-10,10),vy:20,l:1,l0:1,c:'#e8f8ff',s:1});break;
     case'uooros':{ctx.strokeStyle='rgba(176,80,255,'+(.25+Math.sin(gtime*4)*.15)+')';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(x,y-e.h/2,e.w+6+Math.sin(gtime*3)*3,e.h*.7,0,0,7);ctx.stroke();break}
-    case'clockwork':if(Math.random()<.35)P({k:'spark',x:x+rnd(-16,16),y:y-rnd(0,46),vx:0,vy:30,l:.8,c:'#40ffa0',s:1.5});break;
+    case'ordanis':if(Math.random()<.35)P({k:'spark',x:x+rnd(-18,18),y:y-rnd(0,48),vx:0,vy:-24,l:.9,c:pickR(['#ffe08a','#ffffff']),s:1.5});break;
     case'tyrant':for(let i=0;i<5;i++){const a=gtime*1.5+i*1.256;ctx.fillStyle=i%2?'#ffe0ff':'#ff80e0';ctx.fillRect(Math.round(x+Math.cos(a)*22)-1,Math.round(y-e.h+Math.sin(a)*6)-1,2,2)}break;
     case'lionwhyte':if(chance(.08))sparks(x+rnd(-12,12),y-e.h+rnd(-4,8),2,'#a0e0ff');break}
   hum(x,y,f,L.s,Object.assign({vx:e.vx},L),t,st);
-  if(e.boss==='clockwork'&&!FL){// the clock set over his heart, ticking far too fast
-    const cx=x+f*2,cy=y-e.h*.6,sp=e.phase===2?18:9;ctx.fillStyle='#b08a3a';ctx.beginPath();ctx.arc(cx,cy,6,0,7);ctx.fill();ctx.fillStyle='#e8fff4';ctx.beginPath();ctx.arc(cx,cy,4.5,0,7);ctx.fill();
-    ctx.strokeStyle='#0e1a2a';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(gtime*sp)*4,cy+Math.sin(gtime*sp)*4);ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(gtime*sp/12)*2.5,cy+Math.sin(gtime*sp/12)*2.5);ctx.stroke();
-    ctx.fillStyle='rgba(64,255,160,'+(.2+Math.sin(gtime*sp)*.15)+')';ctx.beginPath();ctx.arc(cx,cy,9,0,7);ctx.fill()}
+  if(e.boss==='ordanis'&&!FL){// a halo of perfect light, turning without a sound
+    const hx=x,hy=y-e.h-4+Math.sin(gtime*2)*1.5,sp=e.phase===2?2.4:1.2;ctx.lineWidth=1.5;ctx.strokeStyle='rgba(255,230,150,.85)';ctx.beginPath();ctx.ellipse(hx,hy,13,4,0,0,7);ctx.stroke();
+    for(let i=0;i<8;i++){const a=gtime*sp+i*Math.PI/4;ctx.fillStyle='#fff8e0';ctx.fillRect(Math.round(hx+Math.cos(a)*13)-1,Math.round(hy+Math.sin(a)*4)-1,2,2)}ctx.lineWidth=1;
+    ctx.fillStyle='rgba(255,240,190,'+(.12+Math.sin(gtime*3)*.05)+')';ctx.beginPath();ctx.ellipse(x,y-e.h/2,e.w+10,e.h*.75,0,0,7);ctx.fill()}
   FL=false;ctx.globalAlpha=1}
 function drawProj(q){const x=Math.round(q.x),y=Math.round(q.y);
   if(q.delay>0){if(q.k==='icicle'){ctx.fillStyle='rgba(200,240,255,.6)';ctx.fillRect(x-3,y,6,2);return}if(q.k==='spear'||q.k==='pillar'){ctx.fillStyle=Math.floor(gtime*12)%2?'rgba(255,40,40,.8)':'rgba(255,120,120,.5)';ctx.fillRect(x-q.w/2,y-2,q.w,2);if(q.k==='pillar'){ctx.fillStyle='rgba(255,240,180,.15)';ctx.fillRect(x-1,y-q.h,2,q.h)}}else if(q.k==='meteor'||q.k==='rock'){ctx.fillStyle='rgba(255,80,40,.5)';ctx.fillRect(x-4,y,8,2)}return}
@@ -1613,11 +1632,11 @@ function drawNPC(n){const x=Math.round(n.x),y=15*T;const t=gtime;const f=me?sign
     case'ench':ctx.fillStyle='#3a2440';ctx.fillRect(x-44,y-26,34,20);ctx.fillStyle='#5a3a6a';ctx.beginPath();ctx.ellipse(x-27,y-26,18,10,0,Math.PI,0);ctx.fill();ctx.fillStyle='#2a1a10';ctx.beginPath();ctx.arc(x-38,y-5,5,0,7);ctx.arc(x-16,y-5,5,0,7);ctx.fill();
       hum(x,y,f,1,{skin:'#f0d0c0',cloth:'#4a2a6a',head:'hood',eye:'#c0a0ff',wpn:'orb',orb:'#b080ff'},t,'idle');for(let i=0;i<3;i++){const a=t*2+i*2.1;ctx.fillStyle='#c0a0ff';ctx.fillRect(x+Math.cos(a)*12,y-14+Math.sin(a)*6,2,2)}break;
     case'arch':ctx.fillStyle='#4a3a2a';ctx.fillRect(x+8,y-12,18,2);ctx.fillRect(x+10,y-10,2,10);ctx.fillRect(x+22,y-10,2,10);ctx.fillStyle='#d8d0b0';ctx.fillRect(x+9,y-14,16,2);hum(x,y,f,1,{skin:'#e0c0a0',cloth:'#2a4a5a',head:'',eye:'#111'},t,'idle');ctx.fillStyle='#ddd';ctx.fillRect(x-3,y-22,6,2);break;
-    case'othar':{const b=save.bosses|0;ctx.fillStyle='#4a3424';ctx.fillRect(x-22,y-8,40,3);ctx.fillRect(x-20,y-5,2,5);ctx.fillRect(x+14,y-5,2,5);
-      if(save.trueEnd||b>=7){if(b>=7&&!save.trueEnd&&Math.random()<.04)P({k:'spark',x:x+rnd(-14,14),y:y-rnd(6,20),vx:0,vy:-10,l:1,c:'#40ffa0',s:1});break}
-      if(b<4){const hair=['#5a3420','#7a6a5a','#9a9088','#b8b0a8'][b];hum(x-10,y,1,1,{skin:'#f0d0b8',cloth:'#8a3a4a',head:'hair',hair,eye:'#3a2a2a',wpn:b>=3?'staff':''},t,'idle')}
-      if(b<6){const hair=b<4?'#3a2a1a':b<5?'#8a8a8a':'#d8d8d8';hum(x+8,y,-1,1,{skin:'#e8c8a8',cloth:'#2a3a6a',head:'hair',hair,eye:'#2a2a3a',wpn:''},t,'idle');ctx.fillStyle=b>=4?'#40ffa0':'#c8a040';ctx.fillRect(x+7,y-13,2,2)}
-      else{hum(x+8,y,-1,1.1,{skin:'#c8d0e0',cloth:'#1e3a8a',head:'faceless',eye:'#80ffc0',wpn:''},t,'idle');ctx.fillStyle='#40ffa0';ctx.fillRect(x+7,y-11,3,3)}break}
+    case'keeper':{const b=save.bosses|0,te=save.trueEnd;
+      if(te){drawWaystone(x-6,y,.2,0);const C=['#ff5a5a','#ffd040','#5ad0ff','#7aff7a','#ff90e0'];for(let k=0;k<7;k++){ctx.strokeStyle=C[k%5];ctx.beginPath();ctx.moveTo(x-12+k*2.5,y-8-k*6);ctx.quadraticCurveTo(x-4+Math.sin(k)*4,y-14-k*6,x+3-k%3,y-6-k*6);ctx.stroke()}}
+      else if(b>=7){drawWaystone(x-6,y,.05,1);ctx.strokeStyle='rgba(255,230,160,.5)';ctx.beginPath();ctx.moveTo(x-10,y-4);ctx.lineTo(x-9,y-40);ctx.quadraticCurveTo(x-6,y-48,x-3,y-40);ctx.lineTo(x-2,y-4);ctx.stroke()}
+      else drawWaystone(x-6,y,.4+b*.1,b>=4);
+      if(te||(b>=1&&b<7))hum(x+16,y,-1,1,{skin:'#d8a880',cloth:b===6&&!te?'#a8a098':'#6a4a2a',head:'hood',eye:b===6&&!te?'#ffffff':'#2a1a10',wpn:b>=5&&!te?'mace':'dagger',vx:0},b===6&&!te?0:t,'idle');break}
     case'murk':{const fl=Math.sin(t*2)*2;ctx.fillStyle='#14121a';ctx.beginPath();ctx.moveTo(x-8,y+fl);ctx.lineTo(x-6,y-22+fl);ctx.lineTo(x+6,y-22+fl);ctx.lineTo(x+9,y+fl);ctx.lineTo(x+5,y-3+fl);ctx.lineTo(x,y+fl);ctx.lineTo(x-4,y-3+fl);ctx.fill();ctx.fillStyle='#0a080e';ctx.fillRect(x-4,y-24+fl,8,8);ctx.fillStyle='#7ff0c0';ctx.fillRect(x-2,y-21+fl,1,1);ctx.fillRect(x+1,y-21+fl,1,1);
       ctx.strokeStyle='#5a4a3a';ctx.beginPath();ctx.moveTo(x-10,y-26+fl);ctx.lineTo(x-10,y-2+fl);ctx.stroke();const lg=ctx.createRadialGradient(x-10,y-28+fl,1,x-10,y-28+fl,16);lg.addColorStop(0,'rgba(120,255,200,.7)');lg.addColorStop(1,'rgba(120,255,200,0)');ctx.fillStyle=lg;ctx.fillRect(x-26,y-44+fl,32,32);ctx.fillStyle='#bfffe0';ctx.fillRect(x-12,y-30+fl,4,4);break}}}
 function drawCampScenery(){const gx=60*T;ctx.fillStyle='#2a2028';ctx.fillRect(gx-10,4*T,60,11*T);ctx.fillStyle='#3a3038';ctx.fillRect(gx-14,3*T,68,T);for(let i=0;i<5;i++)ctx.fillRect(gx-14+i*15,2*T,8,T);ctx.fillStyle='#08060a';ctx.beginPath();ctx.moveTo(gx-6,15*T);ctx.lineTo(gx-6,8*T);ctx.quadraticCurveTo(gx+14,4*T,gx+34,8*T);ctx.lineTo(gx+34,15*T);ctx.fill();
@@ -1644,7 +1663,7 @@ function drawUnderhang(x,y,tx,ty,zid,pal){const h=hash2(tx,ty);if(h%3)return;con
   for(let i=0;i<n;i++){const ox=x+2+((h>>>(4+i*3))%12),len=2+((h>>>(9+i*4))%6);
     if(zid==='fro'){ctx.fillStyle='#d8f0ff';ctx.fillRect(ox,y+16,2,Math.max(1,len-2));ctx.fillRect(ox,y+16,1,len);ctx.fillStyle='#ffffff';ctx.fillRect(ox,y+16,1,1)}
     else if(zid==='orm'||zid==='vor'){ctx.fillStyle='#2a2a30';ctx.fillRect(ox,y+16,1,len);if(zid==='orm'&&len>5){ctx.fillStyle='#ff6a1a';ctx.fillRect(ox,y+16+len,1,1)}}
-    else if(zid==='rev'){ctx.fillStyle='#6a5a3a';ctx.fillRect(ox,y+16,1,len);if(len>4){ctx.fillStyle='#b08a3a';ctx.fillRect(ox-1,y+16+len,3,2);ctx.fillStyle='#40ffa0';ctx.fillRect(ox,y+16+len,1,1)}}
+    else if(zid==='nex'){ctx.fillStyle=shade(pal.wall,-.3);ctx.beginPath();ctx.moveTo(ox-1,y+16);ctx.lineTo(ox+1,y+16+len+2);ctx.lineTo(ox+3,y+16);ctx.fill();if(len>4){ctx.fillStyle=h%2?'#ffe08a':'#b090ff';ctx.fillRect(ox,y+16+len,2,2)}}
     else{ctx.fillStyle=shade(pal.grass,-.35);ctx.fillRect(ox,y+16,1,len);if(len>4){ctx.fillStyle=pal.grass;ctx.fillRect(ox-1,y+16+len-2,1,1)}}}}
 // ground clutter: bones, skulls, candles, rubble and tufts
 function drawClutter(d,pal){const x=d.x,y=d.y;switch(d.k){
@@ -1683,11 +1702,14 @@ function actBlit(L,cx,cy,hi){flushW();M.save();M.setTransform(RS,0,0,RS,0,0);M.d
 function footShadow(x,y,w){ctx.fillStyle='rgba(0,0,0,.38)';ctx.beginPath();ctx.ellipse(Math.round(x),Math.round(y)-.5,w*.65+3,2.5,0,0,7);ctx.fill()}
 function drawStep(x,y,pal,tx,ty){const st=shade(pal.hi,.15);ctx.fillStyle=shade(pal.wall,.05);ctx.fillRect(x,y,16,16);ctx.fillStyle=st;ctx.fillRect(x,y,16,4);ctx.fillStyle=shade(pal.hi,.5);ctx.fillRect(x,y,16,1);ctx.fillStyle=shade(pal.wall,-.35);ctx.fillRect(x,y+15,16,1);ctx.fillRect(x,y+4,16,1);
   if(hash2(tx,ty)%3===0){ctx.fillStyle=shade(pal.wall,-.2);ctx.fillRect(x+3+hash2(ty,tx)%9,y+7,1,4)}if(!solidT(tileAt(tx-1,ty))){ctx.fillStyle=shade(pal.hi,.3);ctx.fillRect(x,y,1,4)}if(!solidT(tileAt(tx-1,ty-1))&&tileAt(tx+1,ty)===7&&hash2(tx,ty)%5===0){ctx.fillStyle='rgba(255,210,140,.5)';ctx.fillRect(x+7,y-1,2,1)}}
-// prayer flags strung across the landings, and the great door at the top
-function drawStairDressing(cx,cy,pal){for(const l of world.landings||[]){if(l.gone)continue;const x0=l.x0*T+4,x1=(l.x1+1)*T-4,y=l.y*T;ctx.fillStyle='#3a2a1a';ctx.fillRect(x0,y-40,2,40);ctx.fillRect(x1,y-40,2,40);
-    const C=['#c84a3a','#e0b040','#3a8ac8','#ffffff','#4aa060'];for(let i=0;i<=12;i++){const k=i/12,fx=x0+(x1-x0)*k,fy=y-38+Math.sin(k*Math.PI)*10;ctx.fillStyle='rgba(30,20,10,.7)';ctx.fillRect(Math.round(fx),Math.round(fy),1,1);if(i%2===0&&i<12){const wv=Math.sin(gtime*4+i)*1.5;ctx.fillStyle=C[(i/2)%C.length];ctx.fillRect(Math.round(fx+1),Math.round(fy+1),4,5+wv)}}}
-  const d=world.door;if(d){const x=d.x,y=d.y;ctx.fillStyle=shade(pal.wall,-.2);ctx.fillRect(x-22,y-52,44,52);ctx.fillStyle=shade(pal.hi,.1);ctx.fillRect(x-24,y-56,48,6);ctx.fillRect(x-24,y-52,6,52);ctx.fillRect(x+18,y-52,6,52);
-    const g=.5+.3*Math.sin(gtime*2);ctx.fillStyle=`rgba(255,220,150,${g})`;ctx.fillRect(x-16,y-46,32,46);ctx.fillStyle='rgba(255,250,230,.8)';ctx.fillRect(x-10,y-40,20,40)}}
+// crystal lanterns floating over each resting island, and the far Waystone
+function drawWaystone(x,y,glow,white){ctx.fillStyle='#2a2636';ctx.beginPath();ctx.moveTo(x-11,y);ctx.lineTo(x-8,y-58);ctx.lineTo(x,y-66);ctx.lineTo(x+8,y-58);ctx.lineTo(x+11,y);ctx.fill();ctx.fillStyle='#3e3850';ctx.beginPath();ctx.moveTo(x-8,y-58);ctx.lineTo(x,y-66);ctx.lineTo(x+1,y);ctx.lineTo(x-11,y);ctx.fill();
+  ctx.fillStyle='#1a1624';ctx.fillRect(x-14,y-4,28,4);const c=white?'255,250,235':'255,224,138';for(let k=0;k<6;k++){ctx.fillStyle=`rgba(${c},${glow*(.5+.5*Math.sin(gtime*2+k))})`;ctx.fillRect(x-3+(k%2)*4,y-52+k*8,2,4)}
+  const g=ctx.createRadialGradient(x,y-34,0,x,y-34,40);g.addColorStop(0,`rgba(${c},${.25*glow})`);g.addColorStop(1,`rgba(${c},0)`);ctx.fillStyle=g;ctx.fillRect(x-40,y-74,80,80)}
+function drawStairDressing(cx,cy,pal){for(const l of world.landings||[]){if(l.gone)continue;for(const [k,lx] of[[0,l.x0*T+20],[1,(l.x1+1)*T-20]]){const ly=l.y*T-34+Math.sin(gtime*1.5+k+l.x0)*4,hue=(gtime*40+l.x0*9+k*90)%360;
+      const g=ctx.createRadialGradient(lx,ly,0,lx,ly,16);g.addColorStop(0,`hsla(${hue},90%,75%,.45)`);g.addColorStop(1,`hsla(${hue},90%,75%,0)`);ctx.fillStyle=g;ctx.fillRect(lx-16,ly-16,32,32);
+      ctx.fillStyle=`hsl(${hue},80%,82%)`;ctx.beginPath();ctx.moveTo(lx,ly-6);ctx.lineTo(lx+3,ly);ctx.lineTo(lx,ly+6);ctx.lineTo(lx-3,ly);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(lx-.5,ly-3,1,3)}}
+  const d=world.door;if(d)drawWaystone(d.x,d.y,1,(world.nz|0)>=7)}
 function drawWorld(){
   const pal=world.pal||CAMP_PAL;
   drawParallax();ctx.fillStyle=world.camp?'rgba(8,4,14,.2)':'rgba(8,4,14,.12)';ctx.fillRect(0,0,VW,VH);// every country is open air now
@@ -1703,7 +1725,7 @@ function drawWorld(){
     if(t===1){const deep=solidT(tileAt(tx-1,ty))&&solidT(tileAt(tx+1,ty))&&solidT(tileAt(tx,ty-1))&&solidT(tileAt(tx,ty+1))&&solidT(tileAt(tx-1,ty-1))&&solidT(tileAt(tx+1,ty+1));
       if(deep&&!world.camp)TW(11,x,y);else{TW((tx*3+ty*5)&3,x,y);if(!solidT(tileAt(tx,ty-1)))TW(10,x,y);if(!solidT(tileAt(tx,ty+1))){ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect(x,y+14,16,2)}if(!solidT(tileAt(tx-1,ty))){ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(x,y,1,16)}if(!solidT(tileAt(tx+1,ty))){ctx.fillStyle='rgba(0,0,0,.25)';ctx.fillRect(x+15,y,1,16)}}}
     else if(t===2)TW(6,x,y);else if(t===3)TW(7,x,y);else if(t===4)TW(8,x,y);else if(t===5)TW(9,x,y);else if(t===7)drawStep(x,y,pal,tx,ty);else if(t===6){const c=world.crumb&&world.crumb.get(tx+','+ty);TW(12,x+(c&&c.ph==='shake'?(Math.floor(gtime*40)%2?1:-1):0),y);if(Math.random()<.006)P({k:'spark',x:x+rnd(2,14),y:y+16,vx:0,vy:30,l:.6,c:'#9a8a70',s:1})}
-    if((t===1||t===6)&&!world.camp&&!solidT(tileAt(tx,ty+1))&&tileAt(tx,ty+1)!==2)drawUnderhang(x,y,tx,ty,ZONES[run.zi].id,pal)}
+    if((t===1||t===6)&&!world.camp&&!solidT(tileAt(tx,ty+1))&&tileAt(tx,ty+1)!==2)drawUnderhang(x,y,tx,ty,world.stair?'nex':ZONES[run.zi].id,pal)}
   if(world.clutter)for(const d of world.clutter){if(d.x<cx-20||d.x>cx+VW+20||d.y<cy-20||d.y>cy+VH+20)continue;drawClutter(d,pal)}
   if(world.traps)for(const tr of world.traps){const hp=tr.pos&&tr.pos.x!=null,px=hp?tr.pos.x:tr.x??tr.ax??tr.px,py=hp?tr.pos.y:tr.y??tr.ay??tr.py;if(px==null||Math.abs(px-cx-VW/2)>VW||Math.abs(py-cy-VH/2)>VH)continue;drawTrap(tr,pal)}
   // blood
@@ -1986,6 +2008,8 @@ function vMobHead(o,hx,hy,skin,eye,t){
       vP([hx-2.6,hy-2.2,hx+2.8,hy-2.2,hx+3,hy-5.2,hx+1.6,hy-3.6,hx+.2,hy-5.8,hx-1.2,hy-3.6,hx-2.8,hy-5.2],vg('#c8b040',hy-5.8,hy-2.2));vE(hx+.2,hy-3.2,.45,.45,vc('#60ff80'));break;
     case'icecrown':base();eyes();vQ([hx-.6,hy+1.6,hx+3.2,hy+1.2,hx+2.6,hy+5,hx+1,hy+6.6,hx+.2,hy+4],vc('#e0f8ff'));for(let i=0;i<5;i++)vP([hx-2.8+i*1.4,hy-2.2,hx-2.2+i*1.4,hy-5.4-(i===2?2:i%2),hx-1.6+i*1.4,hy-2.2],vg(i===2?'#ffffff':'#a0e0ff',hy-7,hy-2));break;
     case'flayer':base(3.2,skin);vE(hx+1.2,hy-1,.7,.45,vc(eye));for(let i=0;i<4;i++){const w=Math.sin(t*4+i)*.6;ctx.beginPath();ctx.moveTo(hx+.6+i*.7,hy+1.4);ctx.quadraticCurveTo(hx+1+i*.7+w,hy+4,hx+.6+i*.6-w,hy+6.4+i%2);ctx.lineTo(hx+1.2+i*.7,hy+1.4);ctx.closePath();ctx.fillStyle=vg(skin,hy+1,hy+6);ctx.fill()}break;
+    case'empyreal':vE(hx,hy,3.2,3.6,vg('#fff4d8',hy-3.6,hy+3.6,.2));vE(hx+1,hy-.4,2,2.6,FL?'#fff':'rgba(255,255,255,.35)');vR(hx+.9,hy-2.6,.3,4.6,.15,vc('#c8a040'));if(!FL){vGlow(hx,hy,6,'255,230,150',.3)}break;
+    case'remnant':vE(hx,hy,3,3.2,vg('#f0e8dc',hy-3.2,hy+3.2,.2));vR(hx+.2,hy-.6,2.8,.5,.2,vc('#c8a040'));if(!FL)vGlow(hx+1.5,hy-.4,2.2,'255,230,150',.25);vP([hx-3,hy-1.4,hx-1,hy-3.8,hx+1.4,hy-3.4,hx-1.2,hy-1.6],vc('#c8a040'));break;
     case'faceless':vR(hx-3.2,hy-3.4,6.6,6.8,2.4,vg('#3a5ab8',hy-3.4,hy+3.4,.3));vR(hx-.4,hy-.2,3.6,.35,.15,vc('#80ffc0'));if(!FL)vGlow(hx+1.4,hy,3,'128,255,192',.25);vE(hx-1.4,hy-2.2,1.2,.6,FL?'#fff':'rgba(255,255,255,.35)');vR(hx-.2,hy-3.4,.5,6.8,.2,vc('#2a3a80'));break;
     case'tyrant':base(3.1,'#f8f0ff');vE(hx+.8,hy-.4,.4,.5,vc(eye));vE(hx+2.2,hy-.4,.4,.5,vc(eye));for(const s of[-1,1]){vP([hx+s*2,hy-2.4,hx+s*3.6,hy-6,hx+s*1,hy-3],vc('#3a1a6a'))}break;
     case'bald':base();ear();eyes(eye);vE(hx-.4,hy-2.2,2.2,.8,FL?'#fff':'rgba(255,255,255,.18)');break;
@@ -2040,7 +2064,7 @@ let toastT=0;function toast(a,b){const e=$('toast');e.innerHTML=esc(a)+(b?'<smal
 let heir=null,waitingParty=false;
 function toCamp(){mode='camp';world=genCamp();world.pal=CAMP_PAL;tiles=buildTiles(CAMP_PAL,'camp');skyC=buildSky(CAMP_PAL,true);enemies=[];projs=[];pickups=[];parts=[];decals=[];props=[];chests=[];graves=[];portal=null;run=null;waitingParty=false;
   if(!me||me.heir!==heir||me.dead)me=makePlayer(heir);else{me.hp=me.st.maxhp}
-  me.st=computeStats(heir);me.party=null;save.cur2=null;me.arrows=quiverOf(me);me.hp=Math.min(me.hp,me.st.maxhp);me.mp=me.st.maxmp;placePlayer(me,world.start.x,world.start.y);cam.x=0;cam.y=0;cam.room=null;hideAll();music('camp');audio();acctNote();toast('FIRSTSTEP, KALANDRIS',save.lineage.length<2?'TRAIN WITH THE SENSEI · OLD MURK GUIDES YOU ONTO THE STAIR':'SPEND YOUR GOLD BEFORE THE GATE')}
+  me.st=computeStats(heir);me.party=null;save.cur2=null;me.arrows=quiverOf(me);me.hp=Math.min(me.hp,me.st.maxhp);me.mp=me.st.maxmp;placePlayer(me,world.start.x,world.start.y);cam.x=0;cam.y=0;cam.room=null;hideAll();music('camp');audio();acctNote();toast('DRIFTHOLM, NEXUSAR',save.lineage.length<2?'TRAIN WITH THE SENSEI · LISTEN TO THE OLD WAYSTONE':'SPEND YOUR GOLD BEFORE THE GATE')}
 function startGame(){audio();if(!save.heirs||!heir&&!save.cur){openHeirs(save.lineage.length?'Your last heir has fallen. Who carries the blade now?':'The first of the bloodline. Choose who begins it.');return}heir=save.cur;toCamp()}
 function openHeirs(note){if(!save.heirs||save.heirs.length<3){save.heirs=[genHeir(),genHeir(),genHeir()];save.rerolls=L('heirs');persist()}
   $('heirnote').textContent=note||'Choose your heir.';const list=$('heirlist');list.innerHTML='';
@@ -2059,45 +2083,47 @@ function loadZone(zi,seed){run.zi=zi;run.seed=seed;world=genCastle(seed,zi,{trea
   props=world.props.map(p=>Object.assign({},p));chests=world.chests.map(c=>Object.assign({},c));projs=[];pickups=[];parts=[];decals=[];graves=[];bossUI=null;
   mode='run';waitingParty=false;if(me.dead){me.dead=false;me.hp=Math.round(me.st.maxhp*.5)}placePlayer(me,world.start.x,world.start.y);me.room=0;world.rooms[0].seen=true;cam.room=null;snapCam();hideAll();
   toast(ZONES[zi].n.toUpperCase(),ZONES[zi].sub);music(ZONES[zi].mus);persist()}
-// ================= the story of Othar Hilderic, told on the stair between countries =================
-// STORY[i] is the climb after beating country i: four landings, each a short exchange that plays line by line
+// ================= the Keeper's errand, told in the Nexus between countries =================
+// STORY[i] is the crossing after beating country i: four stretches of path, each a short exchange that plays line by line
 const STORY=[
- [["Behind Carla's lair a stair of pale stone opens in the air, where the clock at Othar's throat points.","OTHAR: “It only does that near things that have lived too long. Sorry. I should have said.”"],
-  ["OTHAR: “Carla was three hundred years old. She ate children's teeth, and with them their years.”","LIILIA: “So the cure is eating children. Lovely. I'll pass.”"],
-  ["OTHAR: “No! No. The years can be taken without... I'll find a kinder way.”","He fiddles with the broken clock, trying to make it tick again."],
-  ["LIILIA: “Stop counting my grey hairs, Othar. Count something useful.”","There is a grey streak in her hair that was not there this morning. Ahead lies Dhargul."]],
- [["The Rock-Chief kept the bones of every challenger. One of them still had a clock tattooed on its neck.","OTHAR: “The Order of the Sapphire marks its mages like that. Whatever he was, he got far.”"],
-  ["One night on the stair, a blue dome of light rises around your camp, and inside it a memory that is not yours:","a wood at night, a young couple in the leaves, and a faceless man in blue armour coming for her."],
-  ["LIILIA: “That's the night we met him. The man with no face. I killed him, you know. He turned to dust.”","OTHAR: “Please don't. Not in front of them.”"],
-  ["OTHAR: “I'm sorry. Thank you for coming this far. I'll pay double.”","LIILIA: “He apologises too much. Pay them triple.” The cold walls of Ormagöden rise ahead."]],
- [["The clock at Othar's throat is ticking again. He has not slept in two nights.","OTHAR: “Lionwhyte's crown was cut from the same metal. With it I could finally mend the spring.”"],
-  ["OTHAR: “It isn't a clock. It never was. It's a key, and it points south, to the sea.”","LIILIA: “Everything points south when you want it badly enough.”"],
-  ["She walks with a hand on the wall now. Her hair is half grey. She is twenty.","LIILIA: “Don't look at me like that. I'm still faster than you.”"],
-  ["OTHAR: “There is a place called Lock Keep. A pocket beside time. If I can open it, I can hold her.”","Through the far door comes the smell of blood and old wine. C'Tharvatul."]],
- [["Lord Ravenna lived nine hundred years. As she died, the key at Othar's throat drank something out of the air.","OTHAR: “That's it. That's the last piece. Come with me. Please.”"],
-  ["He turns the key in nothing at all, and a door opens beside time. Lock Keep. In the middle stands the machine.","In the machine lies a woman's body. An old woman. She has Liilia's face."],
-  ["Behind her, in glass, row after row, lie more of her. Some are older. Some are dust.","OTHAR: “Don't. Don't ask me. Help me lift her.” You help him seal the dead woman in glass with the others."],
-  ["He lays his Liilia in the machine. It hums. For the first time in weeks, her hair stops turning grey.","OTHAR: “It can hold her. It only needs time to run on. Taken from the living.” The black forests of Rotheim lie ahead."]],
- [["OTHAR: “I fed it myself, while you were fighting. A few years. I don't need them.”","His hair is white at the temples. His voice is older than his face."],
-  ["OTHAR: “And Valthor had centuries in him. You saw where they went? Into the key. Into her.”","Every lord you cut down has been feeding the machine. You have been feeding it all along."],
-  ["He opens his shirt. The key is set into his chest now, over his heart, ticking too fast.","LIILIA, through the glass: “Othar. Stop. Let me go.”"],
-  ["OTHAR: “Just a little more time.”","Snow begins to fall. Frostcrown lies ahead."]],
- [["Othar wears blue armour now. He says it keeps the cold out. He no longer takes off the helm.","OTHAR: “The Ice Entity barely lasted a day in there. The machine is always hungry.”"],
-  ["OTHAR: “Temporalis is full of people. The machine takes a day from a sleeper and a season from a labourer. Nobody would even notice.”","LIILIA: “They would notice, Othar. Their children would notice.”"],
-  ["You find a market on the stair, all old people, white-haired between one stall and the next.","A girl of nineteen with white hair grabs your sleeve. “Who is doing this?” You do not answer."],
-  ["OTHAR: “One more lord. Then she'll have enough, and I can stop. I promise.”","The next door opens on the iron gates of the Vorzakh Empire."]],
- [["When Uooros falls, the man at the top of the stair is not Othar any more. He is faceless, and the clock in his chest ticks far too fast.","CLOCKWORK: “Thank you, friends. And I'm sorry.”"],
-  ["Far to the south, on the sea, a ring of green light rises. Inside it the island of Temporalis is torn out of time, with every soul in the Deep and Tempolis.","The whole country becomes the Reverse: one great machine for his wife, drained hour by hour."],
-  ["CLOCKWORK: “Those who die near the ring will hear my voice. They can join me, or perish.”","CLOCKWORK: “You helped me build this. You could stay. You'd be the first of my Timelords.”"],
-  ["You turn him down. He sounds tired, never angry. “Then come and stop me.”","The stair goes down into the green, to Lock Keep, to the woman in the machine."]]];
+ [["When Carla falls, a thread of light rises out of her, every colour at once, and winds itself around your wrist.","KEEPER: “There. Do you feel it? A little piece of the sickness. Bring it to me, child.”"],
+  ["The Waystone opens onto Nexusar: broken towers drifting in a starless void, joined by bridges that were not there a moment ago.","MARRA: “Mind the gaps. The Nexus moves the road when it gets bored.”"],
+  ["MARRA: “Marra. Relic Hunter, out of Spirefall. You're carrying something that hums. Want to sell it?”","KEEPER: “Do not bargain with scavengers. The thread belongs to the Heart.”"],
+  ["At the far Waystone the thread slips off your wrist and into the stone. The obelisk glows a little whiter.","KEEPER: “One flaw cut away. The next is in Dhargul. Go on.”"]],
+ [["The Rock-Chief's thread is thick and rough, like a song shouted down a cave.","KEEPER: “He carved faces into the mountain that no one asked for. That is the flaw. Do you see it now?”"],
+  ["MARRA: “Funny kind of sickness. Everyone you kill was making something.”","MARRA: “Carla had her teeth. The Rock-Chief had his carvings. What is your Keeper making?”"],
+  ["Behind you the bridge folds up into the void, stone by stone.","LOREWYRM: “...keep... keep one...” A whisper in a hundred voices, from very far away."],
+  ["KEEPER: “Pay that echo no mind. Old things rattle in the Nexus.”","The thread sinks into the Waystone. It is whiter now, and quieter. Ormagöden waits, and it is loud."]],
+ [["General Lionwhyte dies laughing. “The Coil sent you? Of course it did. Silence always wins in the end.”","His thread is so loud it rings in your teeth."],
+  ["MARRA: “The Tainted Coil serves something old. Something that hates noise.”","KEEPER: “The Coil served order, as you do. There is no shame in standing on the right side.”"],
+  ["MARRA: “Lionwhyte was the Coil's own man, and your Keeper wanted him dead anyway. Doesn't that bother you?”","KEEPER: “Even a good tool rusts, little one.”"],
+  ["LOREWYRM: “...that song was mine... he stole it, but it was mine...”","The Waystone drinks the thread. Beyond it hangs a red moon over C'Tharvatul."]],
+ [["Lord Ravenna's thread is black and red and endless, like a story that refuses to finish.","KEEPER: “The Mortum Lords stole from the sickness to live forever. Now you have taken it back.”"],
+  ["Halfway across, the void tears open and an eye of every colour looks through.","LOREWYRM: “Child of the broken empire. You are carrying me home, piece by piece, to the one who made me a weapon.”"],
+  ["The Keeper's voice drops to a hiss you have never heard from it.","KEEPER: “It lies. It is chaos. It cannot help but lie.”"],
+  ["MARRA: “I've dug up Ancient relics all my life. I know what Empyreal light looks like. Your Waystone glows exactly like it.”","MARRA: “Three lords left after the next. Think before you hand over another.” Rotheim lies ahead."]],
+ [["The Waystone is nearly white now. It no longer hums. It is perfectly, beautifully still.","KEEPER: “See how calm it becomes. No more teeth. No more noise. No more nightmares.”"],
+  ["On Driftholm the travellers have stopped telling stories. A child draws a straight line, over and over, and calls it a picture.","MARRA: “It's spreading. Every thread you bring makes the worlds a little quieter.”"],
+  ["MARRA: “The old pyramids in the Wastelands call their weapon the Wyrm of Order. Then something turned it.”","KEEPER: “Something broke it. And you are mending it. That is all.”"],
+  ["LOREWYRM: “Please. I was only ever a dream that got loose.”","You keep walking. Snow begins to fall over Frostcrown."]],
+ [["The Ice Entity's thread is barely a flicker: one snowflake shaped differently from all the others.","KEEPER: “Even that. Even a snowflake that will not match. Bring it.”"],
+  ["Marra is waiting at the Waystone with a hammer.","MARRA: “I'm going to break it open. Then we'll see who's been talking to you.”"],
+  ["The Waystone flares white. When you can see again, Marra is standing very straight, smiling, and she does not blink.","MARRA: “Perfect,” she says, in the Keeper's voice. “Perfect. Perfect.”"],
+  ["KEEPER: “She is at peace now. One more lord, child, and everyone will be.”","The iron gates of the Vorzakh Empire open ahead."]],
+ [["As Uooros falls, the last thread leaves him and the Waystone swallows it whole. The stone is pure white now, and silent.","The voice steps out of the stone: tall, gold, faceless and perfect. An Empyreal."],
+  ["ORDANIS: “Thank you. I am Ordanis, last of the Ancients. Your people were made to serve me, and you have served beautifully.”","ORDANIS: “Seven threads. With them the Heart of Reality is mine again, and the Lorewyrm is a little thing I can close my hand around.”"],
+  ["Across every world you have walked, the songs stop. Carvings smooth over. On Driftholm the travellers stand in rows.","LOREWYRM: “He is going to the Heart. I cannot stop him. I am too small now. You made me small.”"],
+  ["LOREWYRM: “But they made you, and you still chose. That is my spark in you. Use it.”","The Waystone opens on the centre of Nexusar, where the Heart of Reality burns white."]]];
 function loadStair(nz,seed){world=genStair(nz);world.nseed=seed;world.pal=STAIR_PAL;tiles=buildTiles(STAIR_PAL,'stair');skyC=buildSky(STAIR_PAL);
   enemies=[];props=[];chests=[];projs=[];pickups=[];parts=[];decals=[];graves=[];bossUI=null;world.story=STORY[nz-1]||[];storyQ=world.story.length?{lines:world.story.flat(),i:0,t:0}:null;
   portal={x:world.door.x,y:world.door.y,t:0,stair:true};mode='run';waitingParty=false;if(me.dead){me.dead=false;me.hp=Math.round(me.st.maxhp*.5)}
   placePlayer(me,world.start.x,world.start.y);me.room=0;cam.room=null;snapCam();hideAll();me.arrows=quiverOf(me);
-  toast('THE STAIR','ONWARD TO '+ZONES[nz].n.toUpperCase());music('camp');persist()}
-function finishStair(){if(!world.stair)return;if(net&&!net.isHost){toast('AT THE TOP','WAITING FOR THE HOST');netEv({k:'portal'});return}if(net)netGo({cmd:'zone',zi:world.nz,seed:world.nseed});loadZone(world.nz,world.nseed)}
-// halfway up, the stair starts falling away behind you: run
-function stairChase(dt){const w=world,L=w.landings;if(!w.chase){if(me.x>L[1].x0*T){w.chase={x:Math.max(T*6,me.x-15*T),col:0,pause:0};toast('THE STAIR IS FALLING','RUN');shake(6);sfx('boom')}return}
+  toast('NEXUSAR','THE ROAD TO '+ZONES[nz].n.toUpperCase());music('camp');persist()}
+function finishStair(){if(!world.stair)return;if(net&&!net.isHost){toast('AT THE WAYSTONE','WAITING FOR THE HOST');netEv({k:'portal'});return}if(net)netGo({cmd:'zone',zi:world.nz,seed:world.nseed});loadZone(world.nz,world.nseed)}
+// halfway across, the Nexus starts folding the path away behind you: run
+function stairChase(dt){const w=world,L=w.landings;if(me.onGround&&!me.dead&&solidT(tileAt(Math.floor(me.x/T),Math.floor((me.y+1)/T))))w.safe={x:me.x,y:me.y};
+  if(!w.chase&&!me.dead&&w.safe&&me.y>(w.floorAt[clamp(Math.floor(me.x/T),0,w.mw-1)]+6)*T){placePlayer(me,w.safe.x,w.safe.y-.01);me.vx=me.vy=0;me.hp=Math.max(1,me.hp-Math.round(me.st.maxhp*.05));me.inv=1;sfx('hurt');txt(me.x,me.y-me.h-4,'FELL','#ff8a8a');return}// fell into the void before the path starts folding: back to the last island
+  if(!w.chase){if(me.x>L[1].x0*T){w.chase={x:Math.max(T*6,me.x-15*T),col:0,pause:0};toast('THE PATH IS FOLDING AWAY','RUN');shake(6);sfx('boom')}return}
   const c=w.chase,stop=L[L.length-1].x0*T-T;if(c.x>=stop)return;
   if(c.pause>0)c.pause-=dt;else{const gap=me.x-c.x,sp=me.st.spd*(gap>18*T?1.4:.82)+Math.min(20,gtime%1000*0);c.x=Math.min(stop,c.x+sp*dt)}
   const upto=Math.floor(c.x/T);for(;c.col<=upto;c.col++){const f=w.floorAt[c.col];if(c.col<1)continue;for(let yy=f;yy<w.mh;yy++)setTile(c.col,yy,0);gibs(c.col*T+8,f*T+4,3,[w.pal.hi,w.pal.wall,'#2a2630']);if(c.col%3===0){dust(c.col*T+8,f*T,4);sfx('crumble')}}w.clutter=w.clutter.filter(d=>d.x>c.x);w.landings.forEach(l=>{if((l.x1+1)*T<c.x)l.gone=true});
@@ -2109,21 +2135,21 @@ function stairChase(dt){const w=world,L=w.landings;if(!w.chase){if(me.x>L[1].x0*
 let storyQ=null;
 function stairStory(dt){const w=world;if(w.stair&&me)stairChase(dt);if(!storyQ||!me)return;storyQ.t+=dt;const len=storyQ.lines[storyQ.i].length;if(storyQ.t>Math.max(6,2.5+len*.065)||inp.interP&&storyQ.t>.4){storyQ.i++;storyQ.t=0;if(storyQ.i>=storyQ.lines.length)storyQ=null;else sfx('tick')}}
 function drawStory(){const w=world;let s,cnt='';if(w.talk){s=w.talk.lines[w.talk.i];cnt=(w.talk.i+1)+' / '+w.talk.lines.length+'   [E] NEXT'}else{if(!storyQ||mode!=='run')return;s=storyQ.lines[storyQ.i];cnt=(storyQ.i+1)+' / '+storyQ.lines.length+'   [E] NEXT'}
-  if(!s)return;const a=w.talk?1:Math.min(1,storyQ.t/.5);const m=/^([A-Z][A-Z ,]+?)(, through the glass)?: (.*)$/.exec(s);let who='',col='#f4e8c8';if(m){who=m[1]+(m[2]||'');s=m[3];col={OTHAR:'#bfe0ff',LIILIA:'#ffd0c8',CLOCKWORK:'#90ffc8'}[m[1]]||'#f4e8c8'}
+  if(!s)return;const a=w.talk?1:Math.min(1,storyQ.t/.5);const m=/^([A-Z][A-Z ,]+?)(, through the glass)?: (.*)$/.exec(s);let who='',col='#f4e8c8';if(m){who=m[1]+(m[2]||'');s=m[3];col={KEEPER:'#ffe8a8',ORDANIS:'#fff4d0',MARRA:'#ffc8a0',LOREWYRM:'hsl('+((gtime*90)%360|0)+',90%,78%)'}[m[1]]||'#f4e8c8'}
   ctx.font='8px Silkscreen, monospace';const words=s.split(' '),lines=[];let cur='';for(const wd of words){const t=cur?cur+' '+wd:wd;if(ctx.measureText(t).width>VW-90){lines.push(cur);cur=wd}else cur=t}if(cur)lines.push(cur);
   const top=who?12:0,h=lines.length*11+22+top,y=w.talk?150:62;ctx.globalAlpha=a*.85;ctx.fillStyle='#0a0810';ctx.fillRect(30,y,VW-60,h);ctx.fillStyle='#c8a040';ctx.fillRect(30,y,VW-60,1);ctx.fillRect(30,y+h-1,VW-60,1);ctx.globalAlpha=a;ctx.textAlign='center';
   if(who){ctx.fillStyle=col;ctx.fillText(who,VW/2,y+13)}ctx.fillStyle=who?col:'#f4e8c8';lines.forEach((l,k)=>ctx.fillText(l,VW/2,y+15+top+k*11));
   ctx.fillStyle='#8a7a5a';ctx.fillText(cnt,VW/2,y+h-5);ctx.textAlign='left';ctx.globalAlpha=1}
-// ================= Othar and Liilia at camp: what they say depends on how far the bloodline has come =================
-function campTalkLines(){const b=save.bosses|0;if(save.trueEnd)return["Their bench is empty. Someone has scratched a little clock into the wood, and crossed it out.","Far to the south, the sailors say, the island of Temporalis is back on the sea."];
-  return[["OTHAR: “I'm Othar Hilderic, of the Order of the Sapphire. Apprentice. Sorry. I don't need a hero. I need someone who won't stop looking.”","LIILIA: “He means: my wife is cursed, and we can pay.”","OTHAR: “Every lord who has lived too long holds a piece of the cure. Start in Ravenfall.”"],
-   ["LIILIA: “Ravenfall was fun. Do they all have crows?”","OTHAR: “The Rock-Chief in Dhargul next. He keeps the bones of old mages. I need to see them.”"],
-   ["OTHAR: “I dreamed about the man in the woods again.”","LIILIA: “He's dead, Othar. I made sure.”","OTHAR: “I know. That's what frightens me.”"],
-   ["LIILIA: “He hasn't slept. He talks to that clock like it's going to answer.”","OTHAR: “It did answer. It points south. C'Tharvatul next, and then I'll know.”"],
-   ["Liilia is not here. Othar sits alone on the bench, very straight, very tired.","OTHAR: “She's safe in the machine. She's safe. I just need to keep it running.”","OTHAR: “Bring me Valthor. A lich has so much time in him.”"],
-   ["OTHAR: “Don't look at my hair. It's only a few years. I gave them gladly.”","OTHAR: “Frostcrown next. The Ice Entity has kept itself still for an age. All that time, just sitting there.”"],
-   ["A man in blue armour sits on the bench. The helm has no face. He is still polite.","OTHAR: “The Vorzakh Empire. Uooros. After him, I promise, I can stop.”"],
-   ["Their bench is empty. The planks are grey with age, as if a hundred years went by in a night.","Old Murk says a voice spoke to him from the south last night: join, or perish."]][Math.min(b,7)]}
+// ================= the Keeper's Waystone at Driftholm: what it says depends on how far the bloodline has come =================
+function campTalkLines(){const b=save.bosses|0;if(save.trueEnd)return["The Waystone is just a stone now, covered in children's drawings. None of the lines are straight.","MARRA: “Back again? Good. The Nexus moved the bazaar this morning. I love it here.”"];
+  return[["The old obelisk at the edge of Driftholm hums. When you come close, it speaks, warm as sunlight.","KEEPER: “You can hear me. Good. I am the Keeper of the Waystone Ring.”","KEEPER: “Seven lords of Vellorum carry a flaw, a sickness in the weave of the worlds. Cut it out of them and bring it to me, and everything will heal.”","KEEPER: “Begin in Ravenfall. Screeching Carla has been chewing on the world for far too long.”"],
+   ["KEEPER: “The first thread. Do you feel lighter? You should.”","MARRA: “Don't mind me. I just like to listen in on talking rocks.”","KEEPER: “The Rock-Chief in Dhargul next. He carves things. Endlessly.”"],
+   ["KEEPER: “Ormagöden. Lionwhyte. A loud man in a loud country. Make it quiet.”","MARRA: “It talks a lot about quiet, your stone.”"],
+   ["KEEPER: “Pay no attention to the whispers in the Nexus. Echoes. Only echoes.”","KEEPER: “Lord Ravenna in C'Tharvatul. She has been alive far longer than anyone should be.”"],
+   ["The Waystone hums less than it used to. Its light is very even.","KEEPER: “Valthor in Rotheim. After him you are more than halfway home.”","MARRA: “Home. Where is home, for a rock?”"],
+   ["KEEPER: “Is it not peaceful here now? Listen. No one is arguing.”","No one is. The travellers on Driftholm sit very still.","KEEPER: “Frostcrown. The Ice Entity. One last little imperfection in the snow.”"],
+   ["Marra sits beside the stone, smiling, very straight. She does not blink.","KEEPER: “Uooros, child. The last one. Then I will show you my face.”"],
+   ["The Waystone is empty. A tall outline is burned into the stone where something stepped out of it.","LOREWYRM: “Go to the Heart. Please.”"]][Math.min(b,7)]}
 
 function nextZone(){if(world.stair){finishStair();return}if(run.zi>=ZONES.length-1){showEnding();return}const seed=(Math.random()*2**31)|0;if(net&&net.isHost){netGo({cmd:'stair',zi:run.zi+1,seed})}loadStair(run.zi+1,seed)}
 function onLocalDeath(){if(net&&mode==='run'&&!net.wiped){return}recordDeath();showDeath()}
@@ -2136,28 +2162,28 @@ function showDeath(){const p=me,z=run?run.zi:0;$('d-title').textContent=p.heir.n
   if(net){for(const r of remotes.values())if(r.inRun)rows.push([`${r.nick||'Friend'} (score)`,fmt(r.score||0)])}
   $('d-stats').innerHTML=rows.map(([a,b])=>`<li><span>${esc(a)}</span><b>${esc(b)}</b></li>`).join('');mode='dead';show('death');music(null)}
 $('d-ok').onclick=()=>openHeirs('Your last heir has fallen. Who carries the blade now?');
-// the last choice: smash the machine (and the loop begins again), or let her go
-function showEnding(){mode='dead';$('end-h').textContent='JUST A LITTLE MORE TIME';$('end-b').innerHTML=`Clockwork kneels on the floor of Lock Keep, the clock in his chest ticking far too fast. Behind him, in the machine, Liilia is slipping away.<br><br>“Just a little more time,” Othar says. He sounds tired, never angry.<br><br>LIILIA, through the glass: “Let me go. Please. Both of you.”`;
+// the last choice: restore the order (and the bloodline serves again), or set the spark free
+function showEnding(){mode='dead';$('end-h').textContent='THE HEART OF REALITY';$('end-b').innerHTML=`Ordanis lies broken at the foot of the Heart. His seven threads drift loose around you, every colour at once.<br><br>“Put them in the Heart,” he whispers. “No more pain. No more chaos. Everything perfect, forever.”<br><br>LOREWYRM, very small: “Or let me go. I can't promise you anything. That is the point.”`;
   $('end-ok').hidden=true;$('end-smash').hidden=false;$('end-let').hidden=false;show('ending');music('dream')}
 function endingChoice(letGo){const n=esc(me.heir.name);$('end-smash').hidden=true;$('end-let').hidden=true;$('end-ok').hidden=false;
-  if(letGo){save.trueEnd=(save.trueEnd||0)+1;$('end-h').textContent='THE CLOCK STOPS';$('end-b').innerHTML=`${n} stands between Othar and the machine, and lets Liilia sleep. The machine runs down. The clock in his chest stops, and Clockwork, Lord of Time, crumbles to dust beside her, holding her hand.<br><br>In the halls of glass, every Liilia turns to dust at once. Far to the south the green ring unravels, and after years of being lost, Temporalis returns to the sea. Its people are old, and they will not forget who helped him.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('camp')}
-  else{$('end-h').textContent='IT BEGINS AGAIN';$('end-b').innerHTML=`${n} smashes the machine and pulls Liilia free. Clockwork staggers back, punches a hole through time and walks away down the Reverse, into the past, sure that this time he will save her.<br><br>Somewhere, in a wood at night, a young woman drives a dagger through the clock in a faceless man's chest. A young apprentice picks up the broken clock.<br><br>Some weeks later, he walks into Firststep looking for adventurers.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('dream')}persist(true)}
+  if(letGo){save.trueEnd=(save.trueEnd||0)+1;$('end-h').textContent='THE SPARK RETURNS';$('end-b').innerHTML=`${n} opens their hands. The seven threads fly out of the Heart's white light and weave themselves together into something vast and coiling and unfinished. The Lorewyrm stretches across the folds of reality again.<br><br>Ordanis fades like a law nobody remembers. In Ravenfall someone sings off key. In Dhargul the Rock-Chief's carvings grow new faces. On Driftholm, Marra blinks.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('camp')}
+  else{$('end-h').textContent='PERFECT ORDER';$('end-b').innerHTML=`${n} lays the threads in the Heart, one by one. The colours drain out of it until it shines a single, flawless white. Ordanis rises, whole again, and the multiverse goes still.<br><br>No one is afraid any more. No one makes anything either.<br><br>Many years later, on the floating islands of Driftholm, a young heir of a forgotten family hears a warm voice from an old Waystone.<br><br>The bloodline goes on. In <b>New Game+</b> every country is harder and every coin is worth more.`;music('dream')}persist(true)}
 $('end-smash').onclick=()=>endingChoice(false);$('end-let').onclick=()=>endingChoice(true);
 $('end-ok').onclick=()=>{save.ng++;save.bosses=0;persist(true);toCamp()};
 
 // ================= interaction =================
 let reviveT=0;
 function findInteract(){interactTarget=null;if(!me||me.dead)return;
-  if(mode==='camp'){for(const n of world.npcs){if(n.need&&!L(n.need))continue;if(Math.abs(me.x-n.x)<22){interactTarget={x:n.x,y:15*T-30,label:n.k==='othar'&&world.talk?'Next':n.a,npc:n};return}}}
+  if(mode==='camp'){for(const n of world.npcs){if(n.need&&!L(n.need))continue;if(Math.abs(me.x-n.x)<22){interactTarget={x:n.x,y:15*T-30,label:n.k==='keeper'&&world.talk?'Next':n.a,npc:n};return}}}
   if(mode==='run'){for(const c of chests)if(!c.open&&Math.abs(me.x-c.x)<14&&Math.abs(me.y-c.y)<16){interactTarget={x:c.x,y:c.y-12,label:'Open',chest:c};return}
     for(const g of graves)if(!g.mine&&Math.abs(me.x-g.x)<16&&Math.abs(me.y-g.y)<20){interactTarget={x:g.x,y:g.y-14,label:`Hold to raise ${g.n}`,grave:g};return}}}
 function doInteract(){const it=interactTarget;if(!it)return;
   if(it.chest){openChest(it.chest);return}
-  if(it.npc){const k=it.npc.k;if(k==='othar'){if(world.talk){world.talk.i++;sfx('tick');if(world.talk.i>=world.talk.lines.length)world.talk=null}else{world.talk={lines:campTalkLines(),i:0,x:it.npc.x};sfx('swap')}return}if(k==='sensei')openTree();else if(k==='smith')openShop('smith');else if(k==='ench')openShop('ench');else if(k==='arch')openArch();else if(k==='murk')openToll()}}
+  if(it.npc){const k=it.npc.k;if(k==='keeper'){if(world.talk){world.talk.i++;sfx('tick');if(world.talk.i>=world.talk.lines.length)world.talk=null}else{world.talk={lines:campTalkLines(),i:0,x:it.npc.x};sfx('swap')}return}if(k==='sensei')openTree();else if(k==='smith')openShop('smith');else if(k==='ench')openShop('ench');else if(k==='arch')openArch();else if(k==='murk')openToll()}}
 
 // ================= the toll =================
 function openToll(){if(waitingParty)return;$('cf-yes').disabled=false;const opened=Math.min(ZONES.length-1,save.bosses);$('cf-t').textContent='OLD MURK, THE TOLL-WRAITH';
-  $('cf-b').innerHTML=`"The stair takes your years. I take your coin."<br><br>Entering costs <b class="gold-t">all ${fmt(save.gold)} gold</b> you carry. Spend it first.`+(net&&!net.isHost?'<br><br>Your party leader chooses the country.':'');
+  $('cf-b').innerHTML=`"The Waystones take you anywhere. I take your coin."<br><br>Entering costs <b class="gold-t">all ${fmt(save.gold)} gold</b> you carry. Spend it first.`+(net&&!net.isHost?'<br><br>Your party leader chooses the country.':'');
   const ex=$('cf-extra');ex.innerHTML='';let pickZ=0;
   if(opened>0&&(!net||net.isHost)){const seg=document.createElement('div');seg.className='seg';seg.style.cssText='justify-content:center;margin-top:12px;flex-wrap:wrap';for(let z=0;z<=opened;z++){const b=document.createElement('button');b.type='button';b.textContent=ZONES[z].n;b.className=z===0?'on':'';b.onclick=()=>{pickZ=z;[...seg.children].forEach((c,i)=>c.className=i===z?'on':'')};seg.append(b)}ex.append(seg)}
   $('cf-yes').textContent='Pay and enter';$('cf-yes').onclick=()=>{save.gold=0;persist(true);sfx('door');hideAll();
@@ -2367,7 +2393,7 @@ function ambient(dt){const wx=(ZONES[run.zi]||{}).wx;if(!wx||wx==='none'||!chanc
     case'ash':P({k:'amb',x,y:cam.y-4,vx:rnd(-10,10),vy:rnd(16,30),l:7,l0:7,c:pickR(['#5a5050','#ff8a3a','#3a3434']),s:1});break;
     case'mist':P({k:'smoke',x,y:cam.y+VH*rnd(.5,1),vx:rnd(-10,10),vy:rnd(-4,0),l:2.4,l0:2.4,c:shade(world.pal.back2,.25),s:rnd(8,14),mist:1});break;
     case'snow':P({k:'amb',x,y:cam.y-4,vx:rnd(-16,4),vy:rnd(18,34),l:8,l0:8,c:'#f4faff',s:chance(.3)?2:1});break;
-    case'time':P({k:'amb',x,y:cam.y+VH+4,vx:rnd(-4,4),vy:rnd(-22,-10),l:6,l0:6,c:pickR(['#40ffa0','#a0ffd0','#b08a3a']),s:1,tw:1});break;
+    case'time':P({k:'amb',x,y:cam.y+VH+4,vx:rnd(-4,4),vy:rnd(-22,-10),l:6,l0:6,c:pickR(['#ffe8a0','#ffffff','#c0a0ff','#80e0ff']),s:1,tw:1});break;
     case'star':P({k:'amb',x,y,vx:rnd(-4,4),vy:rnd(-10,-2),l:3,l0:3,c:pickR(['#ffe0ff','#ff90e0','#a0e0ff']),s:1,tw:1});break}}
 // ================= co-op over rooms =================
 let room=null,net=null,lobbyUnsub=null,netPj=[];
@@ -2507,7 +2533,7 @@ let crawlOn=!!$('crawl');
     if(crawlOn){const q=readPad(),any=!!(q&&(q.a||q.b||q.x||q.y||q.start||q.sel||q.l1||q.r1));if(any&&!pp)poke();pp=any}})();
   window.__skipCrawl=()=>{sound=true;end()};
 })();
-window.__h={readPad,solidAt,padTargets,get padEl(){return padM.el},get mode(){return mode},get me(){return me},get world(){return world},get enemies(){return enemies},get save(){return save},get run(){return run},startGame,beginRun,loadZone,toCamp,openTree,openShop,openHeirs,computeStats,genCastle,inp,kb,kbP,step,get portal(){return portal},nextZone,hurtMe,set god(v){window.__god=v}};window.__g=()=>graves;window.__mk=(s,z)=>makeEnemy(s,z,0);window.__ZT=z=>ZONES[z].en.map(a=>a[0]).concat(['boss:'+ZONES[z].boss]);window.__it=()=>interactTarget&&{label:interactTarget.label,x:interactTarget.x};
+window.__h={readPad,solidAt,padTargets,get padEl(){return padM.el},get mode(){return mode},get me(){return me},get world(){return world},get enemies(){return enemies},get save(){return save},get run(){return run},startGame,loadStair,showEnding,beginRun,loadZone,toCamp,openTree,openShop,openHeirs,computeStats,genCastle,inp,kb,kbP,step,get portal(){return portal},nextZone,hurtMe,set god(v){window.__god=v}};window.__g=()=>graves;window.__mk=(s,z)=>makeEnemy(s,z,0);window.__ZT=z=>ZONES[z].en.map(a=>a[0]).concat(['boss:'+ZONES[z].boss]);window.__it=()=>interactTarget&&{label:interactTarget.label,x:interactTarget.x};
 </script>
 </body>
 </html>
