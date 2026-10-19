@@ -843,12 +843,17 @@ function grappleInput(p,I,dir,dt){p.hookCd=(p.hookCd||0)-dt;
       for(const e of enemies){if(!e.alive||e.room!==p.room&&!e.boss)continue;if(Math.abs(e.x-h.x)<e.w/2+3&&h.y>e.y-e.h-3&&h.y<e.y+2){hitEnemy(e,Math.round(p.st.dmg*.4),false,sign(cx-e.x),'hook');if(!e.boss){e.vx=sign(cx-e.x)*300;e.vy=-160;e.stunT=Math.max(e.stunT||0,.6)}h.st='back';return}}}
     if(Math.hypot(h.x-cx,h.y-cy)>HOOK_MAX||!I.bow&&h.t>.12)h.st='back';return}
   if(h.st==='back'){const dx=cx-h.x,dy=cy-h.y,d=Math.hypot(dx,dy);if(d<14){p.hook=null;return}h.x+=dx/d*1100*dt;h.y+=dy/d*1100*dt;return}
-  // holding on: the rope pulls you in a circle around the anchor
+  // holding on: you hang from the anchor like a pendulum
   if(!I.bow||p.hurtT>0||p.dead||p.dashT>0){releaseHook(p,false);return}
   if(I.jumpP){p.jbuf=0;releaseHook(p,true);return}
-  h.len=Math.max(16,h.len-(I.d?-120:I.u?400:230)*dt);// reel in while held; up reels faster, down lets rope out
-  const dx=cx-h.x,dy=cy-h.y,d=Math.hypot(dx,dy)||1;if(d>h.len){const nx=dx/d,ny=dy/d,rv=p.vx*nx+p.vy*ny;if(rv>0){p.vx-=rv*nx;p.vy-=rv*ny}p.vx-=nx*(d-h.len)*12;p.vy-=ny*(d-h.len)*12}
-  if(p.onGround&&h.len<26)releaseHook(p,false)}
+  // holding the hook reels you in steadily; up reels faster, down lets rope out
+  if(I.d)h.len=Math.min(HOOK_MAX*.8,h.len+110*dt);else h.len=Math.max(22,h.len-(I.u?300:150)*dt);
+  const dx=cx-h.x,dy=cy-h.y,d=Math.hypot(dx,dy)||1,nx=dx/d,ny=dy/d;
+  if(d>h.len){const rv=p.vx*nx+p.vy*ny,pull=Math.min(240,(d-h.len)*9);if(rv>-pull){p.vx-=(rv+pull)*nx;p.vy-=(rv+pull)*ny}if(ny>.3&&p.onGround){p.onGround=false;p.vy=Math.min(p.vy,-60)}}
+  // pendulum feel: light air drag and a cap on angular speed so it never whips around the anchor
+  const tx=-ny,ty=nx;let tv=p.vx*tx+p.vy*ty;const cap=Math.min(340,Math.max(d,h.len)*4.2);tv*=Math.pow(.55,dt);tv=clamp(tv,-cap,cap);
+  const rv2=p.vx*nx+p.vy*ny;p.vx=tx*tv+nx*rv2;p.vy=ty*tv+ny*rv2;
+  if(p.onGround&&d<26)releaseHook(p,false)}
 function tryParry(p){if(p.parryCd>0||p.dashT>0||p.hurtT>0)return;p.parryT=.18;p.parryCd=.4;sfx('parry0')}
 function parryOK(p,srcX){p.parryT=0;p.parryCd=0;p.inv=Math.max(p.inv,.35);p.nextCrit=true;p.riposte=1.5;txt(p.x,p.y-p.h-6,'PARRY','#ffd040');sfx('parry');hitstop=Math.max(hitstop,.14);shake(4);
   const fx=p.x+sign(srcX-p.x||p.face)*8;ring(fx,p.y-p.h/2,18,'#ffe080',.3);sparks(fx,p.y-p.h/2,12,'#ffe080');
@@ -882,7 +887,7 @@ function updatePlayer(p,dt){
     p.blocking=!!I.parry&&p.atkT<=0&&!p.aiming;
     p.atkHold=I.atk?(p.atkHold||0)+dt:0;p.sprint=p.atkHold>.22&&!!dir&&!p.aiming&&!p.blocking;if(p.sprint&&p.atkT>0&&p.atkType==='light'){p.atkT=0;p.anim='run'}if(p.sprint&&p.onGround&&Math.random()<dt*14)P({k:'dust',x:p.x-p.face*4,y:p.y,vx:-p.face*rnd(10,40),vy:rnd(-20,0),l:.4,c:'#a89880',s:2});
     const target=(p.wallLock>0?Math.sign(p.vx):dir)*st.spd*(p.sprint?1.6:1)*(p.rage>0?1.3:1)*(p.atkT>0&&p.onGround?.45:1)*(p.blocking?.25:1)*(p.aiming&&p.onGround?0:p.aiming?.6:1),acc=p.onGround?2600:1900;
-    if(p.hook&&p.hook.st==='hold'&&!p.onGround)p.vx+=dir*560*dt;else p.vx+=clamp(target-p.vx,-acc*dt,acc*dt);
+    if(p.hook&&p.hook.st==='hold'&&!p.onGround){if(p.y>p.hook.y)p.vx+=dir*240*dt}else p.vx+=clamp(target-p.vx,-acc*dt,acc*dt);
     {const ff=I.d&&!p.onGround&&!p.wall&&p.vy>-40&&!p.aiming,gm=p.jumpHeld&&Math.abs(p.vy)<80?.5:ff?1.4:1;p.vy=Math.min(p.vy+G*gm*dt,p.wall?60:ff?FASTFALL:MAXFALL)}
     if(p.jbuf>0&&!(p.hook&&p.hook.st==='hold')){
       if(I.d&&p.onGround&&onOneWay(p)){p.drop=.25;p.y+=2;p.jbuf=0}
@@ -2086,9 +2091,12 @@ const BOSS_ART={carla:'carla',rockchief:'rockchief',lionwhyte:'lionwhyte',ravenn
 let bgArtOn=false;
 function bgArtName(){if(mode==='title')return'title';if(!world)return null;if(world.camp)return'driftholm';if(world.stair)return'nexus-crossing';return ZONE_ART[(ZONES[world.zi]||{}).id]||null}
 // the painting fills the screen behind the world and pans slowly across it as you move through the level
+const bgPan={w:null,x:.5,y:.5};
 function drawBgArt(){const n=bgArtName(),im=n&&art(n);bgArtOn=!!im;if(!im)return false;const W=VW*RS,H=VH*RS,title=mode==='title';
   const k=Math.max(W/im.width,H/im.height)*(title?1:1.18),dw=im.width*k,dh=im.height*k;let fx=.5,fy=title?.5:.35;
-  if(!title&&world){const ww=world.mw*T-VW,wh=world.mh*T-VH;if(ww>0)fx=clamp(cam.x/ww,0,1);if(wh>0)fy=clamp(cam.y/wh,0,1)*.7}
+  // painted backdrop drifts slowly with the level and ignores short hops: heavy smoothing, small vertical range
+  if(!title&&world){const ww=world.mw*T-VW,wh=world.mh*T-VH,tx=ww>0?clamp(cam.x/ww,0,1):.5,ty=wh>0?clamp(cam.y/wh,0,1):.5;
+    if(bgPan.w!==world){bgPan.w=world;bgPan.x=tx;bgPan.y=ty}bgPan.x+=(tx-bgPan.x)*.03;bgPan.y+=(ty-bgPan.y)*.008;fx=bgPan.x;fy=.25+bgPan.y*.35}
   M.save();M.setTransform(1,0,0,1,0,0);M.imageSmoothingEnabled=true;M.drawImage(im,-(dw-W)*fx,-(dh-H)*fy,dw,dh);
   if(!title){const g=M.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(0,0,0,.05)');g.addColorStop(1,'rgba(0,0,0,.35)');M.fillStyle=g;M.fillRect(0,0,W,H)}M.restore();return true}
 // a portrait cropped to the face, in a round gold frame
